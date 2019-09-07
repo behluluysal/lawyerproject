@@ -1,0 +1,109 @@
+   MailMessage mm = new MailMessage("studevelopers@gmail.com", Rmail);
+                            mm.Subject = "Aktivasyon Kodunuz";
+                            mm.IsBodyHtml = false;
+                            mm.Body = aktivasyonkodu;
+                            using (SmtpClient smtp = new SmtpClient())
+                            {
+                                smtp.Host = "smtp.gmail.com";
+                                smtp.EnableSsl = true;
+                                NetworkCredential NetworkCred = new NetworkCredential("studevelopers@gmail.com", "tatangalar54");
+                                smtp.UseDefaultCredentials = true;
+                                smtp.Credentials = NetworkCred;
+                                smtp.Port = 587;
+                                smtp.Send(mm);
+                                ViewBag.Message = "Email sent.";
+                            }
+
+  <connectionStrings>
+    <remove name="LocalSqlServer" />
+    <add name="OurDbContext" connectionString="Data Source=188.121.44.212,1433;database=mydb; Integrated Security=False;User ID=amdin;Password=Tatangalar54_" providerName="System.Data.SqlClient" />
+  </connectionStrings>
+
+
+
+char* collector(const rastgeleKarakter THIS, int max)
+{
+	printf(":%s:\n", "Hello, world!");
+	THIS->super->adet = max;
+	THIS->super->uret(THIS->super, max);
+	THIS->results1 = (char*)malloc(sizeof(char)*(THIS->super->adet));
+	for (int i = 0; i < max; i++)
+		for (int y = 0; y <= 28; y++)
+		{
+			if (THIS->super->results[i] == y)
+			{
+				THIS->results1 += (THIS->alfabe[y]);
+				break;
+				//result += exarray[i];
+			}
+
+		}
+	return THIS->results1;
+}
+
+gattacas
+
+
+
+     private volatile int value = 0;
+     String[][] testa;
+     private volatile int lenght;
+    
+     birler(int diziboyut, String dizi[][])
+     {
+         lenght = diziboyut;
+         testa = new String [diziboyut][4];
+         testa = dizi;
+     }
+    @Override
+    public void run()
+    {
+        String temps;
+        int temp;
+        for(int i = 0; i<lenght; i++)
+        {
+            temps = testa[i][3];
+            temp = Integer.parseInt(temps);
+            value += temp;
+        }
+        System.out.println(Thread.currentThread().getName());
+    }
+    public int getValue() {
+         return value;
+     }
+
+
+        public FileContentResult Download(string gonderici, string gondericiiki)
+        {
+            string[] veri = gonderici.Split('+');
+            string akbit = veri[0];
+            string birkur = veri[1];
+            string musteritc = veri[2];
+            string aktbitdava = veri[3];
+            string davaad = veri[4];
+            string davaid = veri[5];
+
+            if (birkur == "k") { birkur = "bireysel"; } else { birkur = "kurumsal"; }
+            if (aktbitdava == "s") { aktbitdava = "aktifdavalar"; } else { aktbitdava = "bitendavalar"; }
+
+
+            //yol oluþturma iþlemi
+            string sourceyol = "/uploads/" + birkur + "/" + musteritc + "/" + aktbitdava + "/" + davaad + "/" + gondericiiki;
+            string random = randomcharacter2(7);
+            string targetyol = "/temp/" + random;
+            bool exists = System.IO.Directory.Exists(Server.MapPath(targetyol));
+            if (!exists)
+                System.IO.Directory.CreateDirectory(Server.MapPath(targetyol));
+            targetyol += "/" + gondericiiki;
+            System.IO.FileInfo file = new System.IO.FileInfo(Server.MapPath(targetyol));
+
+            exists = System.IO.File.Exists(Server.MapPath(targetyol));
+            if (!exists)
+                System.IO.File.Copy(Server.MapPath(sourceyol), Server.MapPath(targetyol));
+            
+            var bytes = System.IO.File.ReadAllBytes(Server.MapPath(targetyol));
+            System.IO.Directory.Delete(Server.MapPath(targetyol.Substring(0,13)), true);
+
+            return File(bytes, file.GetType().ToString(), gondericiiki);
+
+        }

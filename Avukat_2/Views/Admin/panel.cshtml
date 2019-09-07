@@ -1,0 +1,691 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model Avukat_2.ViewModels.panelViewModel
+@using Avukat_2.Models
+@using Avukat_2.Security
+
+<!DOCTYPE html>
+
+@{
+    int avukatdavayuzde=0;
+    int aktifmusteri = Model.musterilers.Count;
+    int lastweek = 0;
+    foreach (var item in Model.musterilers)
+    {
+        System.TimeSpan x = DateTime.Now - item.kayittarihi;
+        if (x.TotalDays <= 7)
+        {
+            lastweek++;
+        }
+    }
+    float son;
+    if (aktifmusteri != 0)
+    {
+        son = (100 * lastweek) / aktifmusteri;
+    }
+    else
+    {
+        son = 0;
+    }
+
+    //--------------------------------------------------------
+    
+    int aktifdava = Model.davalars.Count;
+    int dlastweek = 0;
+    foreach (var item in Model.davalars)
+    {
+        System.TimeSpan x = DateTime.Now - item.BaslangicTarihi;
+        if (x.TotalDays <= 7)
+        {
+            dlastweek++;
+        }
+    }
+    float dson;
+    if (aktifdava != 0)
+    {
+        dson = (100 * dlastweek) / aktifdava;
+    }
+    else
+    {
+        dson = 0;
+    }
+    //----------------------------------------------------
+    int aktiferkek = 0;
+    int aktifkadin = 0;
+    int kurumsalmusteri = 0;
+    foreach (var item in Model.musterilers)
+    {
+        if (item.musteriCinsiyet == "erkek")
+        {
+            aktiferkek++;
+        }
+        else if(item.musteriCinsiyet == "kadın")
+        {
+            aktifkadin++;
+        }
+    }
+    int yüzdekadin=0;
+    int yüzdeerkek=0;
+    if (aktifmusteri != 0)
+    {
+        yüzdeerkek = (100 * aktiferkek) / aktifmusteri;
+    }
+    else
+    {
+        yüzdeerkek = 0;
+    }
+
+    if (aktifmusteri != 0)
+    {
+        yüzdekadin =  (100 * aktifkadin) / aktifmusteri;
+    }
+    else
+    {
+        yüzdekadin = 0;
+    }
+
+    //-------------------------------------------------
+    int bukazanc = 0;
+    int oncekikazanc = 0;
+    foreach (var item in ViewBag.buay)
+    {
+        bukazanc += item.DavaUcret;
+    }
+    foreach (var item in ViewBag.oncekiay)
+    {
+        oncekikazanc += item.DavaUcret;
+    }
+    //-------------------------------------------------
+}
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view">
+
+                <div class="clearfix"></div>
+                <!-- menu profile quick info -->
+                <div class="profile clearfix">
+                    <div class="profile_pic">
+                        <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                    </div>
+                    <div class="profile_info">
+                        <span>Hoşgeldin,</span>
+                        <h2>@SessionPersister.Username.  @Session["modtype"]</h2>
+                    </div>
+                </div>
+                <!-- /menu profile quick info -->
+                <br />
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section">
+                        <h3>General</h3>
+                        <ul class="nav side-menu">
+
+                            @{
+
+                                if (Session["modtype"] != null)
+                                {
+                                    if (Session["modtype"].ToString() == "Yönetici")
+                                    {
+                                        <li>
+                                            <a href="@Url.Action("panel", "Admin")"><i class="fa fa-dashboard"></i>Yönetim Paneli</a>
+                                        </li>
+                                    }
+                                }
+
+                            }
+                            <li>
+                                <a><i class="fa fa-users"></i> Müşteriler <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="@Url.Action("bireyselmusteriler", "Admin")">Bireysel Müşterileri Listele/Düzenle</a></li>
+                                    <li><a href="@Url.Action("kurumsalmusteriler", "Admin")">Kurumsal Müşterileri Listele/Düzenle</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a><i class="fa fa-briefcase"></i> Davalar <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="@Url.Action("davakayit", "Admin")">Dava Ekle</a></li>
+                                    <li><a href="@Url.Action("davakapat", "Admin")">Dava Kapat</a></li>
+                                    <li><a href="@Url.Action("bireyseldavalar", "Admin")">Bireysel Davaları Listele/Düzenle</a></li>
+                                    <li><a href="@Url.Action("kurumsaldavalar", "Admin")">Kurumsal Davaları Listele/Düzenle</a></li>
+                                </ul>
+                            </li>
+                            @{
+                                if (Session["modtype"] != null)
+                                {
+                                    if (Session["modtype"].ToString() == "Yönetici")
+                                    {
+                                        <li>
+                                            <a><i class="fa fa-database"></i> Silme İşlemleri <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li><a href="@Url.Action("Davasil", "Delete")">Dava Sil</a></li>
+                                                <li><a href="@Url.Action("Musterisil", "Delete")">Müşteri Sil</a></li>
+                                            </ul>
+                                        </li>
+                                    }
+                                }
+                            }
+                            @{
+                                if (Session["modtype"] != null)
+                                {
+                                    if (Session["modtype"].ToString() == "Yönetici")
+                                    {
+                                        <li>
+                                            <a><i class="fa fa-desktop"></i> Yardımcılar <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li><a href="@Url.Action("Create", "superadmin")">Yardımcı Ekle</a></li>
+                                                <li><a href="@Url.Action("Index", "superadmin")">Yardımcıları Listele / Düzenle</a></li>
+                                            </ul>
+                                        </li>
+                                    }
+                                }
+                            }
+                            @{
+                                if (Session["modtype"] != null)
+                                {
+                                    if (Session["modtype"].ToString() == "Yönetici")
+                                    {
+
+                                        <li>
+                                            <a><i class="fa fa-legal"></i> Avukatlar <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li><a href="@Url.Action("Create", "Avukats")">Avukat Ekle</a></li>
+                                                <li><a href="@Url.Action("Index", "Avukats")">Avukatları Listele / Düzenle</a></li>
+                                            </ul>
+                                        </li>
+                                    }
+                                }
+                            }
+
+
+
+                            <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /sidebar menu -->
+                <!-- /menu footer buttons -->
+                <div class="sidebar-footer hidden-small">
+                    <a data-toggle="tooltip" data-placement="top" title="Settings">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                    </a>
+                    <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                        <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                    </a>
+                    <a data-toggle="tooltip" data-placement="top" title="Lock">
+                        <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                    </a>
+                    <a data-toggle="tooltip" data-placement="top" title="Logout" href="@Url.Action("Logout", "Admin")">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                    </a>
+                </div>
+                <!-- /menu footer buttons -->
+            </div>
+        </div>
+        <!-- top navigation -->
+        <div class="top_nav">
+            <div class="nav_menu">
+                <nav>
+                    <div class="nav toggle">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="">
+                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <img src="images/img.jpg" alt="">@SessionPersister.Username
+                                <span class=" fa fa-angle-down"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                <li><a href="javascript:;"> Profile</a></li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <span class="badge bg-red pull-right">50%</span>
+                                        <span>Settings</span>
+                                    </a>
+                                </li>
+                                <li><a href="javascript:;">Help</a></li>
+                                <li><a href="@Url.Action("Logout", "Admin")"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                            </ul>
+                        </li>
+                      
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- /top navigation -->
+        <!-- page content -->
+        <div class="right_col" role="main">
+            <!-- top tiles -->
+            <div class="row tile_count">
+                <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                    <span class="count_top"><i class="fa fa-users"></i> Aktif Müşteri</span>
+                    <div class="count">@aktifmusteri </div>
+                    <span class="count_bottom"><i class="green">% @son </i> Son 1 haftada</span>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                    <span class="count_top"><i class="fa fa-briefcase"></i> Aktif Dava</span>
+                    <div class="count">@aktifdava</div>
+                    <span class="count_bottom"><i class="green">% @dson </i> Son 1 haftada</span>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                    <span class="count_top"><i class="fa fa-male"></i> Erkek Müşteri</span>
+                    <div class="count">@aktiferkek</div>
+                    <span class="count_bottom"><i class="green">% @yüzdeerkek </i> Müşteri oranı</span>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                    <span class="count_top"><i class="fa fa-female"></i> Kadın Müşteri</span>
+                    <div class="count">@aktifkadin</div>
+                    <span class="count_bottom"><i class="green">% @yüzdekadin </i> Müşteri oranı</span>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                    <span class="count_top"><i class="fa fa-try"></i> Bu Ayki Kazanç</span>
+                    <div class="count"><i id="kazanc" style="font-style:normal" class=""><i id="kazancsimge" class=""></i>@bukazanc</i></div>
+                    <span class="count_bottom"><i>@oncekikazanc</i> Geçen Ayki Kazanç</span>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                    <span class="count_top"><i class="fa fa-gavel"></i> Kapanan Dava Sayısı</span>
+                    <div class="count">@Model.bdavalars.Count</div>
+                </div>
+            </div>
+            <!-- /top tiles -->
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="dashboard_graph">
+                        <div class="row x_title">
+                            <div class="col-md-6">
+                                <h3>Bu alan işlem altındadır. İlk yama ile dahil edilecektir. <small>Graph title sub-title</small></h3>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                                    <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <div id="chart_plot_01" class="demo-placeholder"></div>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
+                            <div class="x_title">
+                                <h2>Top Campaign Performance</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-6">
+                                <div>
+                                    <p>Facebook Campaign</p>
+                                    <div class="">
+                                        <div class="progress progress_sm" style="width: 76%;">
+                                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="80"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p>Twitter Campaign</p>
+                                    <div class="">
+                                        <div class="progress progress_sm" style="width: 76%;">
+                                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="60"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-6">
+                                <div>
+                                    <p>Conventional Media</p>
+                                    <div class="">
+                                        <div class="progress progress_sm" style="width: 76%;">
+                                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="40"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p>Bill boards</p>
+                                    <div class="">
+                                        <div class="progress progress_sm" style="width: 76%;">
+                                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+
+                <div class="col-xs-12 col-md-4">
+                    <!--Davalar için Aşağıda Avukat dava sayısı-->
+                    <div class="x_panel tile">
+                        <div class="x_title">
+                            <h2>Avukatlarınız Dava Oranları</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a href="#">Settings 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Settings 2</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <h4></h4>
+                            @{
+                                foreach (var item in Model.avukats)
+                                {
+                                    if (aktifdava != 0)
+                                    {
+                                        avukatdavayuzde = (100 * item.Davalars.Count) / aktifdava;
+                                    }
+
+                                    <div class="widget_summary">
+                                        <div class="w_left w_25">
+                                            <span>@item.AvukatAd @item.AvukatSoyad</span>
+                                        </div>
+                                        <div class="w_center w_55">
+                                            <div class="progress">
+                                                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width:@avukatdavayuzde%;">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="w_right w_20">
+                                            <span style="font-size:15px">@item.Davalars.Count Dava</span>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                }
+                            }
+
+
+
+                        </div>
+                    </div>
+                    <!--Biten Davalar için Aşağıda Avukat dava sayısı-->
+                    <div class="x_panel tile">
+                        <div class="x_title">
+                            <h2>Avukatlarınız Kapanan Dava Oranları</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a href="#">Settings 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Settings 2</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <h4></h4>
+                            @{
+                                foreach (var item in Model.avukats)
+                                {
+                                    if (Model.bdavalars.Count != 0)
+                                    {
+                                        avukatdavayuzde = (100 * item.bDavalars.Count) / Model.bdavalars.Count;
+                                    }
+
+                                    <div class="widget_summary">
+                                        <div class="w_left w_25">
+                                            <span>@item.AvukatAd @item.AvukatSoyad</span>
+                                        </div>
+                                        <div class="w_center w_55">
+                                            <div class="progress">
+                                                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width:@avukatdavayuzde%;">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="w_right w_20">
+                                            <span style="font-size:15px">@item.bDavalars.Count Dava</span>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                }
+                            }
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-8">
+                    <div class="x_panel tile overflow_hidden">
+                        <div class="x_title">
+                            <h2>Dava Türü İstatistik</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a href="#">Settings 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Settings 2</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <table class="" style="width:100%">
+                                <tr>
+                                    <th class="col-xs-6">
+
+                                    </th>
+                                    <th>
+                                        <div class="col-xs-8">
+                                            <p class="text-center">Dava Türü</p>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <p class="text-center">Oran</p>
+                                        </div>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <canvas id="dChart" style="margin: 15px 10px 10px 0;"></canvas>
+                                    </td>
+                                    <td>
+                                        @{
+                                            int a, b, c, d, e, f, g, h, t, y;
+                                            a = (Model.davalars.Where(x => x.davaturu == (Davalar.Davaturu)3).ToList().Count) + (Model.bdavalars.Where(x => x.davaturu == (BitenDavalar.Davaturub)3).ToList().Count());
+                                            b = (Model.davalars.Where(x => x.davaturu == (Davalar.Davaturu)0).ToList().Count) + (Model.bdavalars.Where(x => x.davaturu == (BitenDavalar.Davaturub)0).ToList().Count());
+                                            c = (Model.davalars.Where(x => x.davaturu == (Davalar.Davaturu)7).ToList().Count) + (Model.bdavalars.Where(x => x.davaturu == (BitenDavalar.Davaturub)7).ToList().Count());
+                                            d = (Model.davalars.Where(x => x.davaturu == (Davalar.Davaturu)8).ToList().Count) + (Model.bdavalars.Where(x => x.davaturu == (BitenDavalar.Davaturub)8).ToList().Count());
+                                            e = (Model.davalars.Where(x => x.davaturu == (Davalar.Davaturu)4).ToList().Count) + (Model.bdavalars.Where(x => x.davaturu == (BitenDavalar.Davaturub)4).ToList().Count());
+                                            f = (Model.davalars.Where(x => x.davaturu == (Davalar.Davaturu)6).ToList().Count) + (Model.bdavalars.Where(x => x.davaturu == (BitenDavalar.Davaturub)6).ToList().Count());
+                                            g = (Model.davalars.Where(x => x.davaturu == (Davalar.Davaturu)5).ToList().Count) + (Model.bdavalars.Where(x => x.davaturu == (BitenDavalar.Davaturub)5).ToList().Count());
+                                            h = (Model.davalars.Where(x => x.davaturu == (Davalar.Davaturu)1).ToList().Count) + (Model.bdavalars.Where(x => x.davaturu == (BitenDavalar.Davaturub)1).ToList().Count());
+                                            t = (Model.davalars.Where(x => x.davaturu == (Davalar.Davaturu)9).ToList().Count) + (Model.bdavalars.Where(x => x.davaturu == (BitenDavalar.Davaturub)9).ToList().Count());
+                                            y = (Model.davalars.Where(x => x.davaturu == (Davalar.Davaturu)2).ToList().Count) + (Model.bdavalars.Where(x => x.davaturu == (BitenDavalar.Davaturub)2).ToList().Count());
+
+                                            int ya, yb, yc, yd, ye, yf, yg, yh, yt, yy;
+                                            if (a + b + c + d + e + f + g + h + t + y != 0)
+                                            {
+                                                ya = (100 * a) / (a + b + c + d + e + f + g + h + t + y);
+                                                yb = (100 * b) / (a + b + c + d + e + f + g + h + t + y);
+                                                yc = (100 * c) / (a + b + c + d + e + f + g + h + t + y);
+                                                yd = (100 * d) / (a + b + c + d + e + f + g + h + t + y);
+                                                ye = (100 * e) / (a + b + c + d + e + f + g + h + t + y);
+                                                yf = (100 * f) / (a + b + c + d + e + f + g + h + t + y);
+                                                yg = (100 * g) / (a + b + c + d + e + f + g + h + t + y);
+                                                yh = (100 * h) / (a + b + c + d + e + f + g + h + t + y);
+                                                yt = (100 * t) / (a + b + c + d + e + f + g + h + t + y);
+                                                yy = (100 * y) / (a + b + c + d + e + f + g + h + t + y);
+                                            }
+                                            else
+                                            {
+                                                ya = 0;
+                                                yb = 0;
+                                                yc = 0;
+                                                yd = 0;
+                                                ye = 0;
+                                                yf = 0;
+                                                yg = 0;
+                                                yh = 0;
+                                                yt = 0;
+                                                yy = 0;
+                                            }
+                                        }
+                                        <table class="tile_info">
+                                            <tr>
+                                                <td>
+                                                    <p><i class="fa fa-square" style="color:#07fcfc;"></i>Belirsiz Alacak ve Tespit Davaları </p>
+                                                </td>
+                                                <td>@ya%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p><i class="fa fa-square " style="color:yellow;"></i>Edim Davası </p>
+                                                </td>
+                                                <td>@yb%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p><i class="fa fa-square " style="color:red;"></i>Kısmi Dava </p>
+                                                </td>
+                                                <td>@yc%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p><i class="fa fa-square " style="color:brown;"></i>Mütelahik Davalar </p>
+                                                </td>
+                                                <td>@yd%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p><i class="fa fa-square " style="color:blue;"></i>Objektif Dava Birleşmesi </p>
+                                                </td>
+                                                <td>@ye%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p><i class="fa fa-square " style="color:orange;"></i>Seçimlik Davalar </p>
+                                                </td>
+                                                <td>@yf%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p><i class="fa fa-square " style="color:green;"></i>Terditli Davalar </p>
+                                                </td>
+                                                <td>@yg%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p><i class="fa fa-square " style="color:gray;"></i>Tespit Davası </p>
+                                                </td>
+                                                <td>@yh%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p><i class="fa fa-square " style="color:pink;"></i>Topluluk Davaları </p>
+                                                </td>
+                                                <td>@yt%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p><i class="fa fa-square " style="color:darkblue;"></i>Yenilik Doğuran Davalar </p>
+                                                </td>
+                                                <td>@yy%</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <!-- /page content -->
+        <!-- Footer -->
+        <footer id="footer" class="footer pb-0 bg-deep">
+          
+            <div class="mu-footer-bottom">
+                <div class="container">
+                    <div class="mu-footer-bottom-area" style="text-align:center;">
+                        <p>© Tüm Hakları Saklıdır. Designed by <a href="https://www.hasturkyazilim.com/" rel="nofollow" style="color:#c99809;">HASTÜRK YAZILIM</a></p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var kazancc = @bukazanc;
+        var oncekikazancc = @oncekikazanc;
+
+        if (kazancc >= oncekikazancc) {
+            document.getElementById("kazanc").className = "green";
+            document.getElementById("kazancsimge").className = "fa fa-sort-asc";
+        }
+        else if (kazancc < oncekikazancc) {
+            document.getElementById("kazanc").className = "red";
+            document.getElementById("kazancsimge").className = "fa fa-sort-desc";
+        }
+    });
+</script>
+
+<script>
+    var ctx = document.getElementById("dChart");
+    var myPieChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ["Belirsiz Alacak ve Tespit Davaları",
+                "Edim Davası",
+                "Kısmi Dava",
+                "Mütelahik Davalar",
+                "Objektif Dava Birleşmesi",
+                "Seçimlik Davalar",
+                "Terditli Davalar",
+                "Tespit Davası",
+                "Topluluk Davaları",
+                "Yenilik Doğuran Davalar"],
+            datasets: [{
+                data: [@a, @b,@c,@d,@e,@f,@g,@h,@t,@y],
+                backgroundColor: ['#07fcfc', 'yellow', 'red', 'brown', 'blue', 'orange', 'green', 'gray', 'pink', 'darkblue'],
+            }],
+        },
+        options: {
+            legend: {
+                display: false
+            },
+        }
+    });
+</script>

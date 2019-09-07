@@ -1,0 +1,1245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B7AAFEF4-F22F-4DA0-8D9E-B16E836079CB}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Avukat_2</RootNamespace>
+    <AssemblyName>Avukat_2</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Diagnostics.DiagnosticSource">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.0\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccessDeniedController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AnasayfasController.cs" />
+    <Compile Include="Controllers\AvukatsController.cs" />
+    <Compile Include="Controllers\DeleteController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ScriptsController.cs" />
+    <Compile Include="Controllers\superadminController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\Anasayfa.cs" />
+    <Compile Include="Models\Avukat.cs" />
+    <Compile Include="Models\Context\OurDbContext.cs" />
+    <Compile Include="Models\BitenDavalar.cs" />
+    <Compile Include="Models\Davalar.cs" />
+    <Compile Include="Models\BitenMusteriler.cs" />
+    <Compile Include="Models\Musteriler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Security\CustomPrincipal.cs" />
+    <Compile Include="Security\SessionPersister.cs" />
+    <Compile Include="ViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModels\DavakayitViewModel.cs" />
+    <Compile Include="ViewModels\MusteriListeleViewModel.cs" />
+    <Compile Include="ViewModels\musteriPanelViewModel.cs" />
+    <Compile Include="ViewModels\panelViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\css\fontawesome-all.min.css" />
+    <Content Include="assets\css\main.css" />
+    <Content Include="assets\js\main.js" />
+    <Content Include="assets\webfonts\fa-brands-400.svg" />
+    <Content Include="assets\webfonts\fa-regular-400.svg" />
+    <Content Include="assets\webfonts\fa-solid-900.svg" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\jquery-2.2.0.min.js" />
+    <Content Include="js\jquery-plugin-collection.js" />
+    <Content Include="js\jquery-ui.min.js" />
+    <Content Include="js\modernizr.custom.js" />
+    <Content Include="js\revolution-slider\css\layers.css" />
+    <Content Include="js\revolution-slider\css\navigation.css" />
+    <Content Include="js\revolution-slider\css\settings.css" />
+    <Content Include="js\revolution-slider\js\extensions\revolution.extension.actions.min.js" />
+    <Content Include="js\revolution-slider\js\extensions\revolution.extension.carousel.min.js" />
+    <Content Include="js\revolution-slider\js\extensions\revolution.extension.kenburn.min.js" />
+    <Content Include="js\revolution-slider\js\extensions\revolution.extension.layeranimation.min.js" />
+    <Content Include="js\revolution-slider\js\extensions\revolution.extension.migration.min.js" />
+    <Content Include="js\revolution-slider\js\extensions\revolution.extension.navigation.min.js" />
+    <Content Include="js\revolution-slider\js\extensions\revolution.extension.parallax.min.js" />
+    <Content Include="js\revolution-slider\js\extensions\revolution.extension.slideanims.min.js" />
+    <Content Include="js\revolution-slider\js\extensions\revolution.extension.video.min.js" />
+    <Content Include="js\revolution-slider\js\jquery.themepunch.revolution.min.js" />
+    <Content Include="js\revolution-slider\js\jquery.themepunch.tools.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="assets\sass\base\_bg.scss" />
+    <Content Include="assets\sass\base\_page.scss" />
+    <Content Include="assets\sass\base\_reset.scss" />
+    <Content Include="assets\sass\base\_typography.scss" />
+    <Content Include="assets\sass\components\_button.scss" />
+    <Content Include="assets\sass\components\_form.scss" />
+    <Content Include="assets\sass\components\_icon.scss" />
+    <Content Include="assets\sass\components\_icons.scss" />
+    <Content Include="assets\sass\components\_list.scss" />
+    <Content Include="assets\sass\components\_section.scss" />
+    <Content Include="assets\sass\layout\_footer.scss" />
+    <Content Include="assets\sass\layout\_header.scss" />
+    <Content Include="assets\sass\layout\_signup-form.scss" />
+    <Content Include="assets\sass\libs\_breakpoints.scss" />
+    <Content Include="assets\sass\libs\_functions.scss" />
+    <Content Include="assets\sass\libs\_mixins.scss" />
+    <Content Include="assets\sass\libs\_vars.scss" />
+    <Content Include="assets\sass\libs\_vendor.scss" />
+    <Content Include="assets\sass\main.scss" />
+    <Content Include="assets\webfonts\fa-brands-400.eot" />
+    <Content Include="assets\webfonts\fa-brands-400.ttf" />
+    <Content Include="assets\webfonts\fa-brands-400.woff" />
+    <Content Include="assets\webfonts\fa-brands-400.woff2" />
+    <Content Include="assets\webfonts\fa-regular-400.eot" />
+    <Content Include="assets\webfonts\fa-regular-400.ttf" />
+    <Content Include="assets\webfonts\fa-regular-400.woff" />
+    <Content Include="assets\webfonts\fa-regular-400.woff2" />
+    <Content Include="assets\webfonts\fa-solid-900.eot" />
+    <Content Include="assets\webfonts\fa-solid-900.ttf" />
+    <Content Include="assets\webfonts\fa-solid-900.woff" />
+    <Content Include="assets\webfonts\fa-solid-900.woff2" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1\package.json" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1\AUTHORS.txt" />
+    <Content Include="Scripts\jquery-ui-1.12.1\external\jquery\jquery.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1\images\ui-icons_444444_256x240.png" />
+    <Content Include="Scripts\jquery-ui-1.12.1\images\ui-icons_555555_256x240.png" />
+    <Content Include="Scripts\jquery-ui-1.12.1\images\ui-icons_777620_256x240.png" />
+    <Content Include="Scripts\jquery-ui-1.12.1\images\ui-icons_777777_256x240.png" />
+    <Content Include="Scripts\jquery-ui-1.12.1\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Scripts\jquery-ui-1.12.1\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Scripts\jquery-ui-1.12.1\index.html" />
+    <Content Include="Scripts\jquery-ui-1.12.1\jquery-ui.css" />
+    <Content Include="Scripts\jquery-ui-1.12.1\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1\jquery-ui.min.css" />
+    <Content Include="Scripts\jquery-ui-1.12.1\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1\jquery-ui.structure.css" />
+    <Content Include="Scripts\jquery-ui-1.12.1\jquery-ui.structure.min.css" />
+    <Content Include="Scripts\jquery-ui-1.12.1\jquery-ui.theme.css" />
+    <Content Include="Scripts\jquery-ui-1.12.1\jquery-ui.theme.min.css" />
+    <Content Include="Scripts\jquery-ui-1.12.1\LICENSE.txt" />
+    <Content Include="Scripts\jquery.filedrop.js" />
+    <Content Include="Scripts\jquery.mask.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="vendors\behlülözel\jquery.inputmask.bundle.js" />
+    <Content Include="vendors\behlülözel\layout\inputmask.js" />
+    <Content Include="vendors\behlülözel\layout\jquery.inputmask.js" />
+    <Content Include="vendors\bootstrap-daterangepicker\daterangepicker.css" />
+    <Content Include="vendors\bootstrap-daterangepicker\daterangepicker.js" />
+    <Content Include="vendors\bootstrap-progressbar\bootstrap-progressbar.min.js" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-2.0.0.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-2.0.0.min.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-2.0.1.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-2.0.1.min.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-2.0.2.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-2.0.2.min.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-2.0.3.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-2.0.3.min.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-2.0.4.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-2.0.4.min.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-2.1.0.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-2.1.0.min.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-2.1.1.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-2.1.1.min.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-2.2.0.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-2.2.0.min.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-2.2.1.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-2.2.1.min.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-2.2.2.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-2.2.2.min.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-2.3.0.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-2.3.0.min.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-2.3.1.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-2.3.1.min.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-2.3.2.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-2.3.2.min.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-3.0.0-rc1.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-3.0.0-rc1.min.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-3.0.0-rc2.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-3.0.0-rc2.min.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-3.0.0.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-3.0.0.min.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-3.0.1.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-3.0.1.min.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-3.0.2.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-3.0.2.min.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-3.0.3.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-3.0.3.min.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-3.1.0.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-3.1.0.min.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-3.1.1.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-3.1.1.min.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-3.2.0.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-3.2.0.min.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-3.3.0.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-3.3.0.min.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-3.3.1.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-3.3.1.min.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-3.3.2.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-3.3.2.min.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-3.3.4.css" />
+    <Content Include="vendors\bootstrap-progressbar\css\bootstrap-progressbar-3.3.4.min.css" />
+    <Content Include="vendors\bootstrap\dist\css\bootstrap-theme.css" />
+    <Content Include="vendors\bootstrap\dist\css\bootstrap-theme.min.css" />
+    <Content Include="vendors\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="vendors\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="vendors\bootstrap\dist\js\bootstrap.js" />
+    <Content Include="vendors\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="vendors\bootstrap\dist\js\npm.js" />
+    <Content Include="vendors\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="vendors\bootstrap\Gruntfile.js" />
+    <Content Include="vendors\bootstrap\grunt\browsers.js" />
+    <Content Include="vendors\bootstrap\grunt\bs-commonjs-generator.js" />
+    <Content Include="vendors\bootstrap\grunt\bs-glyphicons-data-generator.js" />
+    <Content Include="vendors\bootstrap\grunt\bs-lessdoc-parser.js" />
+    <Content Include="vendors\bootstrap\grunt\bs-raw-files-generator.js" />
+    <Content Include="vendors\bootstrap\grunt\change-version.js" />
+    <Content Include="vendors\bootstrap\grunt\generate-sri.js" />
+    <Content Include="vendors\bootstrap\grunt\karma.conf.js" />
+    <Content Include="vendors\bootstrap\js\affix.js" />
+    <Content Include="vendors\bootstrap\js\alert.js" />
+    <Content Include="vendors\bootstrap\js\button.js" />
+    <Content Include="vendors\bootstrap\js\carousel.js" />
+    <Content Include="vendors\bootstrap\js\collapse.js" />
+    <Content Include="vendors\bootstrap\js\dropdown.js" />
+    <Content Include="vendors\bootstrap\js\modal.js" />
+    <Content Include="vendors\bootstrap\js\popover.js" />
+    <Content Include="vendors\bootstrap\js\scrollspy.js" />
+    <Content Include="vendors\bootstrap\js\tab.js" />
+    <Content Include="vendors\bootstrap\js\tooltip.js" />
+    <Content Include="vendors\bootstrap\js\transition.js" />
+    <Content Include="vendors\bootstrap\package.js" />
+    <Content Include="vendors\Chart.js\dist\Chart.bundle.js" />
+    <Content Include="vendors\Chart.js\dist\Chart.bundle.min.js" />
+    <Content Include="vendors\Chart.js\dist\Chart.js" />
+    <Content Include="vendors\Chart.js\dist\Chart.min.js" />
+    <Content Include="vendors\datatables.net-bs\css\dataTables.bootstrap.css" />
+    <Content Include="vendors\datatables.net-bs\css\dataTables.bootstrap.min.css" />
+    <Content Include="vendors\datatables.net-bs\js\dataTables.bootstrap.js" />
+    <Content Include="vendors\datatables.net-bs\js\dataTables.bootstrap.min.js" />
+    <Content Include="vendors\datatables.net-keytable\js\dataTables.keyTable.js" />
+    <Content Include="vendors\datatables.net-keytable\js\dataTables.keyTable.min.js" />
+    <Content Include="vendors\datatables.net-keytable\License.txt" />
+    <Content Include="vendors\datatables.net-responsive\js\dataTables.responsive.js" />
+    <Content Include="vendors\datatables.net-responsive\js\dataTables.responsive.min.js" />
+    <Content Include="vendors\datatables.net-scroller\js\dataTables.scroller.js" />
+    <Content Include="vendors\datatables.net-scroller\js\dataTables.scroller.min.js" />
+    <Content Include="vendors\datatables.net\js\jquery.dataTables.js" />
+    <Content Include="vendors\datatables.net\js\jquery.dataTables.min.js" />
+    <Content Include="vendors\DateJS\build\date-tr-TR.js" />
+    <Content Include="vendors\DateJS\build\date.js" />
+    <Content Include="vendors\DateJS\build\i18n\tr-TR.js" />
+    <Content Include="vendors\DateJS\build\production\date-tr-TR.min.js" />
+    <Content Include="vendors\dropzone\dist\basic.css" />
+    <Content Include="vendors\dropzone\dist\dropzone-amd-module.js" />
+    <Content Include="vendors\dropzone\dist\dropzone.css" />
+    <Content Include="vendors\dropzone\dist\dropzone.js" />
+    <Content Include="vendors\dropzone\dist\min\basic.min.css" />
+    <Content Include="vendors\dropzone\dist\min\dropzone-amd-module.min.js" />
+    <Content Include="vendors\dropzone\dist\min\dropzone.min.css" />
+    <Content Include="vendors\dropzone\dist\min\dropzone.min.js" />
+    <Content Include="vendors\fastclick\lib\fastclick.js" />
+    <Content Include="vendors\flot-spline\js\jquery.flot.spline.js" />
+    <Content Include="vendors\flot-spline\js\jquery.flot.spline.min.js" />
+    <Content Include="vendors\flot.curvedlines\curvedLines.js" />
+    <Content Include="vendors\flot.orderbars\js\jquery.flot.orderBars.js" />
+    <Content Include="vendors\Flot\excanvas.js" />
+    <Content Include="vendors\Flot\excanvas.min.js" />
+    <Content Include="vendors\Flot\gulpfile.js" />
+    <Content Include="vendors\Flot\jquery.colorhelpers.js" />
+    <Content Include="vendors\Flot\jquery.flot.canvas.js" />
+    <Content Include="vendors\Flot\jquery.flot.categories.js" />
+    <Content Include="vendors\Flot\jquery.flot.crosshair.js" />
+    <Content Include="vendors\Flot\jquery.flot.errorbars.js" />
+    <Content Include="vendors\Flot\jquery.flot.fillbetween.js" />
+    <Content Include="vendors\Flot\jquery.flot.image.js" />
+    <Content Include="vendors\Flot\jquery.flot.js" />
+    <Content Include="vendors\Flot\jquery.flot.navigate.js" />
+    <Content Include="vendors\Flot\jquery.flot.pie.js" />
+    <Content Include="vendors\Flot\jquery.flot.resize.js" />
+    <Content Include="vendors\Flot\jquery.flot.selection.js" />
+    <Content Include="vendors\Flot\jquery.flot.stack.js" />
+    <Content Include="vendors\Flot\jquery.flot.symbol.js" />
+    <Content Include="vendors\Flot\jquery.flot.threshold.js" />
+    <Content Include="vendors\Flot\jquery.flot.time.js" />
+    <Content Include="vendors\Flot\jquery.js" />
+    <Content Include="vendors\Flot\jquery.mousewheel.LICENSE.txt" />
+    <Content Include="vendors\Flot\legend.css" />
+    <Content Include="vendors\font-awesome\.gitignore" />
+    <Content Include="vendors\font-awesome\css\font-awesome.css" />
+    <Content Include="vendors\font-awesome\css\font-awesome.min.css" />
+    <Content Include="vendors\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="vendors\font-awesome\HELP-US-OUT.txt" />
+    <Content Include="vendors\inputpas\.gitattributes" />
+    <Content Include="vendors\inputpas\.gitignore" />
+    <Content Include="vendors\inputpas\bundle.jquery.js" />
+    <Content Include="vendors\inputpas\bundle.js" />
+    <Content Include="vendors\inputpas\css\inputmask.css" />
+    <Content Include="vendors\inputpas\dist\bindings\inputmask.binding.js" />
+    <Content Include="vendors\inputpas\dist\inputmask.js" />
+    <Content Include="vendors\inputpas\dist\inputmask.min.js" />
+    <Content Include="vendors\inputpas\dist\jquery.inputmask.js" />
+    <Content Include="vendors\inputpas\dist\jquery.inputmask.min.js" />
+    <Content Include="vendors\inputpas\Gruntfile.js" />
+    <Content Include="vendors\inputpas\index.html" />
+    <Content Include="vendors\inputpas\index.js" />
+    <Content Include="vendors\inputpas\lib\bindings\inputmask.binding.js" />
+    <Content Include="vendors\inputpas\lib\dependencyLibs\inputmask.dependencyLib.jqlite.js" />
+    <Content Include="vendors\inputpas\lib\dependencyLibs\inputmask.dependencyLib.jquery.js" />
+    <Content Include="vendors\inputpas\lib\dependencyLibs\inputmask.dependencyLib.js" />
+    <Content Include="vendors\inputpas\lib\extensions\inputmask.date.extensions.js" />
+    <Content Include="vendors\inputpas\lib\extensions\inputmask.extensions.js" />
+    <Content Include="vendors\inputpas\lib\extensions\inputmask.numeric.extensions.js" />
+    <Content Include="vendors\inputpas\lib\global\window.js" />
+    <Content Include="vendors\inputpas\lib\inputmask.js" />
+    <Content Include="vendors\inputpas\lib\jquery.inputmask.js" />
+    <Content Include="vendors\inputpas\lib\maskScope.js" />
+    <Content Include="vendors\inputpas\lib\maskset.js" />
+    <Content Include="vendors\inputpas\LICENSE.txt" />
+    <Content Include="vendors\inputpas\nuspecs\Readme.txt" />
+    <Content Include="vendors\inputpas\qunit\index.js" />
+    <Content Include="vendors\inputpas\qunit\prototypeExtensions.js" />
+    <Content Include="vendors\inputpas\qunit\qunit.html" />
+    <Content Include="vendors\inputpas\qunit\simulator.js" />
+    <Content Include="vendors\inputpas\qunit\tests_alternations.js" />
+    <Content Include="vendors\inputpas\qunit\tests_attributes.js" />
+    <Content Include="vendors\inputpas\qunit\tests_base.js" />
+    <Content Include="vendors\inputpas\qunit\tests_date.js" />
+    <Content Include="vendors\inputpas\qunit\tests_dynamic.js" />
+    <Content Include="vendors\inputpas\qunit\tests_escape.js" />
+    <Content Include="vendors\inputpas\qunit\tests_formatvalidate.js" />
+    <Content Include="vendors\inputpas\qunit\tests_initialvalue.js" />
+    <Content Include="vendors\inputpas\qunit\tests_inputeventonly.js" />
+    <Content Include="vendors\inputpas\qunit\tests_ip.js" />
+    <Content Include="vendors\inputpas\qunit\tests_jitmasking.js" />
+    <Content Include="vendors\inputpas\qunit\tests_jquery_inputmask.js" />
+    <Content Include="vendors\inputpas\qunit\tests_keepStatic.js" />
+    <Content Include="vendors\inputpas\qunit\tests_multi.js" />
+    <Content Include="vendors\inputpas\qunit\tests_numeric.js" />
+    <Content Include="vendors\inputpas\qunit\tests_numericinput.js" />
+    <Content Include="vendors\inputpas\qunit\tests_option.js" />
+    <Content Include="vendors\inputpas\qunit\tests_optional.js" />
+    <Content Include="vendors\inputpas\qunit\tests_paste.js" />
+    <Content Include="vendors\inputpas\qunit\tests_regex.js" />
+    <Content Include="vendors\inputpas\qunit\tests_setvalue.js" />
+    <Content Include="vendors\inputpas\webpack.buildconfig.js" />
+    <Content Include="vendors\inputpas\webpack.config.js" />
+    <Content Include="vendors\inputpas\webpack.jqueryconfig.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\ajaxSubmit-integration-demo.html" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\bootstrap\index-bs4.html" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\bootstrap\index.html" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\captcha\captcha.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\captcha\images\button.png" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\captcha\images\image.php" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\captcha\image_req.php" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\captcha\index.php" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\captcha\newsession.php" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\captcha\process.php" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\captcha\rand.php" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\captcha\style.css" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\cinema\index.html" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\cinema\plan_9.jpg" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\cinema\refer_madness.jpg" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\cinema\saucer_men.jpg" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\css\cmxform.css" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\css\cmxformTemplate.css" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\css\core.css" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\css\reset.css" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\css\screen.css" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\custom-messages-data-demo.html" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\custom-methods-demo.html" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\dynamic-totals.html" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\errorcontainer-demo.html" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\errors-within-labels.html" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\file_input.html" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\images\bg.gif" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\images\checked.gif" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\images\cmxform-divider.gif" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\images\cmxform-fieldset.gif" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\images\loading.gif" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\images\unchecked.gif" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\index.html" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\jquerymobile.html" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\login\images\bg.gif" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\login\images\header1.jpg" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\login\images\page.gif" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\login\images\required_star.gif" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\login\index.html" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\login\screen.css" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\marketo\images\backRequiredGray.gif" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\marketo\images\back_green-fade.gif" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\marketo\images\back_nav_blue.gif" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\marketo\images\blank.gif" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\marketo\images\button-submit.gif" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\marketo\images\favicon.ico" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\marketo\images\help.png" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\marketo\images\left-nav-callout-long.png" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\marketo\images\login-sprite.gif" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\marketo\images\logo_marketo.gif" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\marketo\images\sf.png" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\marketo\images\step1-24.gif" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\marketo\images\step2-24.gif" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\marketo\images\step3-24.gif" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\marketo\images\tab-sprite.gif" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\marketo\images\tab_green.gif" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\marketo\images\time.png" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\marketo\images\toggle.gif" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\marketo\images\warning.gif" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\marketo\index.html" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\marketo\jquery.maskedinput.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\marketo\mktSignup.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\marketo\step2.htm" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\marketo\stylesheet.css" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\milk\bg.gif" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\milk\index.html" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\milk\left_white.png" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\milk\milk.css" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\milk\milk.png" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\milk\right_white.png" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\multipart\index.html" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\multipart\style.css" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\radio-checkbox-select-demo.html" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\requirejs\app.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\requirejs\index.html" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\semantic-ui\index.html" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\site-demos.css" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\themerollered.html" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\tinymce4\index.html" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\tinymce\index.html" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\tinymce\themes\simple\editor_template.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\tinymce\themes\simple\img\icons.gif" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\tinymce\themes\simple\langs\en.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\tinymce\themes\simple\skins\default\ui.css" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\tinymce\tiny_mce.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\additional-methods.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\additional-methods.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\jquery.validate.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\jquery.validate.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_ar.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_ar.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_az.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_az.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_bg.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_bg.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_bn_BD.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_bn_BD.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_ca.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_ca.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_cs.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_cs.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_da.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_da.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_de.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_de.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_el.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_el.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_es.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_es.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_es_AR.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_es_AR.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_es_PE.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_es_PE.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_et.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_et.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_eu.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_eu.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_fa.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_fa.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_fi.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_fi.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_fr.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_fr.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_ge.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_ge.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_gl.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_gl.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_he.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_he.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_hr.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_hr.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_hu.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_hu.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_hy_AM.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_hy_AM.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_id.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_id.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_is.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_is.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_it.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_it.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_ja.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_ja.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_ka.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_ka.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_kk.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_kk.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_ko.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_ko.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_lt.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_lt.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_lv.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_lv.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_mk.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_mk.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_my.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_my.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_nl.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_nl.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_no.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_no.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_pl.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_pl.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_pt_BR.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_pt_BR.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_pt_PT.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_pt_PT.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_ro.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_ro.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_ru.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_ru.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_sd.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_sd.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_si.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_si.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_sk.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_sk.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_sl.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_sl.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_sr.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_sr.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_sr_lat.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_sr_lat.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_sv.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_sv.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_th.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_th.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_tj.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_tj.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_tr.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_tr.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_uk.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_uk.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_ur.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_ur.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_vi.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_vi.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_zh.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_zh.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_zh_TW.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\messages_zh_TW.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\methods_de.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\methods_de.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\methods_es_CL.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\methods_es_CL.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\methods_fi.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\methods_fi.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\methods_it.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\methods_it.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\methods_nl.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\methods_nl.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\methods_pt.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\dist\localization\methods_pt.min.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\Gruntfile.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\lib\jquery-1.11.1.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\lib\jquery-1.7.2.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\lib\jquery-1.8.3.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\lib\jquery-1.9.1.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\lib\jquery-3.1.1.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\lib\jquery.form.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\lib\jquery.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\lib\jquery.mockjax-1.5.3.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\lib\jquery.mockjax-2.2.1.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\lib\jquery.mockjax.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\lib\jquery.simulate.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\lib\require.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\parsley.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\abaRoutingNumber.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\accept.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\additional.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\alphanumeric.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\bankaccountNL.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\bankorgiroaccountNL.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\bic.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\cifES.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\cnhBR.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\cnpjBR.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\cpfBR.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\creditcard.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\creditcardtypes.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\currency.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\dateFA.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\dateITA.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\dateNL.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\extension.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\giroaccountNL.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\greaterThan.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\greaterThanEqual.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\iban.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\integer.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\ipv4.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\ipv6.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\lessThan.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\lessThanEqual.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\lettersonly.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\letterswithbasicpunc.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\maxfiles.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\maxsize.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\maxsizetotal.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\mobileNL.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\mobileRU.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\mobileUK.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\netmask.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\nieES.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\nifES.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\nipPL.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\nisBR.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\notEqualTo.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\nowhitespace.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\pattern.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\phoneNL.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\phonePL.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\phonesUK.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\phoneUK.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\phoneUS.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\postalcodeBR.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\postalCodeCA.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\postalcodeIT.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\postalcodeNL.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\postcodeUK.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\require_from_group.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\skip_or_fill_minimum.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\statesUS.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\strippedminlength.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\time.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\time12h.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\url2.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\vinUS.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\zipcodeUS.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\additional\ziprange.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\ajax.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\core.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_ar.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_az.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_bg.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_bn_BD.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_ca.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_cs.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_da.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_de.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_el.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_es.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_es_AR.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_es_PE.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_et.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_eu.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_fa.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_fi.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_fr.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_ge.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_gl.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_he.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_hr.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_hu.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_hy_AM.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_id.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_is.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_it.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_ja.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_ka.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_kk.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_ko.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_lt.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_lv.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_mk.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_my.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_nl.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_no.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_pl.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_pt_BR.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_pt_PT.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_ro.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_ru.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_sd.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_si.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_sk.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_sl.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_sr.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_sr_lat.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_sv.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_th.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_tj.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_tr.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_uk.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_ur.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_vi.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_zh.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\messages_zh_TW.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\methods_de.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\methods_es_CL.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\methods_fi.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\methods_it.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\methods_nl.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\src\localization\methods_pt.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\test\additional\abaRoutingNumber.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\test\additional\cnhBR.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\test\additional\creditcard.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\test\additional\netmask.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\test\aria.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\test\error-placement.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\test\index.html" />
+    <Content Include="vendors\jquery-validation-1.19.1\test\messages.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\test\methods.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\test\rules.js" />
+    <Content Include="vendors\jquery-validation-1.19.1\test\test.js" />
+    <Content Include="vendors\jquery.fileDownload.js" />
+    <Content Include="vendors\jquery.mask.js" />
+    <Content Include="vendors\jquery\AUTHORS.txt" />
+    <Content Include="vendors\jquery\dist\jquery.js" />
+    <Content Include="vendors\jquery\dist\jquery.min.js" />
+    <Content Include="vendors\jquery\external\sizzle\dist\sizzle.js" />
+    <Content Include="vendors\jquery\external\sizzle\dist\sizzle.min.js" />
+    <Content Include="vendors\jquery\external\sizzle\LICENSE.txt" />
+    <Content Include="vendors\jquery\LICENSE.txt" />
+    <Content Include="vendors\jquery\src\ajax.js" />
+    <Content Include="vendors\jquery\src\ajax\jsonp.js" />
+    <Content Include="vendors\jquery\src\ajax\load.js" />
+    <Content Include="vendors\jquery\src\ajax\parseJSON.js" />
+    <Content Include="vendors\jquery\src\ajax\parseXML.js" />
+    <Content Include="vendors\jquery\src\ajax\script.js" />
+    <Content Include="vendors\jquery\src\ajax\var\location.js" />
+    <Content Include="vendors\jquery\src\ajax\var\nonce.js" />
+    <Content Include="vendors\jquery\src\ajax\var\rquery.js" />
+    <Content Include="vendors\jquery\src\ajax\xhr.js" />
+    <Content Include="vendors\jquery\src\attributes.js" />
+    <Content Include="vendors\jquery\src\attributes\attr.js" />
+    <Content Include="vendors\jquery\src\attributes\classes.js" />
+    <Content Include="vendors\jquery\src\attributes\prop.js" />
+    <Content Include="vendors\jquery\src\attributes\support.js" />
+    <Content Include="vendors\jquery\src\attributes\val.js" />
+    <Content Include="vendors\jquery\src\callbacks.js" />
+    <Content Include="vendors\jquery\src\core.js" />
+    <Content Include="vendors\jquery\src\core\access.js" />
+    <Content Include="vendors\jquery\src\core\init.js" />
+    <Content Include="vendors\jquery\src\core\parseHTML.js" />
+    <Content Include="vendors\jquery\src\core\ready.js" />
+    <Content Include="vendors\jquery\src\core\var\rsingleTag.js" />
+    <Content Include="vendors\jquery\src\css.js" />
+    <Content Include="vendors\jquery\src\css\addGetHookIf.js" />
+    <Content Include="vendors\jquery\src\css\adjustCSS.js" />
+    <Content Include="vendors\jquery\src\css\curCSS.js" />
+    <Content Include="vendors\jquery\src\css\defaultDisplay.js" />
+    <Content Include="vendors\jquery\src\css\hiddenVisibleSelectors.js" />
+    <Content Include="vendors\jquery\src\css\showHide.js" />
+    <Content Include="vendors\jquery\src\css\support.js" />
+    <Content Include="vendors\jquery\src\css\var\cssExpand.js" />
+    <Content Include="vendors\jquery\src\css\var\getStyles.js" />
+    <Content Include="vendors\jquery\src\css\var\isHidden.js" />
+    <Content Include="vendors\jquery\src\css\var\rmargin.js" />
+    <Content Include="vendors\jquery\src\css\var\rnumnonpx.js" />
+    <Content Include="vendors\jquery\src\css\var\swap.js" />
+    <Content Include="vendors\jquery\src\data.js" />
+    <Content Include="vendors\jquery\src\data\Data.js" />
+    <Content Include="vendors\jquery\src\data\var\acceptData.js" />
+    <Content Include="vendors\jquery\src\data\var\dataPriv.js" />
+    <Content Include="vendors\jquery\src\data\var\dataUser.js" />
+    <Content Include="vendors\jquery\src\deferred.js" />
+    <Content Include="vendors\jquery\src\deprecated.js" />
+    <Content Include="vendors\jquery\src\dimensions.js" />
+    <Content Include="vendors\jquery\src\effects.js" />
+    <Content Include="vendors\jquery\src\effects\animatedSelector.js" />
+    <Content Include="vendors\jquery\src\effects\Tween.js" />
+    <Content Include="vendors\jquery\src\event.js" />
+    <Content Include="vendors\jquery\src\event\ajax.js" />
+    <Content Include="vendors\jquery\src\event\alias.js" />
+    <Content Include="vendors\jquery\src\event\focusin.js" />
+    <Content Include="vendors\jquery\src\event\support.js" />
+    <Content Include="vendors\jquery\src\event\trigger.js" />
+    <Content Include="vendors\jquery\src\exports\amd.js" />
+    <Content Include="vendors\jquery\src\exports\global.js" />
+    <Content Include="vendors\jquery\src\intro.js" />
+    <Content Include="vendors\jquery\src\jquery.js" />
+    <Content Include="vendors\jquery\src\manipulation.js" />
+    <Content Include="vendors\jquery\src\manipulation\buildFragment.js" />
+    <Content Include="vendors\jquery\src\manipulation\getAll.js" />
+    <Content Include="vendors\jquery\src\manipulation\setGlobalEval.js" />
+    <Content Include="vendors\jquery\src\manipulation\support.js" />
+    <Content Include="vendors\jquery\src\manipulation\var\rcheckableType.js" />
+    <Content Include="vendors\jquery\src\manipulation\var\rscriptType.js" />
+    <Content Include="vendors\jquery\src\manipulation\var\rtagName.js" />
+    <Content Include="vendors\jquery\src\manipulation\wrapMap.js" />
+    <Content Include="vendors\jquery\src\manipulation\_evalUrl.js" />
+    <Content Include="vendors\jquery\src\offset.js" />
+    <Content Include="vendors\jquery\src\outro.js" />
+    <Content Include="vendors\jquery\src\queue.js" />
+    <Content Include="vendors\jquery\src\queue\delay.js" />
+    <Content Include="vendors\jquery\src\selector-native.js" />
+    <Content Include="vendors\jquery\src\selector-sizzle.js" />
+    <Content Include="vendors\jquery\src\selector.js" />
+    <Content Include="vendors\jquery\src\serialize.js" />
+    <Content Include="vendors\jquery\src\traversing.js" />
+    <Content Include="vendors\jquery\src\traversing\findFilter.js" />
+    <Content Include="vendors\jquery\src\traversing\var\dir.js" />
+    <Content Include="vendors\jquery\src\traversing\var\rneedsContext.js" />
+    <Content Include="vendors\jquery\src\traversing\var\siblings.js" />
+    <Content Include="vendors\jquery\src\var\arr.js" />
+    <Content Include="vendors\jquery\src\var\class2type.js" />
+    <Content Include="vendors\jquery\src\var\concat.js" />
+    <Content Include="vendors\jquery\src\var\document.js" />
+    <Content Include="vendors\jquery\src\var\documentElement.js" />
+    <Content Include="vendors\jquery\src\var\hasOwn.js" />
+    <Content Include="vendors\jquery\src\var\indexOf.js" />
+    <Content Include="vendors\jquery\src\var\pnum.js" />
+    <Content Include="vendors\jquery\src\var\push.js" />
+    <Content Include="vendors\jquery\src\var\rcssNum.js" />
+    <Content Include="vendors\jquery\src\var\rnotwhite.js" />
+    <Content Include="vendors\jquery\src\var\slice.js" />
+    <Content Include="vendors\jquery\src\var\support.js" />
+    <Content Include="vendors\jquery\src\var\toString.js" />
+    <Content Include="vendors\jquery\src\wrap.js" />
+    <Content Include="vendors\moment\locale\tr.js" />
+    <Content Include="vendors\moment\min\moment.min.js" />
+    <Content Include="vendors\moment\src\moment.js" />
+    <Content Include="vendors\pnotify\.gitignore" />
+    <Content Include="vendors\pnotify\dist\pnotify.animate.js" />
+    <Content Include="vendors\pnotify\dist\pnotify.brighttheme.css" />
+    <Content Include="vendors\pnotify\dist\pnotify.buttons.css" />
+    <Content Include="vendors\pnotify\dist\pnotify.buttons.js" />
+    <Content Include="vendors\pnotify\dist\pnotify.callbacks.js" />
+    <Content Include="vendors\pnotify\dist\pnotify.confirm.js" />
+    <Content Include="vendors\pnotify\dist\pnotify.css" />
+    <Content Include="vendors\pnotify\dist\pnotify.desktop.js" />
+    <Content Include="vendors\pnotify\dist\pnotify.history.css" />
+    <Content Include="vendors\pnotify\dist\pnotify.history.js" />
+    <Content Include="vendors\pnotify\dist\pnotify.js" />
+    <Content Include="vendors\pnotify\dist\pnotify.material.css" />
+    <Content Include="vendors\pnotify\dist\pnotify.mobile.css" />
+    <Content Include="vendors\pnotify\dist\pnotify.mobile.js" />
+    <Content Include="vendors\pnotify\dist\pnotify.nonblock.css" />
+    <Content Include="vendors\pnotify\dist\pnotify.nonblock.js" />
+    <Content Include="vendors\pnotify\dist\pnotify.reference.js" />
+    <Content Include="vendors\pnotify\dist\pnotify.tooltip.js" />
+    <Content Include="vendors\pnotify\libtests\browserify\index.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\AccessDenied\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Admin\panel.cshtml" />
+    <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="vendors\bootstrap-progressbar\scss\bootstrap-progressbar-2.x.x.scss" />
+    <Content Include="vendors\bootstrap-progressbar\scss\bootstrap-progressbar-3.0.0-3.1.x.scss" />
+    <Content Include="vendors\bootstrap-progressbar\scss\bootstrap-progressbar-3.2.0.scss" />
+    <Content Include="vendors\bootstrap-progressbar\scss\bootstrap-progressbar-3.3.0-3.x.x.scss" />
+    <Content Include="vendors\bootstrap\.bower.json" />
+    <Content Include="vendors\bootstrap\bower.json" />
+    <Content Include="vendors\bootstrap\CHANGELOG.md" />
+    <Content Include="vendors\bootstrap\dist\css\bootstrap-theme.css.map" />
+    <Content Include="vendors\bootstrap\dist\css\bootstrap-theme.min.css.map" />
+    <Content Include="vendors\bootstrap\dist\css\bootstrap.css.map" />
+    <Content Include="vendors\bootstrap\dist\css\bootstrap.min.css.map" />
+    <Content Include="vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="vendors\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="vendors\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="vendors\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="vendors\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="vendors\bootstrap\Gemfile" />
+    <Content Include="vendors\bootstrap\Gemfile.lock" />
+    <Content Include="vendors\bootstrap\grunt\.jshintrc" />
+    <Content Include="vendors\bootstrap\grunt\.stylelintrc" />
+    <Content Include="vendors\bootstrap\grunt\configBridge.json" />
+    <Content Include="vendors\bootstrap\ISSUE_TEMPLATE.md" />
+    <Content Include="vendors\bootstrap\js\.jscsrc" />
+    <Content Include="vendors\bootstrap\js\.jshintrc" />
+    <Content Include="vendors\bootstrap\less\alerts.less" />
+    <Content Include="vendors\bootstrap\less\badges.less" />
+    <Content Include="vendors\bootstrap\less\bootstrap.less" />
+    <Content Include="vendors\bootstrap\less\breadcrumbs.less" />
+    <Content Include="vendors\bootstrap\less\button-groups.less" />
+    <Content Include="vendors\bootstrap\less\buttons.less" />
+    <Content Include="vendors\bootstrap\less\carousel.less" />
+    <Content Include="vendors\bootstrap\less\close.less" />
+    <Content Include="vendors\bootstrap\less\code.less" />
+    <Content Include="vendors\bootstrap\less\component-animations.less" />
+    <Content Include="vendors\bootstrap\less\dropdowns.less" />
+    <Content Include="vendors\bootstrap\less\forms.less" />
+    <Content Include="vendors\bootstrap\less\glyphicons.less" />
+    <Content Include="vendors\bootstrap\less\grid.less" />
+    <Content Include="vendors\bootstrap\less\input-groups.less" />
+    <Content Include="vendors\bootstrap\less\jumbotron.less" />
+    <Content Include="vendors\bootstrap\less\labels.less" />
+    <Content Include="vendors\bootstrap\less\list-group.less" />
+    <Content Include="vendors\bootstrap\less\media.less" />
+    <Content Include="vendors\bootstrap\less\mixins.less" />
+    <Content Include="vendors\bootstrap\less\mixins\alerts.less" />
+    <Content Include="vendors\bootstrap\less\mixins\background-variant.less" />
+    <Content Include="vendors\bootstrap\less\mixins\border-radius.less" />
+    <Content Include="vendors\bootstrap\less\mixins\buttons.less" />
+    <Content Include="vendors\bootstrap\less\mixins\center-block.less" />
+    <Content Include="vendors\bootstrap\less\mixins\clearfix.less" />
+    <Content Include="vendors\bootstrap\less\mixins\forms.less" />
+    <Content Include="vendors\bootstrap\less\mixins\gradients.less" />
+    <Content Include="vendors\bootstrap\less\mixins\grid-framework.less" />
+    <Content Include="vendors\bootstrap\less\mixins\grid.less" />
+    <Content Include="vendors\bootstrap\less\mixins\hide-text.less" />
+    <Content Include="vendors\bootstrap\less\mixins\image.less" />
+    <Content Include="vendors\bootstrap\less\mixins\labels.less" />
+    <Content Include="vendors\bootstrap\less\mixins\list-group.less" />
+    <Content Include="vendors\bootstrap\less\mixins\nav-divider.less" />
+    <Content Include="vendors\bootstrap\less\mixins\nav-vertical-align.less" />
+    <Content Include="vendors\bootstrap\less\mixins\opacity.less" />
+    <Content Include="vendors\bootstrap\less\mixins\pagination.less" />
+    <Content Include="vendors\bootstrap\less\mixins\panels.less" />
+    <Content Include="vendors\bootstrap\less\mixins\progress-bar.less" />
+    <Content Include="vendors\bootstrap\less\mixins\reset-filter.less" />
+    <Content Include="vendors\bootstrap\less\mixins\reset-text.less" />
+    <Content Include="vendors\bootstrap\less\mixins\resize.less" />
+    <Content Include="vendors\bootstrap\less\mixins\responsive-visibility.less" />
+    <Content Include="vendors\bootstrap\less\mixins\size.less" />
+    <Content Include="vendors\bootstrap\less\mixins\tab-focus.less" />
+    <Content Include="vendors\bootstrap\less\mixins\table-row.less" />
+    <Content Include="vendors\bootstrap\less\mixins\text-emphasis.less" />
+    <Content Include="vendors\bootstrap\less\mixins\text-overflow.less" />
+    <Content Include="vendors\bootstrap\less\mixins\vendor-prefixes.less" />
+    <Content Include="vendors\bootstrap\less\modals.less" />
+    <Content Include="vendors\bootstrap\less\navbar.less" />
+    <Content Include="vendors\bootstrap\less\navs.less" />
+    <Content Include="vendors\bootstrap\less\normalize.less" />
+    <Content Include="vendors\bootstrap\less\pager.less" />
+    <Content Include="vendors\bootstrap\less\pagination.less" />
+    <Content Include="vendors\bootstrap\less\panels.less" />
+    <Content Include="vendors\bootstrap\less\popovers.less" />
+    <Content Include="vendors\bootstrap\less\print.less" />
+    <Content Include="vendors\bootstrap\less\progress-bars.less" />
+    <Content Include="vendors\bootstrap\less\responsive-embed.less" />
+    <Content Include="vendors\bootstrap\less\responsive-utilities.less" />
+    <Content Include="vendors\bootstrap\less\scaffolding.less" />
+    <Content Include="vendors\bootstrap\less\tables.less" />
+    <Content Include="vendors\bootstrap\less\theme.less" />
+    <Content Include="vendors\bootstrap\less\thumbnails.less" />
+    <Content Include="vendors\bootstrap\less\tooltip.less" />
+    <Content Include="vendors\bootstrap\less\type.less" />
+    <Content Include="vendors\bootstrap\less\utilities.less" />
+    <Content Include="vendors\bootstrap\less\variables.less" />
+    <Content Include="vendors\bootstrap\less\wells.less" />
+    <Content Include="vendors\bootstrap\LICENSE" />
+    <Content Include="vendors\bootstrap\nuget\bootstrap.less.nuspec" />
+    <Content Include="vendors\bootstrap\nuget\bootstrap.nuspec" />
+    <Content Include="vendors\bootstrap\nuget\MyGet.ps1" />
+    <Content Include="vendors\bootstrap\package-lock.json" />
+    <Content Include="vendors\bootstrap\package.json" />
+    <Content Include="vendors\bootstrap\README.md" />
+    <Content Include="vendors\font-awesome\.bower.json" />
+    <Content Include="vendors\font-awesome\.npmignore" />
+    <Content Include="vendors\font-awesome\bower.json" />
+    <Content Include="vendors\font-awesome\css\font-awesome.css.map" />
+    <Content Include="vendors\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="vendors\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="vendors\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="vendors\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="vendors\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="vendors\font-awesome\less\animated.less" />
+    <Content Include="vendors\font-awesome\less\bordered-pulled.less" />
+    <Content Include="vendors\font-awesome\less\core.less" />
+    <Content Include="vendors\font-awesome\less\fixed-width.less" />
+    <Content Include="vendors\font-awesome\less\font-awesome.less" />
+    <Content Include="vendors\font-awesome\less\icons.less" />
+    <Content Include="vendors\font-awesome\less\larger.less" />
+    <Content Include="vendors\font-awesome\less\list.less" />
+    <Content Include="vendors\font-awesome\less\mixins.less" />
+    <Content Include="vendors\font-awesome\less\path.less" />
+    <Content Include="vendors\font-awesome\less\rotated-flipped.less" />
+    <Content Include="vendors\font-awesome\less\screen-reader.less" />
+    <Content Include="vendors\font-awesome\less\stacked.less" />
+    <Content Include="vendors\font-awesome\less\variables.less" />
+    <Content Include="vendors\font-awesome\scss\font-awesome.scss" />
+    <Content Include="vendors\font-awesome\scss\_animated.scss" />
+    <Content Include="vendors\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="vendors\font-awesome\scss\_core.scss" />
+    <Content Include="vendors\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="vendors\font-awesome\scss\_icons.scss" />
+    <Content Include="vendors\font-awesome\scss\_larger.scss" />
+    <Content Include="vendors\font-awesome\scss\_list.scss" />
+    <Content Include="vendors\font-awesome\scss\_mixins.scss" />
+    <Content Include="vendors\font-awesome\scss\_path.scss" />
+    <Content Include="vendors\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="vendors\font-awesome\scss\_screen-reader.scss" />
+    <Content Include="vendors\font-awesome\scss\_stacked.scss" />
+    <Content Include="vendors\font-awesome\scss\_variables.scss" />
+    <Content Include="vendors\datatables.net-keytable\.bower.json" />
+    <Content Include="vendors\datatables.net-keytable\bower.json" />
+    <Content Include="vendors\datatables.net-keytable\Readme.md" />
+    <Content Include="Views\Admin\davakayit.cshtml" />
+    <Content Include="Views\superadmin\Create.cshtml" />
+    <Content Include="Views\superadmin\Delete.cshtml" />
+    <Content Include="Views\superadmin\Details.cshtml" />
+    <Content Include="Views\superadmin\Edit.cshtml" />
+    <Content Include="Views\superadmin\Index.cshtml" />
+    <Content Include="vendors\dropzone\.bower.json" />
+    <Content Include="vendors\dropzone\bower.json" />
+    <Content Include="vendors\dropzone\dist\readme.md" />
+    <Content Include="Views\Scripts\deneyemedim.cshtml" />
+    <Content Include="vendors\jquery-validation-1.19.1\demo\captcha\fonts\Anorexia.ttf" />
+    <Content Include="vendors\jquery-validation-1.19.1\package.json" />
+    <Content Include="vendors\jquery-validation-1.19.1\README.md" />
+    <Content Include="vendors\inputpas\.eslintrc" />
+    <Content Include="vendors\inputpas\.github\ISSUE_TEMPLATE\issue-report.md" />
+    <Content Include="vendors\inputpas\bower.json" />
+    <Content Include="vendors\inputpas\CHANGELOG.md" />
+    <Content Include="vendors\inputpas\composer.json" />
+    <Content Include="vendors\inputpas\nuspecs\Inputmask.nuspec" />
+    <Content Include="vendors\inputpas\nuspecs\jquery.inputmask.nuspec" />
+    <Content Include="vendors\inputpas\package.json" />
+    <Content Include="vendors\inputpas\README.md" />
+    <Content Include="vendors\inputpas\README_android.md" />
+    <Content Include="vendors\inputpas\README_date.md" />
+    <Content Include="vendors\inputpas\README_numeric.md" />
+    <Content Include="vendors\inputpas\README_other.md" />
+    <Content Include="vendors\jquery\.bower.json" />
+    <Content Include="vendors\jquery\bower.json" />
+    <Content Include="vendors\jquery\dist\jquery.min.map" />
+    <Content Include="vendors\jquery\external\sizzle\dist\sizzle.min.map" />
+    <Content Include="vendors\jquery\README.md" />
+    <Content Include="vendors\jquery\src\.jshintrc" />
+    <Content Include="Views\Admin\bireyseldavalar.cshtml" />
+    <Content Include="Views\Admin\kurumsaldavalar.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\musteriPanel.cshtml" />
+    <Content Include="Views\Avukats\Create.cshtml" />
+    <Content Include="Views\Avukats\Delete.cshtml" />
+    <Content Include="Views\Avukats\Details.cshtml" />
+    <Content Include="Views\Avukats\Edit.cshtml" />
+    <Content Include="Views\Avukats\Index.cshtml" />
+    <Content Include="Views\Delete\Davasil.cshtml" />
+    <Content Include="Views\Admin\bireyselmusteriler.cshtml" />
+    <Content Include="Views\Admin\kurumsalmusteriler.cshtml" />
+    <Content Include="Views\Delete\Musterisil.cshtml" />
+    <Content Include="vendors\pnotify\.bower.json" />
+    <Content Include="vendors\pnotify\bower.json" />
+    <Content Include="vendors\pnotify\COPYING" />
+    <Content Include="vendors\pnotify\README.md" />
+    <Content Include="Views\Anasayfas\Edit.cshtml" />
+    <Content Include="Views\Anasayfas\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Admin\davakapat.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\uploads\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>51617</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:51617/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Bu proje bu bilgisayarda olmayan NuGet paketlerine başvuru yapıyor. Bunları indirmek için NuGet Paket Geri Yükleme'yi kullanın. Daha fazla bilgi için, bkz. http://go.microsoft.com/fwlink/?LinkID=322105. Eksik dosya: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

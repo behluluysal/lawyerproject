@@ -1,0 +1,11 @@
+NTgxNTYxNTY5OTc3MTcyMDQ3.XOhD2Q.gS4rrjdjz7Q5E7NYdfvbkepLdJE   token 
+581561569977172047						clientid
+PDkgF9jtwSGL-IOn96LTkNKQf-FccrPs
+
+
+https://discordapp.com/oauth2/authorize?&client_id=581561569977172047&scope=bot&permissions=8
+289
+
+https://www.youtube.com/watch?v=Z-tc91hArlM&list=PLdnyVeMcpY7-GfaXaWBOb3ZQkJxP53BIx
+
+http://www.turkanime.tv/anime/tate-no-yuusha-no-nariagari

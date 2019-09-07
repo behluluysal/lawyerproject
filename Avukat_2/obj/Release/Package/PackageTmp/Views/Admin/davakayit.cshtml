@@ -1,0 +1,2157 @@
+﻿@using Avukat_2.Security
+
+@{
+    Layout = null;
+    @model Avukat_2.ViewModels.DavakayitViewModel
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dava Kayıt </title>
+
+
+    <!-- Bootstrap -->
+    <link href="~/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="~/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="~/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="~/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+
+    <!-- bootstrap-progressbar -->
+    <link href="~/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="~/build/css/custom.min.css" rel="stylesheet">
+    <!-- Switchery -->
+    <link href="~/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+    <!-- Dropzone.js -->
+    <link href="~/vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
+    <link href="~/vendors/inputpas/css/inputmask.css" rel="stylesheet" />
+    <link href="~/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+    <!-- PNotify -->
+    <link href="~/vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="~/vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+
+    <style>
+        .stepContainer {
+            height: auto !important;
+            overflow-x: unset !important;
+        }
+    </style>
+</head>
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a class="site_title"><i class="fa fa-legal"></i> <span>Sakarya Büroosu</span></a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- menu profile quick info -->
+                    <div class="profile clearfix">
+                        <div class="profile_pic">
+                            <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                        </div>
+                        <div class="profile_info">
+                            <span>Hoşgeldin,</span>
+                            <h2>@SessionPersister.Username.  @Session["modtype"]</h2>
+                        </div>
+                    </div>
+                    <!-- /menu profile quick info -->
+                    <br />
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3>General</h3>
+                            <ul class="nav side-menu">
+
+                                @{
+
+                                    if (Session["modtype"] != null)
+                                    {
+                                        if (Session["modtype"].ToString() == "Yönetici")
+                                        {
+                                            <li>
+                                                <a href="@Url.Action("panel", "Admin")"><i class="fa fa-dashboard"></i>Yönetim Paneli</a>
+                                            </li>
+                                        }
+                                    }
+
+                                }
+                                <li>
+                                    <a><i class="fa fa-users"></i> Müşteriler <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="@Url.Action("bireyselmusteriler", "Admin")">Bireysel Müşterileri Listele/Düzenle</a></li>
+                                        <li><a href="@Url.Action("kurumsalmusteriler", "Admin")">Kurumsal Müşterileri Listele/Düzenle</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-briefcase"></i> Davalar <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="@Url.Action("davakayit", "Admin")">Dava Ekle</a></li>
+                                        <li><a href="@Url.Action("davakapat", "Admin")">Dava Kapat</a></li>
+                                        <li><a href="@Url.Action("bireyseldavalar", "Admin")">Bireysel Davaları Listele/Düzenle</a></li>
+                                        <li><a href="@Url.Action("kurumsaldavalar", "Admin")">Kurumsal Davaları Listele/Düzenle</a></li>
+                                    </ul>
+                                </li>
+                                @{
+                                    if (Session["modtype"] != null)
+                                    {
+                                        if (Session["modtype"].ToString() == "Yönetici")
+                                        {
+                                            <li>
+                                                <a><i class="fa fa-database"></i> Silme İşlemleri <span class="fa fa-chevron-down"></span></a>
+                                                <ul class="nav child_menu">
+                                                    <li><a href="@Url.Action("Davasil", "Delete")">Dava Sil</a></li>
+                                                    <li><a href="@Url.Action("Musterisil", "Delete")">Müşteri Sil</a></li>
+                                                </ul>
+                                            </li>
+                                        }
+                                    }
+                                }
+                                @{
+                                    if (Session["modtype"] != null)
+                                    {
+                                        if (Session["modtype"].ToString() == "Yönetici")
+                                        {
+                                            <li>
+                                                <a><i class="fa fa-desktop"></i> Yardımcılar <span class="fa fa-chevron-down"></span></a>
+                                                <ul class="nav child_menu">
+                                                    <li><a href="@Url.Action("Create", "superadmin")">Yardımcı Ekle</a></li>
+                                                    <li><a href="@Url.Action("Index", "superadmin")">Yardımcıları Listele / Düzenle</a></li>
+                                                </ul>
+                                            </li>
+                                        }
+                                    }
+                                }
+                                @{
+                                    if (Session["modtype"] != null)
+                                    {
+                                        if (Session["modtype"].ToString() == "Yönetici")
+                                        {
+
+                                            <li>
+                                                <a><i class="fa fa-legal"></i> Avukatlar <span class="fa fa-chevron-down"></span></a>
+                                                <ul class="nav child_menu">
+                                                    <li><a href="@Url.Action("Create", "Avukats")">Avukat Ekle</a></li>
+                                                    <li><a href="@Url.Action("Index", "Avukats")">Avukatları Listele / Düzenle</a></li>
+                                                </ul>
+                                            </li>
+                                        }
+                                    }
+                                }
+
+
+                                <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /sidebar menu -->
+                    <!-- /menu footer buttons -->
+                    <div class="sidebar-footer hidden-small">
+                        <a data-toggle="tooltip" data-placement="top" title="Settings">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Lock">
+                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="@Url.Action("Logout", "Admin")">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <!-- /menu footer buttons -->
+                </div>
+            </div>
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <nav>
+                        <div class="nav toggle">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <img src="images/img.jpg" alt="">@SessionPersister.Username
+                                    <span class=" fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                    <li><a href="javascript:;"> Profile</a></li>
+                                    <li>
+                                        <a href="javascript:;">
+                                            <span class="badge bg-red pull-right">50%</span>
+                                            <span>Settings</span>
+                                        </a>
+                                    </li>
+                                    <li><a href="javascript:;">Help</a></li>
+                                    <li><a href="@Url.Action("Logout", "Admin")"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <div class="">
+
+                    <div class="clearfix"></div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <h2>Müşteri/dava İşlemleri </h2>
+
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li>
+                                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li>
+                                                    <a href="#">Settings 1</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Settings 2</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a class="close-link"><i class="fa fa-close"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+
+                                    <!-- Smart Wizard -->
+
+
+                                    <div id="wizard" class="form_wizard wizard_horizontal">
+                                        <ul class="wizard_steps">
+                                            <li>
+                                                <a href="#step-1">
+                                                    <span class="step_no">1</span>
+                                                    <span class="step_descr">
+                                                        Adım 1<br />
+                                                        <small>Müşteriyi Bul</small>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#step-2">
+                                                    <span class="step_no">2</span>
+                                                    <span class="step_descr">
+                                                        Adım 2<br />
+                                                        <small>Müşteri Bilgilerini Önizle</small>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#step-3">
+                                                    <span class="step_no">3</span>
+                                                    <span class="step_descr">
+                                                        Adım 3<br />
+                                                        <small>Dava Bilgilerinin Girişi</small>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#step-4">
+                                                    <span class="step_no">4</span>
+                                                    <span class="step_descr">
+                                                        Adım 4<br />
+                                                        <small>Son Kontroller</small>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <div id="step-1">
+                                            <form id="tcform" class="form-horizontal form-label-left" data-parsley-validate="parsley">
+                                                <div class="form-group">
+                                                    <label id="tclabel" class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+
+                                                    </label>
+                                                    <div id="tercih" class="form-horizontal form-label-left col-md-6 col-sm-6 col-xs-12">
+                                                        <div class="btn-group" data-toggle="buttons">
+                                                            <label class="btn btn-primary" data-toggle-class="btn" data-toggle-passive-class="btn">
+                                                                <input type="radio" name="kapaSecim" id="bireyselsecim" onchange="bireysel()" value="bireysel"> &nbsp; Bireysel &nbsp;
+                                                            </label>
+                                                            <label class="btn btn-primary" data-toggle-class="btn" data-toggle-passive-class="btn">
+                                                                <input type="radio" name="kapaSecim" onchange="kurumsal()" value="kurumsal"> Kurumsal
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <div id="tcdiv">
+                                                        <label id="tclabel" class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+
+                                                        </label>
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <input type="text" id="tc" class="form-control has-feedback-left col-md-7 col-xs-12" maxlength="11" data-parsley-length="[11, 11]" data-parsley-length-message="T.C. Kimlik numarası 11 haneli olmak zorundadır." data-parsley-required-message="T.C. Kimlik numarası giriniz." required data-parsley-trigger="input"
+                                                                   oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" placeholder="T.C. Kimlik Numarası">
+                                                            <span class="fa fa-search form-control-feedback left" aria-hidden="true"></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <!--Kurum için aşağıda-->
+                                                    <div style="display:none" id="vergidiv">
+                                                        <label id="vergilabel" class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+
+                                                        </label>
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <input type="text" id="vergino" class="form-control has-feedback-left col-md-7 col-xs-12" maxlength="10" data-parsley-length="[10, 10]" data-parsley-length-message="Vergi numarası 10 haneli olmak zorundadır." data-parsley-required-message="Vergi numarası giriniz." required data-parsley-trigger="input"
+                                                                   oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" placeholder="Vergi Numarası">
+                                                            <span class="fa fa-search form-control-feedback left" aria-hidden="true"></span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <br /><br /><br /><hr />
+
+                                                <button id="btnileri" class="buttonNext btn btn-success" style="float:right">İleri</button>
+                                                <button id="btngeri" class="buttonPrevious buttonDisabled btn btn-primary" style="float:right" disabled>Geri</button>
+                                            </form>
+                                        </div>
+
+
+
+
+
+                                        <div id="step-2" style="display:none">
+                                            <h2 class="StepTitle">Adım 2 İçeriği</h2>
+                                            <h2 style="font-family:Calibri" class="alert alert-warning" id="dialog1"> </h2>
+                                            <form id="kmusteriform" data-parsley-validate class="form-horizontal form-label-left" style="display:none">
+                                                <div class="form-group">
+                                                    <label id="kfirst-name-label" class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                                        <span class="required">Ad *</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                                        <input type="text" placeholder="Ad" class="form-control has-feedback-left" id="kfirst-name" style="display:block" name="firstname" data-parsley-required-message="Lütfen T.C. Kimlik numarası giriniz." required data-parsley-trigger="input" disabled="disabled">
+                                                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label id="klast-name-label" class="control-label col-md-3 col-sm-3 col-xs-12" for="lastname">
+                                                        <span class="required">Soyad *</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                                        <input type="text" placeholder="Soyad" class="form-control has-feedback-left" id="klast-name" name="klastname" required="required" disabled>
+                                                        <span class=" form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label id="ktc1-label" for="tc1" class="control-label col-md-3 col-sm-3 col-xs-12">T.C Kimlik Numarası *</label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input id="ktc1" placeholder="T.C. Kimlik numarası" class="form-control  has-feedback-left col-md-7 col-xs-12" required="required" type="text" name="ktc1" disabled>
+                                                        <span class="fa fa-bookmark form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label id="kbirthday-label" class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Doğum Tarihi *<span class="required"></span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input id="kbirthday" placeholder="Doğum Tarihi" name="bt" class="date-picker form-control  has-feedback-left col-md-7 col-xs-12" type="date" required disabled>
+                                                        <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label id="kbirthday-label" class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Müşteri Kayıt Tarihi *<span class="required"></span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input id="kkayit" placeholder="Kayıt Tarihi" name="bt" class="date-picker form-control  has-feedback-left col-md-7 col-xs-12" type="date" required disabled>
+                                                        <span class="fa fa-calendar-check-o form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Email <span class="required"></span>
+
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative; display: block;">
+
+
+                                                        <input id="kemail" name="email" class="form-control has-feedback-left col-md-7 col-xs-12" type="email" style="padding-left: 40px;" disabled>
+                                                        <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Telefon Numarası <span class="required"></span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative; display: block;">
+
+
+                                                        <input id="kphone" name="kphone" class="date-picker form-control has-feedback-left col-md-7 col-xs-12" type="tel" style="padding-left: 40px;" disabled>
+                                                        <span class="fa fa-mobile-phone form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label id="evphone-label" class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Ev Telefonu Numarası <span class="required"></span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative; display: block;">
+
+
+                                                        <input id="kevphone" name="kevphone" class="date-picker form-control has-feedback-left col-md-7 col-xs-12" type="tel" style="padding-left: 40px;" disabled>
+                                                        <span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Adres <span class="required"></span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                                        <textarea id="kadres" placeholder="Müşterinin Adresi" name="kadres" class="date-picker form-control col-md-7 col-xs-12" type="text" disabled></textarea>
+
+
+                                                    </div>
+                                                </div>
+                                                <br /><br /><br /><hr />
+                                                <button id="btnileriss" class="buttonNext btn btn-success" style="float:right" type="button">İleri</button>
+                                                <button id="btngeriss" class="buttonPrevious buttonDisabled btn btn-primary" style="float:right" type="button">Geri</button>
+
+                                            </form>
+                                            <!----------------------------------------------------------------------------------->
+                                            <div id="bmusteriform" data-parsley-validate class="form-horizontal form-label-left" style="display:none">
+                                                <div class="form-group">
+                                                    <label id="bfirst-name-label" class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                                        Ad <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <table style="width:130%">
+                                                            <tr>
+                                                                <td><input type="text" placeholder="Ad" id="bfirst-name" style="display:inline" name="bfirstname" required="required" class="form-control has-feedback-left col-md-7 col-xs-12" disabled="disabled"><span class="fa fa-user form-control-feedback left" aria-hidden="true"></span></td>
+                                                                <td style="display:inline; margin-left:17px" id="buton1d"><input class="js-switch" id="buton1" style="display: none;" type="checkbox" data-switchery="true"></td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label id="blast-name-label" class="control-label col-md-3 col-sm-3 col-xs-12" for="lastname">
+                                                        Soyad <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <table style="width:130%">
+                                                            <tr>
+                                                                <td><input type="text" placeholder="Soyad" id="blast-name" name="blastname" required="required" class="form-control has-feedback-left col-md-7 col-xs-12" disabled><span class="form-control-feedback left" aria-hidden="true"></span></td>
+                                                                <td style="display:inline; margin-left:17px" id="buton2d"><input id="buton2" class="js-switch" style="display: none;" type="checkbox" data-switchery="true"></td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label id="btc1-label" for="tc1" class="control-label col-md-3 col-sm-3 col-xs-12">T.C Kimlik Numarası *</label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input id="btc1" class="form-control has-feedback-left col-md-7 col-xs-12" type="text" name="btc1" disabled>
+                                                        <span class="fa fa-bookmark form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label id="bbirthday-label" class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Doğum Tarihi <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input id="bbirthday" name="bbt" class="date-picker form-control has-feedback-left col-md-7 col-xs-12" required type="date" disabled>
+                                                        <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label id="kbirthday-label" class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Müşteri Kayıt Tarihi <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <table style="width:136%">
+                                                            <tr>
+                                                                <td><input id="bkayit" name="bt" class="date-picker form-control has-feedback-left col-xs-12" required="required" type="date" disabled><span class="fa fa-calendar-check-o form-control-feedback left" aria-hidden="true"></span></td>
+                                                                <td style="display:inline; margin-left:17px" id="buton7d"><input class="js-switch" id="buton7" style="display: none;" type="checkbox" data-switchery="false"></td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Email <span class="required">*</span>
+
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative; display: block;">
+                                                        <table style="width:131%">
+                                                            <tr>
+                                                                <td>
+                                                                    <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+                                                                    <input id="bemail" name="bemail" placeholder="Email" class="date-picker form-control has-feedback-left col-md-7 col-xs-12" type="email" style="padding-left: 40px;" disabled required>
+                                                                <td style="display:inline; margin-left:17px" id="buton3d"><input class="js-switch" id="buton3" style="display: none;" type="checkbox" data-switchery="true"></td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Telefon Numarası <span class="required"></span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative; display: block;">
+                                                        <table style="width:131%">
+                                                            <tr>
+                                                                <td>
+                                                                    <span class="fa fa-mobile form-control-feedback left" aria-hidden="true"></span>
+                                                                    <input id="bphone" name="bphone" class="date-picker form-control col-md-7 col-xs-12" type="tel" style="padding-left: 40px;" disabled>
+                                                                </td>
+                                                                <td style="display:inline; margin-left:17px" id="buton4d"><input class="js-switch" style="display: none;" id="buton4" type="checkbox" data-switchery="true"></td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label id="evphone-label" class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Ev Telefonu Numarası <span class="required"></span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative; display: block;">
+                                                        <table style="width:131%">
+                                                            <tr>
+                                                                <td>
+                                                                    <span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
+                                                                    <input id="bevphone" name="bevphone" class="date-picker form-control has-feedback-left col-md-7 col-xs-12" type="tel" style="padding-left: 40px;" disabled>
+                                                                </td>
+                                                                <td style="display:inline; margin-left:17px" id="buton5d"><input class="js-switch" style="display: none;" id="buton6" type="checkbox" data-switchery="true"></td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Adres <span class="required"></span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <table style="width:139%">
+                                                            <tr>
+                                                                <td><textarea id="badres" placeholder="Müşterinin Adresi" name="badres" class="date-picker form-control col-md-7 col-xs-12" type="text" disabled></textarea></td>
+                                                                <td style="display:inline; margin-left:17px" id="buton6d"><input class="js-switch" id="buton5" style="display: none;" type="checkbox" data-switchery="false"></td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <br /><br /><br /><hr />
+                                                <button id="btnilerissb" class="buttonNext btn btn-success" style="float:right">İleri</button>
+                                                <button id="btngerissb" class="buttonPrevious buttonDisabled btn btn-primary" style="float:right">Geri</button>
+
+                                            </div>
+                                            <!---------------------------------------------------------------------------------------------------------------------->
+                                            <form id="kkurumform" data-parsley-validate class="form-horizontal form-label-left" style="display:none">
+                                                <div class="form-group">
+                                                    <label id="kkfirst-name-label" class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                                        Kurum Adı <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <span class="fa fa-users form-control-feedback left" aria-hidden="true"></span>
+                                                        <input type="text" id="kkfirst-name" style="display:inline" name="kkfirstname" required="required" class="form-control has-feedback-left col-md-7 col-xs-12" disabled="disabled">
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label id="kktc1-label" for="tc1" class="control-label col-md-3 col-sm-3 col-xs-12">Vergi Numarası *</label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input id="kktc1" class="form-control has-feedback-left col-md-7 col-xs-12" type="text" name="kktc1" disabled>
+                                                        <span class="fa fa-bookmark form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label id="kbirthday-label" class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Müşteri Kayıt Tarihi <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input id="kkkayit" name="bt" class="date-picker form-control has-feedback-left col-md-7 col-xs-12" required="required" type="date" disabled>
+                                                        <span class="fa fa-calendar-check-o form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Email <span class="required"></span>
+
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative; display: block;">
+
+                                                        <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+                                                        <input id="kkemail" name="kkemail" class="date-picker form-control col-md-7 col-xs-12" type="email" style="padding-left: 40px;" disabled>
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Telefon Numarası <span class="required"></span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative; display: block;">
+
+                                                        <span class="fa fa-mobile-phone form-control-feedback left" aria-hidden="true"></span>
+                                                        <input id="kkphone" name="kphone" class="date-picker form-control col-md-7 col-xs-12" type="tel" style="padding-left: 40px;" disabled>
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label id="evphone-label" class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Fax Numarası <span class="required"></span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative; display: block;">
+                                                        <span class="fa fa-fax form-control-feedback left" aria-hidden="true"></span>
+
+                                                        <input id="kkevphone" name="kevphone" class="date-picker form-control has-feedback-left col-md-7 col-xs-12" type="tel" style="padding-left: 40px;" disabled>
+
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Adres <span class="required"></span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                                        <textarea id="kkadres" placeholder="Kurumun Adresi" name="kadres" class="date-picker form-control col-md-7 col-xs-12" type="text" disabled></textarea>
+
+
+                                                    </div>
+                                                </div>
+                                                <br /><br /><br /><hr />
+                                                <button id="btnilerissk" class="buttonNext btn btn-success" style="float:right" type="button">İleri</button>
+                                                <button id="btngerissk" class="buttonPrevious buttonDisabled btn btn-primary" style="float:right" type="button">Geri</button>
+
+                                            </form>
+                                            <!-------------------------------------------------------------------------------------------->
+                                            <form id="bkurumform" data-parsley-validate class="form-horizontal form-label-left" style="display:none">
+                                                <div class="form-group">
+                                                    <label id="bkfirst-name-label" class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                                        Kurum Adı <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <table style="width:130%">
+                                                            <tr>
+                                                                <td><input type="text" id="bkfirst-name" style="display:inline" name="bfirstname" required="required" class="form-control has-feedback-left col-md-7 col-xs-12" disabled="disabled"> <span class="fa fa-users form-control-feedback left" aria-hidden="true"></span></td>
+                                                                <td style="display:inline; margin-left:17px" id="buton1k"><input class="js-switch" id="buton11" style="display: none;" type="checkbox" data-switchery="true"></td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label id="btc1-label" for="tc1" class="control-label col-md-3 col-sm-3 col-xs-12">Vergi Numarası *</label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input id="bktc1" class="form-control has-feedback-left col-md-7 col-xs-12" type="text" name="btc1" disabled>
+                                                        <span class="fa fa-bookmark form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label id="kbirthday-label" class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Müşteri Kayıt Tarihi <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <table style="width:136%">
+                                                            <tr>
+                                                                <td><input id="bkkayit" name="bt" class="date-picker form-control has-feedback-left col-md-7 col-xs-12" required="required" type="date" disabled> <span class="fa fa-calendar-check-o form-control-feedback left" aria-hidden="true"></span></td>
+                                                                <td style="display:inline; margin-left:17px" id="buton6k"><input class="js-switch" id="buton66" style="display: none;" type="checkbox" data-switchery="false"></td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Email <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative; display: block;">
+                                                        <table style="width:131%">
+                                                            <tr>
+                                                                <td>
+                                                                    <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+                                                                    <input id="bkemail" name="bkemail" class="date-picker form-control has-feedback-left col-md-7 col-xs-12" type="email" style="padding-left: 40px;" disabled required>
+                                                                <td style="display:inline; margin-left:17px" id="buton2k"><input class="js-switch" id="buton22" style="display: none;" type="checkbox" data-switchery="true"></td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Telefon Numarası <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative; display: block;">
+                                                        <table style="width:131%">
+                                                            <tr>
+                                                                <td>
+                                                                    <i style="position: absolute; padding: 9px 8px; color: #aaa; transition: 0.3s; z-index:10; " id="result1" class="fa fa-envelope fa-lg fa-fw" aria-hidden="true"></i>
+                                                                    <input id="bkphone" name="bphone" class="date-picker form-control col-md-7 col-xs-12" type="tel" style="padding-left: 40px;" disabled>
+                                                                </td>
+                                                                <td style="display:inline; margin-left:17px" id="buton3k"><input class="js-switch" style="display: none;" id="buton33" type="checkbox" data-switchery="true"></td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label id="evphone-label" class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Fax Numarası <span class="required"></span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative; display: block;">
+                                                        <table style="width:131%">
+                                                            <tr>
+                                                                <td>
+                                                                    <i style="position: absolute; padding: 9px 8px; color: #aaa; transition: 0.3s; z-index:10; " id="ev-phonei" class="fa fa-fax fa-lg fa-fw" aria-hidden="true"></i>
+                                                                    <input id="bkevphone" name="bevphone" class="date-picker form-control col-md-7 col-xs-12" type="tel" style="padding-left: 40px;" disabled>
+                                                                </td>
+                                                                <td style="display:inline; margin-left:17px" id="buton4k"><input class="js-switch" style="display: none;" id="buton44" type="checkbox" data-switchery="true"></td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Adres <span class="required"></span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <table style="width:139%">
+                                                            <tr>
+                                                                <td><textarea id="bkadres" placeholder="Kurumun Adresi" name="badres" class="date-picker form-control col-md-7 col-xs-12" type="text" disabled></textarea></td>
+                                                                <td style="display:inline; margin-left:17px" id="buton5k"><input class="js-switch" id="buton55" style="display: none;" type="checkbox" data-switchery="false"></td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <br /><br /><br /><hr />
+                                                <button id="btnilerisskk" class="buttonNext btn btn-success" style="float:right" type="button">İleri</button>
+                                                <button id="btngerisskk" class="buttonPrevious buttonDisabled btn btn-primary" style="float:right" type="button">Geri</button>
+
+                                            </form>
+                                            <!------------------------------------------------------------------------------>
+                                            <form id="newkurumform" data-parsley-validate class="form-horizontal form-label-left" style="display:none">
+                                                <div class="form-group">
+                                                    <label id="kkfirst-name-label" class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                                        <span class="required">Kurum Adı</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                                        <input type="text" placeholder="Kurum Adı" id="nkfirst-name" style="display:inline" name="kkfirstname" required="required" class="form-control has-feedback-left col-md-7 col-xs-12">
+                                                        <span class="fa fa-users form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label id="kktc1-label" for="tc1" class="control-label col-md-3 col-sm-3 col-xs-12">Kurum Numarası</label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input id="nktc1" placeholder="Vergi Numarası" class="form-control has-feedback-left col-md-7 col-xs-12" required="required" type="text" name="kktc1" disabled>
+                                                        <span class="fa fa-bookmark form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label id="kbirthday-label" class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Müşteri Kayıt Tarihi <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input id="nkkayit" name="bt" class="date-picker form-control has-feedback-left col-md-7 col-xs-12" required="required" type="date">
+                                                        <span class="fa fa-calendar-check-o form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Email <span class="required">*</span>
+
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative; display: block;">
+
+                                                        <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+                                                        <input id="nkemail" placeholder="Email" name="kkemail" class="date-picker form-control has-feedback-left col-md-7 col-xs-12" type="email" style="padding-left: 40px;" required>
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Telefon Numarası <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative; display: block;">
+
+                                                        <span class="fa fa-mobile-phone form-control-feedback left" aria-hidden="true"></span>
+                                                        <input id="nkphone" placeholder="Telefon Numarası" name="kphone" class="date-picker form-control has-feedback-left col-md-7 col-xs-12" type="tel" style="padding-left: 40px;">
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label id="evphone-label" class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Fax Numarası <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative; display: block;">
+
+                                                        <span class="fa fa-fax form-control-feedback left" aria-hidden="true"></span>
+                                                        <input id="nkevphone" placeholder="Fax Numarası" name="kevphone" class="date-picker form-control has-feedback-left col-md-7 col-xs-12" type="tel" style="padding-left: 40px;">
+
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Adres <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                                        <textarea id="nkadres" placeholder="Kurumun adres bilgisi" name="kadres" class="date-picker form-control col-md-7 col-xs-12" type="text"></textarea>
+
+
+                                                    </div>
+                                                </div>
+                                                <br /><br /><br /><hr />
+                                                <button id="btnilerink" class="buttonNext btn btn-success" style="float:right" type="button">İleri</button>
+                                                <button id="btngerink" class="buttonPrevious buttonDisabled btn btn-primary" style="float:right" type="button">Geri</button>
+                                            </form>
+                                            <!--------------------------------------------------------------------------------------------->
+                                            <form id="newmusteriform" data-parsley-validate class="form-horizontal form-label-left" style="display:none">
+                                                <div class="form-group">
+                                                    <label id="nkfirst-name-label" class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                                        Ad <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                                        <input type="text" placeholder="Adı" id="nmfirst-name" style="display:inline" name="firstname" data-parsley-required-message="Lütfen isim giriniz." required data-parsley-trigger="input" class="form-control has-feedback-left col-md-7 col-xs-12">
+                                                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label id="klast-name-label" class="control-label col-md-3 col-sm-3 col-xs-12" for="lastname">
+                                                        Soyad <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                                        <input type="text" placeholder="Soyadı" id="nmlast-name" name="klastname" required="required" data-parsley-required-message="Lütfen isim giriniz." data-parsley-trigger="input" class="form-control has-feedback-left col-md-7 col-xs-12">
+                                                        <span class=" form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label id="ktc1-label" for="tc1" class="control-label col-md-3 col-sm-3 col-xs-12">T.C Kimlik Numarası</label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input id="nmtc1" class="form-control has-feedback-left col-md-7 col-xs-12" required="required" type="text" name="ktc1" disabled>
+                                                        <span class="fa fa-bookmark form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label id="kbirthday-label" class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Doğum Tarihi <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input id="nmbirthday" name="bt" class="date-picker form-control has-feedback-left col-md-7 col-xs-12" required="required" type="date">
+                                                        <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Cinsiyet</label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <div id="gender" class="btn-group" data-toggle="buttons">
+                                                            <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                                                <input type="radio" name="gender" value="erkek" required> &nbsp; Erkek &nbsp;
+                                                            </label>
+                                                            <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                                                <input type="radio" name="gender" value="kadın" checked> Kadın
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label id="kbirthday-label" class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Müşteri Kayıt Tarihi <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input id="nmkayit" name="bt" class="date-picker form-control has-feedback-left col-md-7 col-xs-12" required="required" type="date">
+                                                        <span class="fa fa-calendar-check-o form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Email <span class="required">*</span>
+
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative; display: block;">
+
+                                                        <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+                                                        <input id="nmemail" placeholder="Email Adresi" name="email" class="date-picker form-control has-feedback-left col-md-7 col-xs-12" type="email" style="padding-left: 40px;" required>
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Telefon Numarası <span class="required"></span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative; display: block;">
+
+
+                                                        <input id="nmphone" placeholder="Cep Telefonu Numarası" name="nmphone" class="date-picker form-control has-feedback-left col-md-7 col-xs-12" type="tel" style="padding-left: 40px;">
+                                                        <span class="fa fa-mobile-phone form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label id="evphone-label" class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Ev Telefonu Numarası <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative; display: block;">
+
+                                                        <span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
+                                                        <input id="nmevphone" placeholder="Ev Telefonu Numarası" name="kevphone" class="date-picker form-control has-feedback-left col-md-7 col-xs-12" type="tel" style="padding-left: 40px;">
+
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Adres <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                                        <textarea id="nmadres" placeholder="Adresi" name="kadres" class="date-picker form-control col-md-7 col-xs-12" type="text"></textarea>
+
+
+                                                    </div>
+                                                </div>
+                                                <br /><br /><br /><hr />
+                                                <button id="btnilerinm" class="buttonNext btn btn-success" style="float:right" type="button">İleri</button>
+                                                <button id="btngerinm" class="buttonPrevious buttonDisabled btn btn-primary" style="float:right" type="button">Geri</button>
+                                            </form>
+
+                                        </div>
+                                        <div id="step-3" style="display:none">
+                                            <h2 class="StepTitle">Adım 3 İçeriği</h2>
+                                            <div id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                                        Musteri ID <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input type="text" id="dava-musteri-id" name="dava-musteri-id" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control has-feedback-left col-md-7 col-xs-12" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                                        Musteri T.C. / Vergi No <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input type="text" id="dava-musteri-no" name="dava-musteri-no" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control has-feedback-left col-md-7 col-xs-12" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                                        Dava No <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <span class="fa fa-gavel form-control-feedback left" aria-hidden="true"></span>
+                                                        <input type="text" placeholder="Dava Numarası (Her davanın numarası farklı olmalıdır.)" id="dava-no" name="dava-no" required="required" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" class="form-control has-feedback-left col-md-7 col-xs-12">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                                        Dava Adı <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input type="text" placeholder="Dava Adı" id="dava-name" name="dava-name" required="required" class="form-control has-feedback-left col-md-7 col-xs-12">
+                                                        <span class="fa fa-briefcase form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                                                        Dosya Adı <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input type="text" id="dava-dosya" name="dava-dosya" class="form-control has-feedback-left col-md-7 col-xs-12" value="Dava dosyasını yüklediğinizde sistem otomatik olarak dolduracaktır." disabled>
+                                                        <span class="fa fa-file-text form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="tc1" class="control-label col-md-3 col-sm-3 col-xs-12">Dava Ücreti</label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input id="dava-ucret" placeholder="Dava Ücreti" class="form-control has-feedback-left col-md-7 col-xs-12" required="required" type="text" name="dava-ucret" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                                                        <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Dava Başlangıç Tarihi <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <span class="fa fa-calendar-check-o form-control-feedback left" aria-hidden="true"></span>
+                                                        <input id="dava-bt" class="date-picker form-control has-feedback-left col-md-7 col-xs-12" required="required" type="date">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Dava Açıklaması <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <textarea id="dava-aciklama" placeholder="Dava Açıklaması" class="date-picker form-control has-feedback-left col-md-7 col-xs-12" required="required" type="text"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Dava Tipi <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        @Html.EnumDropDownListFor(model => model.dava.davaturu, new { @id = "davatipdrop", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                        Dava Avukatı <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        @*@Html.EnumDropDownListFor(model => model.avukat, (SelectList)Model.avukatliste, new { @id = "davatipdrop" })*@
+                                                        <select id="avukatdrop" class="form-control">
+                                                            @{
+                                                                foreach (var item in Model.avukats)
+                                                                {
+                                                                    <option value="@item.AvukatID" customAttribute="item.SomethingSpecial">
+                                                                        @item.AvukatAd @item.AvukatSoyad
+                                                                    </option>
+                                                                }
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                    <br /><br /><br /><hr />
+                                                    <button id="btnileriuc" class="buttonNext btn btn-success" style="float:right">İleri</button>
+                                                    <button id="btngeriuc" class="buttonPrevious buttonDisabled btn btn-primary" style="float:right">Geri</button>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    <div class="x_panel">
+                                                        <div class="x_title">
+                                                            <h2>Dropzone multiple file uploader</h2>
+                                                            <ul class="nav navbar-right panel_toolbox">
+                                                                <li>
+                                                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                                                </li>
+                                                                <li class="dropdown">
+                                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                                                    <ul class="dropdown-menu" role="menu">
+                                                                        <li>
+                                                                            <a href="#">Settings 1</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">Settings 2</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="close-link"><i class="fa fa-close"></i></a>
+                                                                </li>
+                                                            </ul>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                        <div class="x_content">
+                                                            <p>Drag multiple files to the box below for multi upload or click to select files. This is for demonstration purposes only, the files are not uploaded to any server.</p>
+
+
+                                                            <form action="/Admin/davakayit" method="post" id="dropzone1" class="dropzone">
+                                                                <div class="fallback">
+                                                                    <input type="file" name="file" />
+                                                                    <input id="test" style="display:none" name="test" />
+
+                                                                </div>
+                                                            </form>
+
+
+
+                                                            <br />
+                                                            <br />
+                                                            <br />
+                                                            <br />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="step-4" style="display:none">
+                                            <h2 class="StepTitle">Bilgileri Onayla</h2>
+
+
+
+                                            <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                                                <div class="panel">
+                                                    <a class="panel-heading collapsed" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                        <h4 class="panel-title">Müşteri Bilgileri</h4>
+                                                    </a>
+                                                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="height: 0px;">
+                                                        <div class="panel-body">
+                                                            <div class="list-group" style="font-size:20px">
+                                                                <a class="list-group-item list-group-item-action flex-column align-items-start active">
+
+                                                                    <p style="display:inline;color:black">Dava no:   </p>
+                                                                    <small id="davano4"></small>
+                                                                    <hr />
+                                                                    <p style="display:inline;color:black" class="mb-1">Dava Adı:   </p>
+                                                                    <small id="davaadi4"></small>
+                                                                    <hr />
+                                                                    <p style="display:inline;color:black">Dava Başlangıç Tarihi:   </p>
+                                                                    <small id="davatarih4"></small>
+                                                                    <hr />
+                                                                    <p style="display:inline;color:black" class="mb-1">Dava Açıklaması:   </p>
+                                                                    <small id="davaaciklama4"></small>
+                                                                    <hr />
+                                                                    <p style="display:inline;color:black">Dava Ücreti:   </p>
+                                                                    <small id="davaucret4"></small>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel">
+                                                    <a class="panel-heading collapsed" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                        <h4 class="panel-title">Dava Bilgileri</h4>
+                                                    </a>
+                                                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false" style="height: 0px;">
+                                                        <div class="panel-body">
+                                                            <div class="list-group" style="font-size:20px">
+                                                                <a class="list-group-item list-group-item-action flex-column align-items-start active" style="background-color:crimson; border-color:crimson; ">
+
+                                                                    <p style="display:inline; color:black" class="mb-1" id="musteriad4p">Müşteri Ad:   </p>
+                                                                    <span id="musteriad4"></span>
+                                                                    <hr />
+                                                                    <p style="display:inline;color:black" class="mb-1" id="musterisoyad4p">Müşteri Soyad:   </p>
+                                                                    <small id="musterisoyad4"></small>
+                                                                    <hr id="musterisoyadhr4" />
+                                                                    <p style="display:inline;color:black" class="mb-1">Müşteri T.C. / Vergi No:   </p>
+                                                                    <small id="musteritc4"></small>
+                                                                    <hr />
+
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <br /><br /><br /><hr />
+                                                <button id="btnbitir" class="buttonFinish buttonDisabled btn btn-default" style="float:right">Bitir</button>
+                                                <button id="btngeridort" class="buttonPrevious buttonDisabled btn btn-primary" style="float:right">Geri</button>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <!-- End SmartWizard Content -->
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /page content -->
+            <!-- Footer -->
+            <footer id="footer" class="footer pb-0 bg-deep">
+
+                <div class="mu-footer-bottom">
+                    <div class="container">
+                        <div class="mu-footer-bottom-area" style="text-align:center;">
+                            <p>© Tüm Hakları Saklıdır. Designed by <a href="https://www.hasturkyazilim.com/" rel="nofollow" style="color:#c99809;">HASTÜRK YAZILIM</a></p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+
+
+    <!-- jQuery -->
+    <script src="~/vendors/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/vendors/behlülözel/jquery.inputmask.bundle.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="~/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- jQuery Smart Wizard -->
+    <script src="~/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="~/build/js/custom.js"></script>
+    <!-- Switchery -->
+    <script src="~/vendors/switchery/dist/switchery.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="~/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- Dropzone.js -->
+    <script src="~/vendors/dropzone/dist/dropzone.js"></script>
+
+    <script src="~/vendors/pnotify/dist/pnotify.js"></script>
+    <script src="~/vendors/pnotify/dist/pnotify.buttons.js"></script>
+
+    <script src="~/vendors/jquery-validation-1.19.1/parsley.js"></script>
+
+
+
+
+</body>
+</html>
+
+<script type="text/javascript">
+    $("#buton1").on("change", function () {
+        if (document.getElementById("bfirst-name").disabled == false) {
+            document.getElementById("bfirst-name").disabled = true;
+        }
+        else {
+            document.getElementById("bfirst-name").disabled = false;
+        }
+    });
+
+    $("#buton2").on("change", function () {
+        if (document.getElementById("blast-name").disabled == false) {
+            document.getElementById("blast-name").disabled = true;
+        }
+        else {
+            document.getElementById("blast-name").disabled = false;
+        }
+        //code stuff
+    });
+
+    $("#buton3").on("change", function () {
+        if (document.getElementById("bemail").disabled == false) {
+            document.getElementById("bemail").disabled = true;
+        }
+        else {
+            document.getElementById("bemail").disabled = false;
+        }
+    });
+
+    $("#buton4").on("change", function () {
+        if (document.getElementById("bphone").disabled == false) {
+            document.getElementById("bphone").disabled = true;
+        }
+        else {
+            document.getElementById("bphone").disabled = false;
+        }
+    });
+
+    $("#buton5").on("change", function () {
+        if (document.getElementById("badres").disabled == false) {
+            document.getElementById("badres").disabled = true;
+        }
+        else {
+            document.getElementById("badres").disabled = false;
+        }
+    });
+    $("#buton6").on("change", function () {
+        if (document.getElementById("bevphone").disabled == false) {
+            document.getElementById("bevphone").disabled = true;
+        }
+        else {
+            document.getElementById("bevphone").disabled = false;
+        }
+    });
+
+    $("#buton7").on("change", function () {
+        if (document.getElementById("bkayit").disabled == false) {
+            document.getElementById("bkayit").disabled = true;
+        }
+        else {
+            document.getElementById("bkayit").disabled = false;
+        }
+    });
+
+    $("#buton11").on("change", function () {
+        if (document.getElementById("bkfirst-name").disabled == false) {
+            document.getElementById("bkfirst-name").disabled = true;
+        }
+        else {
+            document.getElementById("bkfirst-name").disabled = false;
+        }
+    });
+
+    $("#buton22").on("change", function () {
+        if (document.getElementById("bkemail").disabled == false) {
+            document.getElementById("bkemail").disabled = true;
+        }
+        else {
+            document.getElementById("bkemail").disabled = false;
+        }
+    });
+
+    $("#buton33").on("change", function () {
+        if (document.getElementById("bkphone").disabled == false) {
+            document.getElementById("bkphone").disabled = true;
+        }
+        else {
+            document.getElementById("bkphone").disabled = false;
+        }
+    });
+    $("#buton44").on("change", function () {
+        if (document.getElementById("bkevphone").disabled == false) {
+            document.getElementById("bkevphone").disabled = true;
+        }
+        else {
+            document.getElementById("bkevphone").disabled = false;
+        }
+    });
+
+    $("#buton55").on("change", function () {
+        if (document.getElementById("bkadres").disabled == false) {
+            document.getElementById("bkadres").disabled = true;
+        }
+        else {
+            document.getElementById("bkadres").disabled = false;
+        }
+    });
+    $("#buton66").on("change", function () {
+        if (document.getElementById("bkkayit").disabled == false) {
+            document.getElementById("bkkayit").disabled = true;
+        }
+        else {
+            document.getElementById("bkkayit").disabled = false;
+        }
+    });
+</script>
+
+<script>
+    var count = 0;
+    var temp = "";
+    var flagdz = true;
+    var dzfilenames = "";
+    Dropzone.autoDiscover = false;
+    $("#dropzone1").dropzone({
+        url: '/Admin/davakayit',
+        maxFiles: 5,
+        addRemoveLinks: true,
+        maxfilesexceeded: function (file) {
+            new PNotify({
+                title: 'Uyarı',
+                text: "Tek seferde en fazla 5 dosya yükleyebilirsiniz",
+                type: 'notice',
+                styling: 'bootstrap3'
+            });
+        },
+        init: function () {
+            var dz = this;
+            this.on("addedfile", function (files) {
+
+                var _i, _len;
+                flagdz = true;
+                for (_i = 0, _len = this.files.length; _i < _len - 1; _i++) // -1 to exclude current file
+                {
+                    if (this.files[_i].name === files.name) {
+                        this.removeFile(files);
+                        new PNotify({
+                            title: 'Uyarı',
+                            text: files.name + " Adlı dosya zaten işleme konulmuştur.",
+                            type: 'notice',
+                            styling: 'bootstrap3'
+                        });
+                        flagdz = false;
+                    }
+                }
+                if (flagdz) {
+
+                    dzfilenames += dz.files[count].name + "\\";
+                    $("#dava-dosya").val(dzfilenames);
+                    count++;
+                }
+
+
+                $('.dz-progress').hide();
+            });
+            this.on('sending', function (file, xhr, formData) {
+                formData.append("test", $("#dava-musteri-id").val());
+                formData.append("tip", kontroltip);
+                formData.append("tc", $("#dava-musteri-no").val());
+                formData.append("davaad", $("#dava-name").val());
+            });
+            this.on('removedfile', function (file, xhr, formData) {
+
+                temp = $("#dava-dosya").val();
+                temp = temp.replace(file.name + "\\", "");
+                $("#dava-dosya").val(temp);
+                dzfilenames = temp;
+                temp = "";
+                count--;
+            });
+        },
+
+    });
+
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        document.getElementById('dava-bt').valueAsDate = new Date();
+        $('#tcform').submit(false);
+        $(".btn").first().button("toggle");
+        //tarihleri bugüne ayarlamak için
+        var now = new Date();
+        var month = (now.getMonth() + 1);
+        var day = now.getDate();
+        if (month < 10)
+            month = "0" + month;
+        if (day < 10)
+            day = "0" + day;
+        var today = now.getFullYear() + '-' + month + '-' + day;
+        $('#nkkayit').val(today);
+        $('#nmkayit').val(today);
+
+        $("#kphone").inputmask("+99 (999) 999 9999", { "clearIncomplete": true });
+        $("#bphone").inputmask("+99 (999) 999 9999", { "clearIncomplete": true });
+        $("#kkphone").inputmask("+99 (999) 999 9999", { "clearIncomplete": true });
+        $("#bkphone").inputmask("+99 (999) 999 9999", { "clearIncomplete": true });
+        $("#nkphone").inputmask("+99 (999) 999 9999", { "clearIncomplete": true });
+        $("#nmphone").inputmask("+99 (999) 999 9999", { "clearIncomplete": true });
+
+        $("#kevphone").inputmask("+99 (999) 999 9999", { "clearIncomplete": true });
+        $("#bevphone").inputmask("+99 (999) 999 9999", { "clearIncomplete": true });
+        $("#kkevphone").inputmask("+99 (999) 999 9999", { "clearIncomplete": true });
+        $("#bkevphone").inputmask("+99 (999) 999 9999", { "clearIncomplete": true });
+        $("#nkevphone").inputmask("+99 (999) 999 9999", { "clearIncomplete": true });
+        $("#nmevphone").inputmask("+99 (999) 999 9999", { "clearIncomplete": true });
+    });
+
+</script>
+
+
+
+
+<script>
+    function kurumsal() {
+        $("#tcdiv").css("display", "none");
+        $("#tc").removeAttr('required')
+        $("#tc").val("")
+        $("#vergino").attr('required', 'required')
+        $("#vergidiv").fadeIn(2000);
+
+    };
+    function bireysel() {
+        $("#vergidiv").css("display", "none");
+        $("#vergino").removeAttr('required')
+        $("#vergino").val("")
+        $("#tc").attr('required', 'required')
+        $("#tcdiv").fadeIn(2000);
+    };
+
+</script>
+<script>
+    var kontroltip;
+    var datazero;
+    $(function () {
+            // Wire up your event
+         $('#btnileri').click(function () {
+             var instance = $('#tcform').parsley();
+             if (document.getElementById("step-1").style.display == "block") {
+                 if (instance.isValid()) {
+
+                     // Get your target URL (using the HTML Helper method)
+                     var url = '@Url.Action("CheckTC1", "Scripts")';
+                     // Get your name to pass along
+
+                     var gonderilen = $("input[name='kapaSecim']:checked").val();
+                     if (gonderilen == "kurumsal") {
+                         var name = $("#vergino").val();
+                     }
+                     else {
+                         var name = $("#tc").val();
+                     }
+                     kontrol = gonderilen;
+                     if (name != null || name != "") {
+                         $.post(url, { kname: name, tip: gonderilen }, function (data) {
+                             $("#dava-musteri-no").val(data[3]);
+                             if (data[0] == "Avaliable" && gonderilen == "bireysel") {
+                                 datazero = data[0];
+                                 kontroltip = gonderilen;
+                                 document.getElementById("kmusteriform").style.display = "block";
+                                 document.getElementById("bmusteriform").style.display = "none";
+                                 document.getElementById("kkurumform").style.display = "none";
+                                 document.getElementById("bkurumform").style.display = "none";
+                                 document.getElementById("newkurumform").style.display = "none";
+                                 document.getElementById("newmusteriform").style.display = "none";
+                                 $("#dava-musteri-id").val(data[9]);
+                                 $("#kfirst-name").val(data[1]);
+                                 $("#klast-name").val(data[2]);
+                                 $("#ktc1").val(data[3]);
+                                 $("#kphone").val(data[7]);
+                                 var dialog1text = name + "  T.C.Kimlik numaralı kişi sistemde aktif bir bireysel müşteri olarak kayıtlıdır.Bilgileri güncelleme özelliği sistem güvenliği açısından kapatılmıştır.Bilgi güncellemesi yapmak için Müşteri Bilgilerini Güncelle saysafına gidiniz.";
+                                 document.getElementById("dialog1").className = "alert alert-success";
+                                 document.getElementById("dialog1").innerText = dialog1text;
+                                 //dogum tarihi
+                                 var today = data[5];
+                                 today = today.split('/');
+								 if(today[0].length == 1){
+								 	var mm = "0"+today[0];
+								 }else{
+								 	var mm =today[0]
+								 }
+								 if(today[1].length == 1){
+								 	var dd = "0"+today[1];
+								 }else{
+								 	var dd =today[1]
+								 }
+								 var yyyy = today[2].substring(0,4);
+
+                                 var today = yyyy + '-' + mm + '-' + dd;
+
+                                 document.getElementById('kbirthday').value = today;
+
+                                 //kayit tarihi
+                                  today = data[11];
+                                 today = today.split('/');
+								 
+								 if(today[0].length == 1){
+								 	var mm = "0"+today[0];
+								 }else{
+								 	var mm =today[0]
+								 }
+								 if(today[1].length == 1){
+								 	var dd = "0"+today[1];
+								 }else{
+								 	var dd =today[1]
+								 }
+								 var yyyy = today[2];
+
+                                  today = yyyy + '-' + mm + '-' + dd;
+                                 document.getElementById('kkayit').value = today;
+                                 $("#kemail").val(data[6]);
+                                 $("#kadres").val(data[8]);
+                                 $('#kevphone').val(data[10]);
+                                 for (var i = 1; i < 7; i++) {
+                                     document.getElementById("buton" + i + "d").style.visibility = "hidden";
+                                 }
+                             }
+                             else if (data[0] == "Avaliable" && gonderilen == "kurumsal") {
+                                 datazero = data[0];
+                                 kontroltip = gonderilen;
+                                 document.getElementById("kmusteriform").style.display = "none";
+                                 document.getElementById("bmusteriform").style.display = "none";
+                                 document.getElementById("kkurumform").style.display = "block";
+                                 document.getElementById("bkurumform").style.display = "none";
+                                 document.getElementById("newkurumform").style.display = "none";
+                                 document.getElementById("newmusteriform").style.display = "none";
+
+                                 $("#dava-musteri-id").val(data[9]);
+                                 $("#kkevphone").val(data[10]);
+                                 $("#kkfirst-name").val(data[1]);
+                                 $("#kktc1").val(data[3]);
+                                 $("#kkphone").val(data[7]);
+                                 var dialog1text = name + "  T.C.Kimlik numaralı kişi sistemde aktif bir kurumsal müşteri olarak kayıtlıdır.Bilgileri güncelleme özelliği sistem güvenliği açısından kapatılmıştır.Bilgi güncellemesi yapmak için Müşteri Bilgilerini Güncelle saysafına gidiniz.";
+                                 document.getElementById("dialog1").className = "alert alert-success";
+                                 document.getElementById("dialog1").innerText = dialog1text;
+                                 $("#kkemail").val(data[6]);
+                                 $("#kkadres").val(data[8]);
+                                 for (var i = 1; i < 6; i++) {
+                                     document.getElementById("buton" + i + i).style.visibility = "hidden";
+                                 }
+                                 today = data[11];
+								 today = today.split('/');
+								 
+								 if(today[0].length == 1){
+								 	var mm = "0"+today[0];
+								 }else{
+								 	var mm =today[0]
+								 }
+								 if(today[1].length == 1){
+								 	var dd = "0"+today[1];
+								 }else{
+								 	var dd =today[1]
+								 }
+								 var yyyy = today[2].substring(0,4);
+
+                                 today = yyyy + '-' + mm + '-' + dd;
+                                 document.getElementById('kkkayit').value = today;
+                             }
+                             else if (data[0] == "Not Avaliable" && gonderilen == "bireysel") {
+                                 datazero = data[0];
+                                 kontroltip = gonderilen;
+                                 document.getElementById("kmusteriform").style.display = "none";
+                                 document.getElementById("bmusteriform").style.display = "block";
+                                 document.getElementById("kkurumform").style.display = "none";
+                                 document.getElementById("bkurumform").style.display = "none";
+                                 document.getElementById("newkurumform").style.display = "none";
+                                 document.getElementById("newmusteriform").style.display = "none";
+
+                                 $("#dava-musteri-id").val(data[9]);
+                                 $("#bevphone").val(data[10]);
+                                 $("#bfirst-name").val(data[1]);
+                                 $("#blast-name").val(data[2]);
+                                 $("#btc1").val(data[3]);
+                                 $("#bphone").val(data[7]);
+                                 var dialog1text = name + "  T.C.Kimlik numaralı kişi sistemde deafktif bir bireysel müşteri olarak kayıtlıdır.Bilgileri güncellemek için yan taraftaki butonlara basabilirsiniz.";
+                                 document.getElementById("dialog1").className = "alert alert-warning";
+                                 document.getElementById("dialog1").innerText = dialog1text;
+                                 var today = data[5];
+                                 today = today.split('/');
+
+								 if(today[0].length == 1){
+								 	var mm = "0"+today[0];
+								 }else{
+								 	var mm =today[0]
+								 }
+								 if(today[1].length == 1){
+								 	var dd = "0"+today[1];
+								 }else{
+								 	var dd =today[1]
+								 }
+								 var yyyy = today[2].substring(0,4);
+
+                                 var today = yyyy + '-' + mm + '-' + dd;
+                                 document.getElementById('bbirthday').value = today;
+                                 $("#bemail").val(data[6]);
+                                 $("#badres").val(data[8]);
+                                 for (var i = 1; i < 7; i++) {
+                                     document.getElementById("buton" + i + "d").style.visibility = "visible";
+                                 }
+                                 today = data[11];
+                                 today = today.split('/');
+								 
+								 if(today[0].length == 1){
+								 	var mm = "0"+today[0];
+								 }else{
+								 	var mm =today[0]
+								 }
+								 if(today[1].length == 1){
+								 	var dd = "0"+today[1];
+								 }else{
+								 	var dd =today[1]
+								 }
+								 var yyyy = today[2].substring(0,4);
+
+                                 today = yyyy + '-' + mm + '-' + dd;
+                                 document.getElementById('bkayit').value = today;
+                             }
+                             else if (data[0] == "Not Avaliable" && gonderilen == "kurumsal") {
+                                 datazero = data[0];
+                                 kontroltip = gonderilen;
+                                 document.getElementById("kmusteriform").style.display = "none";
+                                 document.getElementById("bmusteriform").style.display = "none";
+                                 document.getElementById("kkurumform").style.display = "none";
+                                 document.getElementById("bkurumform").style.display = "block";
+                                 document.getElementById("newkurumform").style.display = "none";
+                                 document.getElementById("newmusteriform").style.display = "none";
+
+                                 $("#dava-musteri-id").val(data[9]);
+                                 $("#bkfirst-name").val(data[1]);
+                                 $("#bklast-name").val(data[2]);
+                                 $("#bktc1").val(data[3]);
+                                 $("#bkphone").val(data[7]);
+                                 $("#bkevphone").val(data[10]);
+                                 var dialog1text = name + "  Vergi numaralı kurum sistemde deafktif bir kurumsal müşteri olarak kayıtlıdır.Bilgileri güncellemek için yan taraftaki butonlara basabilirsiniz.";
+                                 document.getElementById("dialog1").className = "alert alert-warning";
+                                 document.getElementById("dialog1").innerText = dialog1text;
+                                 $("#bkemail").val(data[6]);
+                                 $("#bkadres").val(data[8]);
+                                 for (var i = 1; i < 6; i++) {
+                                     document.getElementById("buton" + i + i).style.visibility = "visible";
+                                 }
+                                 var today = data[11];
+                                 today = today.split('/');
+								 
+								 if(today[0].length == 1){
+								 	var mm = "0"+today[0];
+								 }else{
+								 	var mm =today[0]
+								 }
+								 if(today[1].length == 1){
+								 	var dd = "0"+today[1];
+								 }else{
+								 	var dd =today[1]
+								 }
+								 var yyyy = today[2].substring(0,4);
+                                 today = yyyy + '-' + mm + '-' + dd;
+                                 document.getElementById('bkkayit').value = today;
+                             }
+                             else if (data[0] == "Not Not Avaliable" && gonderilen == "bireysel") {
+                                 datazero = data[0];
+                                 kontroltip = gonderilen;
+                                 var dialog1text = name + "  T.C.Kimlik numaralı kişi sistemde kayıtlı değildir. Müşteri kayıt formu aşağıdadır. Ardından dava kayıt sekmesine yönlendirileceksiniz.";
+                                 document.getElementById("dialog1").className = "alert alert-danger";
+                                 document.getElementById("dialog1").innerText = dialog1text;
+                                 document.getElementById("kmusteriform").style.display = "none";
+                                 document.getElementById("bmusteriform").style.display = "none";
+                                 document.getElementById("kkurumform").style.display = "none";
+                                 document.getElementById("bkurumform").style.display = "none";
+                                 document.getElementById("newkurumform").style.display = "none";
+                                 document.getElementById("newmusteriform").style.display = "block";
+                                 document.getElementById("nmtc1").value = $("#tc").val();
+                                 $("#dava-musteri-id").val("Sistem tarafından otomatik olarak atanacaktır.");
+                                 document.getElementById("dava-musteri-no").value = $("#tc").val();
+                             }
+                             else if (data[0] == "Not Not Avaliable" && gonderilen == "kurumsal") {
+                                 kontroltip = gonderilen;
+                                 datazero = data[0];
+                                 var dialog1text = name + "  Kurum numaralı kurum sistemde kayıtlı değildir. Kurum kayıt formu aşağıdadır. Ardından dava kayıt sekmesine yönlendirileceksiniz.";
+                                 document.getElementById("dialog1").className = "alert alert-danger";
+                                 document.getElementById("dialog1").innerText = dialog1text;
+                                 document.getElementById("kmusteriform").style.display = "none";
+                                 document.getElementById("bmusteriform").style.display = "none";
+                                 document.getElementById("kkurumform").style.display = "none";
+                                 document.getElementById("bkurumform").style.display = "none";
+                                 document.getElementById("newkurumform").style.display = "block";
+                                 document.getElementById("newmusteriform").style.display = "none";
+                                 document.getElementById("nktc1").value = $("#vergino").val();
+                                 document.getElementById("dava-musteri-no").value = $("#vergino").val();
+
+                                 $("#dava-musteri-id").val("Sistem tarafından otomatik olarak atanacaktır.");
+                             }
+                             $("#btnilerii").click();
+                         });
+                     }
+
+                 }
+
+             }
+        });
+        $('#btnileriss').click(function () {
+            var instancee = $('#kmusteriform').parsley();
+            instancee.validate();
+            if (instancee.isValid()) {
+                $("#btnilerii").click();
+            }
+        });
+        $('#btnilerissb').click(function () {
+            var instanceee = $('#bmusteriform').parsley();
+            instanceee.validate();
+            if (instanceee.isValid()) {
+                $("#btnilerii").click();
+            }
+        });
+        $('#btnilerissk').click(function () {
+            var instanceeee = $('#kkurumform').parsley();
+            instanceeee.validate();
+            if (instanceeee.isValid()) {
+                $("#btnilerii").click();
+            }
+        });
+        $('#btnilerisskk').click(function () {
+            var instancek = $('#bkurumform').parsley();
+            instancek.validate();
+            if (instancek.isValid()) {
+                $("#btnilerii").click();
+            }
+        });
+        $('#btnilerink').click(function () {
+            var instancekk = $('#newkurumform').parsley();
+            instancekk.validate();
+            if (instancekk.isValid()) {
+                $("#btnilerii").click();
+            }
+        });
+        $('#btnilerinm').click(function () {
+            var instancekm = $('#newmusteriform').parsley();
+            instancekm.validate();
+            if (instancekm.isValid()) {
+                $("#btnilerii").click();
+            }
+        });
+        $('#btnileriuc').click(function () {
+            var flagno = "Not Avaliable";
+            var flagdava = "Not Avaliable";
+            var davno = $("#dava-no").val();
+
+          //----------------------------------------------------------------------------
+
+            //----------------------------------------------------------------------------
+             var davname = $("#dava-name").val();
+            var mstno = $("#dava-musteri-no").val();
+            forkontrolcu();
+            var url = '@Url.Action("CheckDavanameno", "Scripts")';
+            var url2 = '@Url.Action("kayiticindavano", "Scripts")';
+            if (kontrolcu == "nm" || kontrolcu == "nk") {
+                if (davno != null || davno != "") {
+                    var formkontol = $('#demo-form2').parsley();
+                    $.post(url2, { gelen: davno }, function (data) {
+                        if (data == "Avaliable") {
+                            if (formkontol.validate()) {
+                                document.getElementById("davano4").innerText = $("#dava-no").val();
+                                document.getElementById("davaadi4").innerText = $("#dava-name").val();
+                                document.getElementById("davatarih4").innerText = $("#dava-bt").val();
+                                document.getElementById("davaaciklama4").innerText = $("#dava-aciklama").val();
+                                document.getElementById("davaucret4").innerText = $("#dava-ucret").val();
+                                if (kontroltip == "kurumsal") {
+                                    document.getElementById("musterisoyadhr4").style.display = "none";
+                                    document.getElementById("musterisoyad4").style.display = "none";
+                                    document.getElementById("musterisoyad4p").style.display = "none";
+                                    document.getElementById("musteriad4p").innerText = "Kurum Adı:   ";
+                                }
+                                else {
+                                    document.getElementById("musterisoyadhr4").style.display = "block";
+                                    document.getElementById("musterisoyad4").style.display = "inline";
+                                    document.getElementById("musterisoyad4p").style.display = "inline";
+                                    document.getElementById("musteriad4p").innerText = "Müşteri Adı:   ";
+                                }
+                                if (kontroltip == "kurumsal" && datazero == "Not Not Avaliable") {
+                                    document.getElementById("musteriad4").innerText = $("#nkfirst-name").val();
+                                    document.getElementById("musteritc4").innerText = $("#nktc1").val();
+                                }
+                                else if (kontroltip == "bireysel" && datazero == "Not Not Avaliable") {
+                                    document.getElementById("musteriad4").innerText = $("#nmfirst-name").val();
+                                    document.getElementById("musterisoyad4").innerText = $("#nmlast-name").val();
+                                    document.getElementById("musteritc4").innerText = $("#nmtc1").val();
+                                }
+                                $("#btnilerii").click();
+                            }
+                        }
+                        else {
+                            new PNotify({
+                                title: 'Uyarı',
+                                text: "Sisteminizde " + davno + " numaralı bir dava zaten mevcuttur. Lütfen başka bir dava numarası giriniz.",
+                                type: 'notice',
+                                styling: 'bootstrap3'
+                            });
+                            $("#dava-no").val("");
+                        }
+                    });
+                }
+            }
+            else {
+
+                $.post(url, { davaadi: davname, musteritanimi: kontrolcu, musterino: mstno, davano: davno}, function (data) {
+                        if (data[0] == "Avaliable") {
+                            document.getElementById('btnbitir').disabled = false;
+                            document.getElementById("dava-name").style.backgroundColor = "#87e79c";
+                            flagdava = data;
+
+                        }
+                        else if (data[0] == "Not Avaliable") {
+                            $("#dava-name").val("");
+                            document.getElementById("dava-name").style.backgroundColor = "#FAEDEC";
+                            document.getElementById('btnbitir').disabled = true;
+                            flagdava = data[0];
+                        }
+                        else if (data[0] == "externalerror") {
+                            new PNotify({
+                                title: 'Kritik Hata!!!',
+                                text: "Sistemsel bir hata oluştu. Lütfen teknik destek ekibine ulaşınız.",
+                                type: 'error',
+                                styling: 'bootstrap3'
+                            });
+                    }
+                    if (data[1] == "Avaliable") {
+                        document.getElementById('btnbitir').disabled = false;
+                        document.getElementById("dava-no").style.backgroundColor = "#87e79c";
+                        flagdava = data;
+                    }
+                    else if (data[1]  == "Not Avaliable") {
+                        $("#dava-no").val("");
+                        document.getElementById("dava-no").style.backgroundColor = "#FAEDEC";
+                        document.getElementById('btnbitir').disabled = true;
+                        flagdava = data;
+
+                    }
+
+
+                        //dava ismi duplicate kontrolü
+                        var instanceuc = $('#demo-form2').parsley();
+                        instanceuc.validate();
+                        if (instanceuc.isValid()) {
+                            document.getElementById("davano4").innerText = $("#dava-no").val();
+                            document.getElementById("davaadi4").innerText = $("#dava-name").val();
+                            document.getElementById("davatarih4").innerText = $("#dava-bt").val();
+                            document.getElementById("davaaciklama4").innerText = $("#dava-aciklama").val();
+                            document.getElementById("davaucret4").innerText = $("#dava-ucret").val();
+
+                            if (kontroltip == "kurumsal") {
+                                document.getElementById("musterisoyadhr4").style.display = "none";
+                                document.getElementById("musterisoyad4").style.display = "none";
+                                document.getElementById("musterisoyad4p").style.display = "none";
+                                document.getElementById("musteriad4p").innerText = "Kurum Adı:   ";
+                            }
+                            else {
+                                document.getElementById("musterisoyadhr4").style.display = "block";
+                                document.getElementById("musterisoyad4").style.display = "inline";
+                                document.getElementById("musterisoyad4p").style.display = "inline";
+                                document.getElementById("musteriad4p").innerText = "Müşteri Adı:   ";
+                            }
+
+
+                            if (kontroltip == "kurumsal" && datazero == "Not Not Avaliable") {
+                                document.getElementById("musteriad4").innerText = $("#nkfirst-name").val();
+                                document.getElementById("musteritc4").innerText = $("#nktc1").val();
+                            }
+                            else if (kontroltip == "kurumsal" && datazero == "Not Avaliable") {
+                                document.getElementById("musteriad4").innerText = $("bnkfirst-name").val();
+                                document.getElementById("musteritc4").innerText = $("#bktc1").val();
+                            }
+                            else if (kontroltip == "kurumsal" && datazero == "Avaliable") {
+                                document.getElementById("musteriad4").innerText = $("#kkfirst-name").val();
+                                document.getElementById("musteritc4").innerText = $("#kktc1").val();
+                            }
+                            else if (kontroltip == "bireysel" && datazero == "Not Not Avaliable") {
+                                document.getElementById("musteriad4").innerText = $("#nmfirst-name").val();
+                                document.getElementById("musterisoyad4").innerText = $("#nmlast-name").val();
+                                document.getElementById("musteritc4").innerText = $("#nmtc1").val();
+                            }
+                            else if (kontroltip == "bireysel" && datazero == "Not Avaliable") {
+                                document.getElementById("musteriad4").innerText = $("#bfirst-name").val();
+                                document.getElementById("musterisoyad4").innerText = $("#blast-name").val();
+                                document.getElementById("musteritc4").innerText = $("#btc1").val();
+                            }
+                            else if (kontroltip == "bireysel" && datazero == "Avaliable") {
+                                document.getElementById("musteriad4").innerText = $("#kfirst-name").val();
+                                document.getElementById("musterisoyad4").innerText = $("#klast-name").val();
+                                document.getElementById("musteritc4").innerText = $("#ktc1").val();
+                            }
+                            $("#btnilerii").click();
+                        }
+                        else {
+                            if ((davname != "" && data[0] == "Not Avaliable") && (davno != "" && data[1] == "Not Avaliable")) {
+                                new PNotify({
+                                    title: 'Uyarı',
+                                    text: "Sisteminizde " + davno + " numaralı bir dava bulunmaktadır. Ayrıca " + $("#dava-musteri-no").val() + " Numaralı müşterinin " + davname + " isminde bir davası sistemde kayıtlıdır. Lütfen dava adını ve numarasını değiştiriniz.",
+                                    type: 'notice',
+                                    styling: 'bootstrap3'
+                                });
+                            }
+                            else if (davname != "" && data[0] == "Not Avaliable") {
+                                new PNotify({
+                                    title: 'Uyarı',
+                                    text: $("#dava-musteri-no").val() + " Numaralı müşterinin " + davname + " isminde bir davası sistemde kayıtlıdır. Lütfen dava adını değiştiriniz.",
+                                    type: 'notice',
+                                    styling: 'bootstrap3'
+                                });
+                            }
+                            else if (davno !="" && data[1]=="Not Avaliable") {
+
+                                new PNotify({
+                                    title: 'Uyarı',
+                                    text: "Sisteminizde " + davno + " numaralı bir dava zaten mevcuttur. Lütfen başka bir dava numarası giriniz.",
+                                    type: 'notice',
+                                    styling: 'bootstrap3'
+                                });
+                            }
+                            else if (data[0] == "externalerror" || data[1] == "externalerror") {
+                                new PNotify({
+                                    title: 'Kritik Hata!!!',
+                                    text: 'Sistemsel bir hata oluştu. En kısa zamanda teknik ekibe başvurunuz.',
+                                    type: 'error',
+                                    styling: 'bootstrap3'
+                                });
+                            }
+                            else {
+                                new PNotify({
+                                    title: 'Lütfen Gerekli Alanları Doldunuz.',
+                                    text: 'Gerekli alanlar doldurulmadan işleme devam edilemez.',
+                                    type: 'error',
+                                    styling: 'bootstrap3'
+                                });
+                            }
+                        }
+                    });
+
+
+            }
+
+
+        });
+        //------------------------------------
+        $('#btngeriss').click(function () {
+            $("#btngerii").click();
+        });
+        $('#btngerissb').click(function () {
+            $("#btngerii").click();
+        });
+        $('#btngerissk').click(function () {
+            $("#btngerii").click();
+        });
+        $('#btngerisskk').click(function () {
+            $("#btngerii").click();
+        });
+        $('#btngeriuc').click(function () {
+            $("#btngerii").click();
+        });
+        $('#btngerinm').click(function () {
+            $("#btngerii").click();
+        });
+        $('#btngerink').click(function () {
+            $("#btngerii").click();
+        });
+        $('#btngeridort').click(function () {
+            $("#btngerii").click();
+        });
+
+    });
+
+</script>
+<script>
+
+
+
+</script>
+
+
+
+
+
+<script type="text/javascript">
+    var kontrolcu;
+    var dogumtarihi;
+    $(function () {
+
+            // Wire up your event
+         $('#btnbitir').click(function () {
+             forkontrolcu();
+             if (dogumtarihi == "" || dogumtarihi == null) {
+                 dogumtarihi = new Date().toISOString().slice(0, 10)
+             }
+            
+             //Dava Bilgileri
+             var ddosya = $("#dava-dosya").val();
+             var davaad = $("#dava-name").val();
+             var daciklama = $("#dava-aciklama").val();
+             var ducret = $("#dava-ucret").val();
+             var dtarihi = new Date($("#dava-bt").val()).toISOString();
+             var dano = $("#dava-no").val();
+             var dtip = $("#davatipdrop").val();
+             var davukat = $("#avukatdrop").children("option:selected").val();
+
+
+             //Müşteri Bilgileri
+             var deneme = kontrolcu;
+             var name = document.getElementById(deneme + "first-name").value;
+             var lname = "";
+             if (kontroltip == "bireysel") {
+                  lname = document.getElementById(deneme + "last-name").value;
+             }
+
+             var tel = document.getElementById(deneme + "phone").value;
+             var email = document.getElementById(deneme + "email").value;
+             var adres = document.getElementById(deneme + "adres").value;;
+             var tc = document.getElementById(deneme + "tc1").value;
+             var evtelno = document.getElementById(deneme + "evphone").value;
+             var kyttarihi = document.getElementById(deneme + "kayit").value;
+             var mustid = $("#dava-musteri-id").val();
+             var cins = $("input[name='gender']:checked").val();
+             //Kayit işlemi
+             if (true) {
+                 var url = '@Url.Action("Davakaydet","Scripts")';
+                 $.post(url, {
+                     musteridurumu: deneme, musteriad: name, musteritc: tc, musteriemail: email, musteritel: tel, musterievfax: evtelno, musteriadres: adres, kayittarihi:kyttarihi,
+                     /*devamı bireysel özellikleri*/ musteridt: dogumtarihi, musterisoyad: lname,
+                     /*devamı dava bilgileri*/ davaadi: davaad, davadosya: ddosya, davaaciklama: daciklama, davaucret: ducret, davatarihi: dtarihi,
+                     davano: dano, davatip: dtip, davaavukat: davukat/*musteri id en son ve gender*/, musteriid:mustid, cinsiyet:cins
+                 }, function (data) {
+                     if (data == "success") {
+                         var myDropzone = Dropzone.forElement(".dropzone");
+                         myDropzone.processQueue();
+                         document.getElementById("dropzone1").submit();
+                     }
+                     else if (data == "error") {
+                         PNotify.removeAll();
+                         new PNotify({
+                             title: 'Hata!',
+                             text: 'Lütfen tekrar deneyiniz.',
+                             type: 'error',
+                             styling: 'bootstrap3'
+                         });
+                     }
+                     else {
+                         new PNotify({
+                             title: 'Kritik Hata!',
+                             text: 'Lütfen en kısa sürede teknik ekip ile iletişime geçiniz.',
+                             type: 'error',
+                             styling: 'bootstrap3'
+                         });
+                     }
+                    
+                 });
+
+             }
+
+        });
+    });
+
+    function forkontrolcu() {
+        if (kontroltip == "bireysel" && datazero == "Avaliable") {
+            kontrolcu = "k";
+            gonderici = "kayitlibirey";
+            dogumtarihi = document.getElementById(kontrolcu + "birthday").value;
+            soyad = document.getElementById(kontrolcu + "last-name").value;
+        }
+        else if (kontroltip == "kurumsal" && datazero == "Avaliable") {
+            kontrolcu = "kk";
+            gonderici = "kayitlikurum";
+        }
+        else if (kontroltip == "bireysel" && datazero == "Not Avaliable") {
+            kontrolcu = "b";
+            gonderici = "bitenbirey";
+            dogumtarihi = document.getElementById(kontrolcu + "birthday").value;
+            soyad = document.getElementById(kontrolcu + "last-name").value;
+        }
+        else if (kontroltip == "kurumsal" && datazero == "Not Avaliable") {
+            kontrolcu = "bk";
+            gonderici = "bitenkurum";
+        }
+        else if (kontroltip == "bireysel" && datazero == "Not Not Avaliable") {
+            kontrolcu = "nm";
+            gonderici = "kayitsizbirey";
+            dogumtarihi = document.getElementById(kontrolcu + "birthday").value;
+            soyad = document.getElementById(kontrolcu + "last-name").value;
+        }
+        else if (kontroltip == "kurumsal" && datazero == "Not Not Avaliable") {
+            kontrolcu = "nk";
+            gonderici = "kayıtsızkurum";
+        }
+    };
+</script>
+@{
+
+    if (ViewBag.alertler != null && ViewBag.alertler == "success")
+    {
+        <script>
+            new PNotify({
+                title: 'Kayıt İşlemi Başarılı !',
+                text: 'Dava ve müşteri bilgileri başarılı bir şekilde veritabanınıza kayıt ediilmiştir.',
+                type: 'success',
+                styling: 'bootstrap3'
+            });
+        </script>
+    }
+    else if(ViewBag.alertler != null && ViewBag.alertler == "error")
+    {
+        <script>
+            new PNotify({
+                title: 'Hata!',
+                text: 'Lütfen tekrar deneyiniz.',
+                type: 'error',
+                styling: 'bootstrap3'
+            });
+        </script>
+    }
+}
+
+
+
+

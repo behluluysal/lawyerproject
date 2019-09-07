@@ -1,0 +1,12 @@
+Avukatlar hidden file.
+anasayfa düzenleme açýklamalarý.
+
+bireysel müþteri tc ayný girerse sayfa yenileniyor.
+kurumsal müþteri tc ayný girerse sayfa yenileniyor.
+
+
+2300 satýr kontrolcü 7 view sayfa klasörü
+26 view 3 layout
+
+
+dava paneli-> müþteri giriþ

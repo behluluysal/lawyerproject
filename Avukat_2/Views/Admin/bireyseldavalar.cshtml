@@ -1,0 +1,780 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model Avukat_2.ViewModels.DavakayitViewModel
+@using Avukat_2.Security;
+<style>
+    .box-container {
+        height: 200px;
+    }
+
+    .box-item {
+        width: 100%;
+        z-index: 1000
+    }
+</style>
+
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view">
+                <div class="navbar nav_title" style="border: 0;">
+                    <a class="site_title"><i class="fa fa-legal"></i> <span>Sakarya Büroosu</span></a>
+                </div>
+                <div class="clearfix"></div>
+                <!-- menu profile quick info -->
+                <div class="profile clearfix">
+                    <div class="profile_pic">
+                        <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                    </div>
+                    <div class="profile_info">
+                        <span>Hoşgeldin,</span>
+                        <h2>@SessionPersister.Username.  @Session["modtype"]</h2>
+                    </div>
+                </div>
+                <!-- /menu profile quick info -->
+                <br />
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section">
+                        <h3>General</h3>
+                        <ul class="nav side-menu">
+
+                            @{
+
+                                if (Session["modtype"] != null)
+                                {
+                                    if (Session["modtype"].ToString() == "Yönetici")
+                                    {
+                                        <li>
+                                            <a href="@Url.Action("panel", "Admin" )"><i class="fa fa-dashboard"></i>Yönetim Paneli</a>
+                                        </li>
+                                    }
+                                }
+
+                            }
+                            <li>
+                                <a><i class="fa fa-users"></i> Müşteriler <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="@Url.Action("bireyselmusteriler", "Admin" )">Bireysel Müşterileri Listele/Düzenle</a></li>
+                                    <li><a href="@Url.Action("kurumsalmusteriler", "Admin" )">Kurumsal Müşterileri Listele/Düzenle</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a><i class="fa fa-briefcase"></i> Davalar <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="@Url.Action("davakayit", "Admin" )">Dava Ekle</a></li>
+                                    <li><a href="@Url.Action("davakapat", "Admin" )">Dava Kapat</a></li>
+                                    <li><a href="@Url.Action("bireyseldavalar", "Admin" )">Bireysel Davaları Listele/Düzenle</a></li>
+                                    <li><a href="@Url.Action("kurumsaldavalar", "Admin" )">Kurumsal Davaları Listele/Düzenle</a></li>
+                                </ul>
+                            </li>
+                            @{
+                                if (Session["modtype"] != null)
+                                {
+                                    if (Session["modtype"].ToString() == "Yönetici")
+                                    {
+                                        <li>
+                                            <a><i class="fa fa-database"></i> Silme İşlemleri <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li><a href="@Url.Action("Davasil", "Delete" )">Dava Sil</a></li>
+                                                <li><a href="@Url.Action("Musterisil", "Delete" )">Müşteri Sil</a></li>
+                                            </ul>
+                                        </li>
+                                    }
+                                }
+                            }
+                            @{
+                                if (Session["modtype"] != null)
+                                {
+                                    if (Session["modtype"].ToString() == "Yönetici")
+                                    {
+                                        <li>
+                                            <a><i class="fa fa-desktop"></i> Yardımcılar <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li><a href="@Url.Action("Create", "superadmin" )">Yardımcı Ekle</a></li>
+                                                <li><a href="@Url.Action("Index", "superadmin" )">Yardımcıları Listele / Düzenle</a></li>
+                                            </ul>
+                                        </li>
+                                    }
+                                }
+                            }
+                            @{
+                                if (Session["modtype"] != null)
+                                {
+                                    if (Session["modtype"].ToString() == "Yönetici")
+                                    {
+
+                                        <li>
+                                            <a><i class="fa fa-legal"></i> Avukatlar <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li><a href="@Url.Action("Create", "Avukats" )">Avukat Ekle</a></li>
+                                                <li><a href="@Url.Action("Index", "Avukats" )">Avukatları Listele / Düzenle</a></li>
+                                            </ul>
+                                        </li>
+                                    }
+                                }
+                            }
+
+
+
+                            <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /sidebar menu -->
+                <!-- /menu footer buttons -->
+                <div class="sidebar-footer hidden-small">
+                    <a data-toggle="tooltip" data-placement="top" title="Settings">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                    </a>
+                    <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                        <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                    </a>
+                    <a data-toggle="tooltip" data-placement="top" title="Lock">
+                        <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                    </a>
+                    <a data-toggle="tooltip" data-placement="top" title="Logout" href="@Url.Action("Logout", "Admin")">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                    </a>
+                </div>
+                <!-- /menu footer buttons -->
+            </div>
+        </div>
+        <!-- top navigation -->
+        <div class="top_nav">
+            <div class="nav_menu">
+                <nav>
+                    <div class="nav toggle">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="">
+                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <img src="images/img.jpg" alt="">@SessionPersister.Username
+                                <span class=" fa fa-angle-down"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                <li><a href="javascript:;"> Profile</a></li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <span class="badge bg-red pull-right">50%</span>
+                                        <span>Settings</span>
+                                    </a>
+                                </li>
+                                <li><a href="javascript:;">Help</a></li>
+                                <li><a href="@Url.Action("Logout", "Admin")"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- /top navigation -->
+        <!-- page content -->
+        <div class="right_col" role="main">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>Bireysel Davalar</h3>
+                    </div>
+
+                </div>
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Aktif Bireysel Davalar<small>Sisteminizde bulunan açık davalar aktif olarak listelenir.</small></h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li>
+                                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>
+                                                <a href="#">Settings 1</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Settings 2</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a class="close-link"><i class="fa fa-close"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+
+
+                                <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Müşteri Adı Soyadı</th>
+                                            <th>Dava Adı</th>
+                                            <th>Dava Açıklama</th>
+                                            <th>Dava Türü</th>
+                                            <th>Başlangıç Tarihi</th>
+                                            <th>Dava Avukatı</th>
+                                            <th>Dava Ücreti</th>
+
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.davalars)
+                                        {
+                                            if (item.Musteriler.musteriSoyad != null)
+                                            {
+                                                string s = item.davaturu.ToString();
+                                                <tr>
+                                                    <td>@item.Musteriler.musteriAd @item.Musteriler.musteriSoyad</td>
+                                                    <td>
+                                                        @item.DavaAdi
+                                                    </td>
+                                                    <td>@item.DavaAciklama</td>
+                                                    <td>@s.Replace('_', ' ')</td>
+                                                    <td>@item.BaslangicTarihi.ToString("dd/MM/yyyy")</td>
+                                                    <td>@item.Avukat.AvukatAd @item.Avukat.AvukatSoyad</td>
+                                                    <td>@item.DavaUcret</td>
+
+                                                    <td><button id="@item.DavaId" class="btn btn-info" onclick="openModal(this)">Düzenle</button></td>
+                                                    <td><button id="d+@item.DavaId" class="btn btn-info" onclick="dosyaModal(this)">Dosya İşlemleri</button></td>
+                                                </tr>
+                                            }
+
+                                        }
+
+                                    </tbody>
+                                </table>
+
+
+                                <!-- ---------MODAL --------------->
+                                <div id="dosyaModel" class="modal">
+                                    <!-- Modal content -->
+                                    <div class="modal-content" style="padding:50px;">
+                                        <h3 class="alert alert-success text-center" style="color:white;font-weight:bold;">Dosyaları Düzenle</h3>
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <div class="panel panel-default" style="overflow-y: scroll;">
+                                                        <div class="panel-heading">
+                                                            <h1 class="panel-title text-center">Yüklü Dosyalar</h1>
+                                                        </div>
+                                                        <div id="container1" class="panel-body box-container">
+                                                            <div itemid="itm-1" class="btn btn-default box-item">Item 1</div>
+                                                            <div itemid="itm-2" class="btn btn-default box-item">Item 2</div>
+                                                            <div itemid="itm-3" class="btn btn-default box-item">Item 3</div>
+                                                            <div itemid="itm-4" class="btn btn-default box-item">Item 4</div>
+                                                            <div itemid="itm-5" class="btn btn-default box-item">Item 5</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <div class="panel panel-default" style="overflow-y: scroll;">
+                                                        <div class="panel-heading">
+                                                            <h1 class="panel-title text-center">Silinecek Dosyalar</h1>
+                                                        </div>
+                                                        <div id="container2" class="panel-body box-container"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="container-fluid" style="overflow-y:scroll;background-color:white;">
+                                            <form action="/Admin/bireyseldavalar" method="post" id="dropzone1" class="dropzone" style="min-height: auto;height:150px;border:none;">
+                                                <div class="fallback">
+                                                    <input type="file" name="file" />
+                                                    <input id="test" style="display:none" name="test" />
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <hr style="border-top:3px solid white;" />
+                                        <div class="form-group">
+                                            <div style="float:right;">
+                                                <button class="btn btn-lg btn-danger" type="button" onclick="closeDosyaModal()">İptal</button>
+                                                <button type="submit" id="gonder" name="gonder" class="btn btn-lg btn-success" onclick="dosyaGonder()">Onayla</button>
+                                            </div>
+                                        </div>
+                                        <br />
+                                    </div>
+                                </div>
+
+
+                                <!-- ---------MODAL --------------->
+                                <div id="myModal" class="modal">
+                                    <!-- Modal content -->
+                                    <div class="modal-content">
+                                        <h3 class="alert alert-success text-center" style="color:white;font-weight:bold;">Bilgileri Düzenle</h3>
+                                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                                    Dava Adı <span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="text" id="dava-name" name="dava-name" required="required" class="form-control col-md-7 col-xs-12">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                                                    Dava Açıklama <span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="text" id="dava-aciklama" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="tc" class="control-label col-md-3 col-sm-3 col-xs-12">Müşteri Adı Soyadı</label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input id="adsoyad" class="form-control col-md-7 col-xs-12" required="required" type="text" name="tc" disabled>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                    Dava Ücreti <span class="required">*</span>
+
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative; display: block;">
+                                                    <i style="position: absolute; padding: 9px 8px; color: #aaa; transition: 0.3s; z-index:10; " id="result1" class="fa fa-money fa-lg fa-fw" aria-hidden="true"></i>
+                                                    <input id="dava-ucret" class="date-picker form-control col-md-7 col-xs-12" type="text" style="padding-left: 40px;" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                    Başlangıç Tarihi <span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input id="davabt" class="date-picker form-control col-md-7 col-xs-12" value="2000-01-12" required="required" type="date">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                    Dava Avukatı <span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <select id="avukatdrop">
+                                                        @{
+                                                            foreach (var item in Model.avukats)
+                                                            {
+                                                                <option value="@item.AvukatID" customAttribute="item.SomethingSpecial">
+                                                                    @item.AvukatAd @item.AvukatSoyad
+                                                                </option>
+                                                            }
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                    Dava Tipi <span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    @Html.EnumDropDownListFor(model => model.dava.davaturu, new { @id = "davatipdrop" })
+                                                </div>
+                                            </div>
+                                            <div class="ln_solid"></div>
+                                            <div class="form-group">
+                                                <div style="float:right;">
+                                                    <button class="btn btn-lg btn-danger" type="button" onclick="closeModal()">İptal</button>
+                                                    <button type="submit" id="modalgonder" name="gonder" class="btn btn-lg btn-success" onclick="editle()">Onayla</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+                                <!--  Modal  SOn ------>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Deaktif Davalar<small>Sisteminizde bulunan kapalı davalar deaktif olarak listelenir.</small></h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li>
+                                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>
+                                                <a href="#">Settings 1</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Settings 2</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a class="close-link"><i class="fa fa-close"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <p class="text-muted font-13 m-b-30">
+                                    Responsive is an extension for DataTables that resolves that problem by optimising the table's layout for different screen sizes through the dynamic insertion and removal of columns from the table.
+                                </p>
+
+                                <table id="datatable-keytable" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Müşteri Adı Soyadı</th>
+                                            <th>Dava Adı</th>
+                                            <th>Dava Açıklama</th>
+                                            <th>Dava Türü</th>
+                                            <th>Başlangıç Tarihi</th>
+                                            <th>Dava Avukatı</th>
+                                            <th>Dava Ücreti</th>
+                                            <th>Bitiş Tarihi</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.bitenDavalars)
+                                        {
+                                            if (item.Musteriler != null)    // Aktif Müşteri
+                                            {
+                                                if (item.Musteriler.musteriSoyad != null)  // Bireysel Müşteri
+                                                {
+                                                    string s = item.davaturu.ToString();
+                                                    <tr>
+                                                        <td>@item.Musteriler.musteriAd @item.Musteriler.musteriSoyad</td>
+                                                        <td>
+                                                            @item.DavaAdi
+                                                        </td>
+                                                        <td>@item.DavaAciklama</td>
+                                                        <td>@s.Replace('_', ' ')</td>
+                                                        <td>@item.BaslangicTarihi.ToString("dd/MM/yyyy")</td>
+                                                        <td>@item.Avukat.AvukatAd @item.Avukat.AvukatSoyad</td>
+                                                        <td>@item.DavaUcret</td>
+                                                        <td>@item.BitisTarihi.ToString("dd/MM/yyyy")</td>
+                                                        <td><button id="b+@item.DavaId" class="btn btn-info" onclick="dosyaModal(this)">Dosya İşlemleri</button></td>
+                                                    </tr>
+                                                }
+                                            }
+                                            else   // Deaktif Müşteri
+                                            {
+                                                if (item.BMusteriler.musteriSoyad != null)  // bireysel müşteri
+                                                {
+                                                    string s = item.davaturu.ToString();
+                                                    <tr>
+                                                        <td>@item.BMusteriler.musteriAd @item.BMusteriler.musteriSoyad</td>
+                                                        <td>
+                                                            @item.DavaAdi
+                                                        </td>
+                                                        <td>@item.DavaAciklama</td>
+                                                        <td>@s.Replace('_', ' ')</td>
+                                                        <td>@item.BaslangicTarihi.ToString("dd/MM/yyyy")</td>
+                                                        <td>@item.Avukat.AvukatAd @item.Avukat.AvukatSoyad</td>
+                                                        <td>@item.DavaUcret</td>
+                                                        <td>@item.BitisTarihi.ToString("dd/MM/yyyy")</td>
+                                                        <td><button id="b+@item.DavaId" class="btn btn-info" onclick="dosyaModal(this)">Dosya İşlemleri</button></td>
+                                                    </tr>
+                                                }
+                                            }
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input id="formsid" style="display:none" />
+        <input id="fordavaid" style="display:none" />
+        <input id="foreklenecekdosyalar" style="display:none" />
+        <!-- /page content -->
+        <!-- Footer -->
+        <footer id="footer" class="footer pb-0 bg-deep">
+
+            <div class="mu-footer-bottom">
+                <div class="container">
+                    <div class="mu-footer-bottom-area" style="text-align:center;">
+                        <p>© Tüm Hakları Saklıdır. Designed by <a href="https://www.hasturkyazilim.com/" rel="nofollow" style="color:#c99809;">HASTÜRK YAZILIM</a></p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- /footer content -->
+    </div>
+</div>
+
+<script>
+    var davaidbuton;
+    function editle() {
+       
+        var url = '@Url.Action("davaEdit", "Scripts")';
+        var item = $("#dava-name").val();
+        var item1 =$("#dava-aciklama").val();
+        var item2 =$("#dava-ucret").val();
+        var item3 =$("#adsoyad").val();
+        var item4 = document.getElementById("davabt").value;
+
+        var avukat = document.getElementById("avukatdrop");
+
+        var item5 = avukat.options[avukat.selectedIndex].text;
+        var item6 = document.getElementById("davatipdrop").value;
+
+
+        $.post(url, { davaname: item, davaaciklama: item1, davaucret: item2, kurumadi: item3, davabt: item4, avukat: item5, davaturu: item6, davaid: davaidbuton,tippp:"bireysel"}, function (data) {
+            if (data == "success") {
+                new PNotify({
+                    title: 'Başarılı',
+                    text: "Dava güncellemesi başarılı.",
+                    type: 'success',
+                    styling: 'bootstrap3',
+                    delay: 2500
+                });
+            }
+            else if (data == "match") {
+                new PNotify({
+                    title: 'Bilgilendirme',
+                    text: item3 + " Adlı müşterinin " + item + " isminde bir davası olduğu için işlem gerçekleştirilememiştir. Aynı müşterinin dava isimleri birbirinden farklı olmalıdır!",
+                    type: 'notice',
+                    styling: 'bootstrap3',
+                    delay: 2500
+                });
+            }
+            else {
+                new PNotify({
+                    title: 'Bir hata ile karşılaştık.',
+                    text: "Dava güncellenirken bir hata oluştu. Lütfen tekrar deneyiniz.",
+                    type: 'notice',
+                    styling: 'bootstrap3',
+                    delay: 2500
+                });
+            }
+        });
+
+    };
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    var Dmodal = document.getElementById("dosyaModel");
+    var msid = "";
+
+    function openModal(item) {
+        var id = item.id;
+        davaidbuton = item.id;
+        var url = '@Url.Action("bireyselDavaGetir", "Scripts")';
+        $.post(url, { ID: id }, function (data) {
+            if (data[0] == "geldi") {
+                $("#dava-name").val(data[1]);
+                $("#dava-aciklama").val(data[2]);
+                $("#dava-ucret").val(data[4]);
+                $("#adsoyad").val(data[7]);
+                var tarih = data[3];
+                var gun = tarih[0] + tarih[1];
+                var ay = tarih[3] + tarih[4];
+                var yil = tarih[6] + tarih[7] + tarih[8] + tarih[9];
+                tarih = yil + "-" + ay + "-" + gun;
+                document.getElementById("davabt").value = tarih;
+                var elmnt = document.getElementById("avukatdrop");
+                for (var i = 0; i < elmnt.options.length; i++) {
+                    if (elmnt.options[i].text == data[5]) {
+                        elmnt.selectedIndex = i;
+                        break;
+                    }
+                }
+                var test2 = data[6];
+                test2 = test2.replace(/_/g, ' ');
+                var elmnt2 = document.getElementById("davatipdrop");
+                for (var i = 0; i < elmnt2.options.length; i++) {
+                    if (elmnt2.options[i].text == test2) {
+                        elmnt2.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+            else {
+
+            }
+        });
+        closeDosyaModal();
+        modal.style.display = "block";
+    };
+    function dosyaGonder() {
+        var gonderilecekler="";
+        var silinecekler = document.getElementById("container2").children;
+        for (var i = 0; i < silinecekler.length; i++) {
+            gonderilecekler += silinecekler[i].innerHTML+"\\";
+        }
+        var davaid = $("#formsid").val();//davaid için
+        var davatip = $("#fordavaid").val();//davatipi için
+        var urll = '@Url.Action("davaeditislemleri", "Scripts")';
+        var dosyanames = $("#foreklenecekdosyalar").val();
+        $.post(urll, { did: davaid, tip: davatip, dosyalar: gonderilecekler, birkur: "bireysel", davadosyalar: dosyanames }, function (data) {
+            var myDropzone = Dropzone.forElement(".dropzone");
+            myDropzone.processQueue();
+            document.getElementById("dropzone1").submit();
+        });
+
+
+    };
+    function closeDosyaModal() {
+        Dropzone.forElement('#dropzone1').removeAllFiles();
+        Dmodal.style.display = "none";
+        document.getElementById("container1").innerHTML = "";
+        document.getElementById("container2").innerHTML = "";
+        $("#foreklenecekdosyalar").val("");
+        count = 0;
+        dzfilenames = "";
+    };
+    function dosyaModal(item) {
+        closeDosyaModal();
+        msid = item.id;
+        modal.style.display = "none";
+        // Dosyaları listeleme işlemi
+        var icerik = "";
+        var davaID = msid.substring(2);
+        var tipp = "";
+        var url = '@Url.Action("dosyalariGetir", "Scripts")';
+        if (msid[0] == "d") {   //Aktif Dava
+            tipp = "aktif";
+        }
+        else if (msid[0] == "b") {  //Biten Dava
+            tipp = "biten";
+        }
+
+        var durum = "";
+        if (msid[0] == "d") {
+            durum = "aktif";
+        }
+        else {
+            durum = "deaktif";
+        }
+        msid = msid.substring(2);
+        $("#formsid").val(msid)
+        $("#fordavaid").val(durum)
+        $.post(url, { davaid: davaID, tip: tipp }, function (data) {
+            for (var i = 0; i < data.length - 1; i++) {
+                icerik = "<div itemid=\"" + i + "\" class=\"btn btn-default box-item\">" + data[i] + "</div>";
+                $('#container1').append(icerik);
+                $('.box-item').draggable({
+                    cursor: 'move',
+                    helper: "clone"
+                });
+            }
+            $('.box-item').draggable({
+                cursor: 'move',
+                helper: "clone"
+            });
+        });
+
+        Dmodal.style.display = "block";
+    };
+    // When the user clicks on <span> (x), close the modal
+
+    function closeModal() {
+        modal.style.display = "none";
+    };
+
+</script>
+
+
+<script>
+    var temp = "";
+    var dz;
+    var count = 0;
+    var flagdz = true;
+    var dzfilenames = "";
+    Dropzone.autoDiscover = false;
+    $("#dropzone1").dropzone({
+        url: '/Admin/bireyseldavalar',
+        maxFiles: 5,
+        addRemoveLinks: true,
+        maxfilesexceeded: function (file) {
+            new PNotify({
+                title: 'Bilgilendirme.',
+                text: "Tek seferde en fazla 5 dosya yükleyebilirsiniz.",
+                type: 'notice',
+                styling: 'bootstrap3',
+                delay: 2500
+            });
+        },
+        init: function () {
+            var dz = this;
+            this.on("addedfile", function (files) {
+                var _i, _len;
+                flagdz = true;
+                for (_i = 0, _len = this.files.length; _i < _len - 1; _i++) // -1 to exclude current file
+                {
+                    if (this.files[_i].name === files.name) {
+                        this.removeFile(files);
+                        flagdz = false;
+                        new PNotify({
+                            title: 'Bilgilendirme.',
+                            text: files.name + " Adlı dosya zaten işleme konulmuştur.",
+                            type: 'error',
+                            styling: 'bootstrap3',
+                            delay: 2500
+                        });
+                    }
+                }
+                if (flagdz) {
+                    dzfilenames += dz.files[count].name + "\\";
+                    $("#foreklenecekdosyalar").val(dzfilenames);
+                    count++;
+                }
+
+                $('.dz-progress').hide();
+            });
+            this.on('sending', function (file, xhr, formData) {
+                formData.append("davaId", $("#formsid").val());
+                formData.append("durum", $("#fordavaid").val());
+            });
+            this.on('removedfile', function (file, xhr, formData) {
+                temp = $("#foreklenecekdosyalar").val();
+                temp = temp.replace(file.name + "\\", "");
+                $("#foreklenecekdosyalar").val(temp);
+                dzfilenames = temp;
+                count--;
+            });
+
+        },
+
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+
+        $('.box-item').draggable({
+            cursor: 'move',
+            helper: "clone"
+        });
+
+        $("#container1").droppable({
+            drop: function (event, ui) {
+                var itemid = $(event.originalEvent.toElement).attr("itemid");
+                $('.box-item').each(function () {
+                    if ($(this).attr("itemid") === itemid) {
+                        $(this).appendTo("#container1");
+                    }
+                });
+            }
+        });
+
+        $("#container2").droppable({
+            drop: function (event, ui) {
+                var itemid = $(event.originalEvent.toElement).attr("itemid");
+                $('.box-item').each(function () {
+                    if ($(this).attr("itemid") === itemid) {
+                        $(this).appendTo("#container2");
+                    }
+                });
+            }
+        });
+    });
+   
+</script>
+

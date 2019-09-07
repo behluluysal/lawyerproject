@@ -1,0 +1,407 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <title>Eventually by HTML5 UP</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link href="~/assets/css/main.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <style>
+	
+        body {
+            background-color: #222;
+        }
+
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #loader {
+            display: block;
+            position: relative;
+            left: 50%;
+            top: 50%;
+            width: 150px;
+            height: 150px;
+            margin: -75px 0 0 -75px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #9370DB;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+
+            #loader:before {
+                content: "";
+                position: absolute;
+                top: 5px;
+                left: 5px;
+                right: 5px;
+                bottom: 5px;
+                border-radius: 50%;
+                border: 3px solid transparent;
+                border-top-color: #BA55D3;
+                -webkit-animation: spin 3s linear infinite;
+                animation: spin 3s linear infinite;
+            }
+
+            #loader:after {
+                content: "";
+                position: absolute;
+                top: 15px;
+                left: 15px;
+                right: 15px;
+                bottom: 15px;
+                border-radius: 50%;
+                border: 3px solid transparent;
+                border-top-color: #FF00FF;
+                -webkit-animation: spin 1.5s linear infinite;
+                animation: spin 1.5s linear infinite;
+            }
+
+        @@-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @@keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        #ozel li a {
+            color: #f9f9f9 !important;
+            display: inline-block !important;
+            font-size: 14px !important;
+            font-weight: normal !important;
+            padding: 5px 0 5px 15px !important;
+            position: relative !important;
+            text-transform: capitalize !important;
+            -webkit-transition: all 0.5s !important;
+            -moz-transition: all 0.5s !important;
+            -ms-transition: all 0.5s !important;
+            -o-transition: all 0.5s !important;
+            transition: all 0.5s !important;
+        }
+
+            #ozel li a:before {
+                content: "\f101" !important;
+                font-family: FontAwesome !important;
+                left: 0 !important;
+                position: absolute !important;
+                top: 5px !important;
+            }
+
+            #ozel li a:hover, #ozel li a:focus {
+                margin-left: 5px !important;
+                color: blue !important;
+            }
+
+        .form-control {
+            min-height: 41px !important;
+            background: #fff !important;
+            box-shadow: none !important;
+            border-color: #e3e3e3 !important;
+        }
+
+            .form-control:focus {
+                border-color: #70c5c0 !important;
+            }
+
+        .form-control, .btn {
+            border-radius: 2px !important;
+        }
+
+        .login-form {
+            width: 350px !important;
+            margin: 0 auto !important;
+            padding: 100px 0 30px !important;
+        }
+
+            .login-form form {
+                color: #7a7a7a !important;
+                border-radius: 2px !important;
+                margin-bottom: 15px !important;
+                font-size: 13px !important;
+                background: #ececec !important;
+                box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3) !important;
+                padding: 30px !important;
+                position: relative !important;
+            }
+
+            .login-form h2 {
+                font-size: 22px !important;
+                margin: 35px 0 25px !important;
+            }
+
+            .login-form .avatar {
+                position: absolute !important;
+                margin: 0 auto !important;
+                left: 0 !important;
+                right: 0 !important;
+                top: -50px !important;
+                width: 95px !important;
+                height: 95px !important;
+                border-radius: 50% !important;
+                z-index: 9 !important;
+                background: #70c5c0 !important;
+                padding: 15px !important;
+                box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1) !important;
+            }
+
+                .login-form .avatar img {
+                    width: 100% !important;
+                }
+
+            .login-form input[type="checkbox"] {
+                margin-top: 2px !important;
+            }
+
+            .login-form .btn {
+                font-size: 16px !important;
+                font-weight: bold !important;
+                background: #70c5c0 !important;
+                border: none !important;
+                margin-bottom: 20px !important;
+            }
+
+                .login-form .btn:hover, .login-form .btn:focus {
+                    background: #50b8b3 !important;
+                    outline: none !important;
+                }
+
+            .login-form a {
+                color: #fff !important;
+                text-decoration: underline !important;
+            }
+
+                .login-form a:hover {
+                    text-decoration: none !important;
+                }
+
+            .login-form form a {
+                color: #7a7a7a !important;
+                text-decoration: none !important;
+            }
+
+                .login-form form a:hover {
+                    text-decoration: underline !important;
+                }
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed !important; /* Stay in place */
+            z-index: 9 !important; /* Sit on top */
+            left: 35% !important;
+            top: 25% !important;
+            width: 35% !important; /* Full width */
+            height: min-content !important; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0) !important; /* Fallback color */
+            background-color: transparent !important; /* Black w/ opacity */
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe !important;
+            padding: 20px !important;
+            border: 1px solid #888 !important;
+            background-color: dimgray !important;
+        }
+
+        /* The Close Button */
+        .close {
+            color: white !important;
+            float: right !important;
+            font-size: 40px !important;
+            font-weight: bolder !important;
+            opacity: unset !important;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: black !important;
+                text-decoration: none !important;
+                cursor: pointer !important;
+            }
+			@@media only screen and (max-width: 800px) {
+            .modal{
+                left:10% !important;
+                width:80% !important;
+            }
+}
+    </style>
+</head>
+<body class="is-preload">
+    <div id="preloader" style="display:block">
+        <div id="loader" style="display:block"></div>
+
+    </div>
+
+    <div id="main" style="display:none;">
+        <!-- Header -->
+        <header id="header">
+            <h1 style="color:white">Sakarya Bürosu</h1>
+            <p>
+                HasTürk Yazılım tarafından hazırlanmıştır.
+            </p>
+        </header>
+
+        <div class="col-xs-3">
+            <button class="btn btn-orange-brd" onclick="girisModal()">MÜŞTERİ GİRİŞ</button>
+        </div>
+        <!-- ---------MODAL --------------->
+        <div id="myModal" class="modal" >
+            <!-- Modal content -->
+            <div class="modal-content text-center" style="background-image:url('../images/loginbg.jpg') !important">
+                <span class="close">&times;</span>
+                <p>
+                    <button type="button" class="btn btn-primary" style="background-color:darkgray" onclick="bireyselForm()">BİREYSEL</button>
+                    <button type="button" class="btn btn-primary" style="background-color:darkgray" onclick="kurumsalForm()">KURUMSAL</button>
+                </p>
+                <div id="bireysel" style="display:block">
+                    <div class="container-login100">
+                        <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+                            <form class="login100-form validate-form" method="post" action="/Home/Login">
+                                <div class="wrap-input100 validate-input" style="color:white; margin-bottom:15px">
+                                    <input class="input100" type="text" id="tc" name="tc" placeholder="T.C. Kimlik No" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="11" required>
+                                    <span class="focus-input100-1"></span>
+                                    <span class="focus-input100-2"></span>
+                                </div>
+
+                                <div class="wrap-input100 rs1 validate-input" style="color:white;margin-bottom:15px">
+                                    <input class="input100" type="password" id="tcsifre" name="tcsifre" placeholder="Şifre" required>
+                                    <span class="focus-input100-1"></span>
+                                    <span class="focus-input100-2"></span>
+                                </div>
+                                <div class="container-login100-form-btn m-t-20">
+                                    <button type="submit" class="btn btn-orange-brd">
+                                        GİRİŞ YAP
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div id="kurumsal" style="display:none">
+                    <div class="container-login100">
+                        <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+                            <form class="login100-form validate-form" method="post" action="/Home/Login">
+                                <div class="wrap-input100 validate-input" style="color:white;margin-bottom:15px">
+                                    <input class="input100" type="text" id="vergi" name="tc" placeholder="Vergi No" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="10" required>
+                                    <span class="focus-input100-1"></span>
+                                    <span class="focus-input100-2"></span>
+                                </div>
+
+                                <div class="wrap-input100 rs1 validate-input" style="color:white;margin-bottom:15px">
+                                    <input class="input100" type="password" id="vergisifre" name="tcsifre" placeholder="Şifre" required>
+                                    <span class="focus-input100-1"></span>
+                                    <span class="focus-input100-2"></span>
+                                </div>
+                                <div class="container-login100-form-btn m-t-20">
+                                    <button type="submit" class="btn btn-orange-brd">
+                                        GİRİŞ YAP
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--  Modal  SOn ------>
+        <!-- Footer -->
+        <footer id="footer" style="position:fixed;bottom:20px;">
+            <ul class="icons">
+                <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+                <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+                <li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+                <li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
+            </ul>
+            <ul class="copyright">
+                <li>&copy; Untitled.</li>
+                <li>Credits: <a href="http://html5up.net">HTML5 UP</a></li>
+            </ul>
+        </footer>
+    </div>
+
+
+    <!-- Scripts -->
+    <script src="~/assets/js/main.js"></script>
+
+</body>
+</html>
+
+<script>
+    $(document).ready(function () {
+        var delayInMilliseconds = 1500; //2,5 second
+
+        setTimeout(function () {
+            $("#preloader").fadeOut(1000);
+            $("#main").fadeIn(1000);
+            //your code to be executed after 2,5 second
+        }, delayInMilliseconds);
+    });
+
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    function girisModal() {
+        modal.style.display = "block";
+    };
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+    function bireyselForm() {
+        document.getElementById('kurumsal').style.display = "none";
+        $('#bireysel').fadeIn(2000);
+    };
+    function kurumsalForm() {
+        document.getElementById('bireysel').style.display = "none";
+        $('#kurumsal').fadeIn(2000);
+    };
+
+</script>
+
+@if ( Session["user"]!=null)
+{
+if(Session["user"].ToString() == "deaktif" && ViewBag.mesaj !="" ){
+<script>
+        alert("@ViewBag.mesaj");
+    </script>
+}
+    
+}

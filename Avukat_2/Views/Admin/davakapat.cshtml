@@ -1,0 +1,784 @@
+﻿@{
+    Layout = null;
+}
+@using Avukat_2.Security
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dava Kapat</title>
+    <!-- Bootstrap -->
+    <link href="~/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="~/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="~/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="~/build/css/custom.min.css" rel="stylesheet">
+    <link href="~/vendors/pnotify/dist/pnotify.css" rel="stylesheet" />
+    <link href="~/vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <style type="text/css">
+        .stepContainer {
+            height: auto !important;
+            overflow-x: unset !important;
+        }
+
+        .panel-group .panel {
+            box-shadow: none;
+            -webkit-border-radius: 0 0 0 0;
+            -moz-border-radius: 0;
+            -ms-border-radius: 0 0 0 0;
+            border-radius: 0 0 0 0;
+            border: none;
+            position: relative;
+        }
+
+        .panel-group .panel-title {
+            font-size: 13px;
+        }
+
+            .panel-group .panel-title a {
+                background: rgba(238, 238, 238, 0.5);
+                display: block;
+                font-size: 14px;
+                padding: 10px 15px 10px 48px;
+                white-space: normal;
+            }
+
+                .panel-group .panel-title a.active {
+                    background: #f1f1f1 none repeat scroll 0 0 !important;
+                    border-bottom: 1px solid #d3d3d3 !important;
+                    color: #111111;
+                }
+
+                    .panel-group .panel-title a.active .open-sub:after {
+                        display: none;
+                    }
+
+                    .panel-group .panel-title a.active::after {
+                        color: #fff;
+                        background: #e3e3e3 !important;
+                        content: "\f068";
+                    }
+
+                .panel-group .panel-title a::after {
+                    color: #777777;
+                    content: "\f067";
+                    font-family: fontawesome;
+                    font-size: 14px;
+                    left: 0;
+                    padding: 10px 14px;
+                    position: absolute;
+                    top: 0;
+                }
+
+            .panel-group .panel-title:hover a,
+            .panel-group .panel-title:focus a {
+                color: #333333;
+            }
+
+            .panel-group .panel-title .open-sub {
+                display: block;
+                position: relative;
+            }
+
+                .panel-group .panel-title .open-sub:before,
+                .panel-group .panel-title .open-sub:after {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    height: 1px;
+                    top: 50%;
+                    margin-top: -0.5px;
+                    left: 50%;
+                }
+
+        .panel-group .panel-content {
+            background: #f1f1f1 none repeat scroll 0 0;
+            padding: 10px 20px 20px;
+        }
+
+            .panel-group .panel-content > :last-child {
+                margin-bottom: 0;
+            }
+        /* -------- Toggle ---------- */
+        .panel-group.toggle .panel-heading {
+            padding: 0;
+            border-bottom: 0;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+
+        .panel-group.toggle .panel-body {
+            padding: 10px 0 5px 25px;
+        }
+
+        .panel-group.accordion.transparent .panel-title a,
+        .panel-group.toggle.transparent .panel-title a,
+        .panel-group.accordion.transparent .panel-title a.active,
+        .panel-group.toggle.transparent .panel-title a.active {
+            background: transparent !important;
+            border: none !important;
+        }
+
+            .panel-group.accordion.transparent .panel-title a::after,
+            .panel-group.toggle.transparent .panel-title a::after,
+            .panel-group.accordion.transparent .panel-title a.active::after,
+            .panel-group.toggle.transparent .panel-title a.active::after {
+                color: #333333;
+                background: transparent !important;
+            }
+
+        .panel-group.accordion.transparent .panel-content,
+        .panel-group.toggle.transparent .panel-content {
+            background: transparent !important;
+        }
+
+        .panel-group.toggle .panel-heading + .panel-collapse > .panel-body,
+        .panel-group.toggle .panel-heading + .panel-collapse > .list-group {
+            border-top: none;
+        }
+        /*
+            /* Accordion & Toggles */
+        .panel-group .panel {
+            margin-bottom: 10px;
+            background: none;
+            border: none;
+            border-radius: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+
+        .panel-heading {
+            padding: 0;
+            background: none !important;
+            border: 0 !important;
+        }
+
+            .panel-heading .panel-title {
+                color: #32373c;
+                font-size: 13px;
+                font-weight: 600;
+                border: 1px solid #e1e3e5;
+                text-transform: uppercase;
+            }
+
+        .panel-title .active {
+            color: #fff;
+            background: #f4f6f8;
+        }
+
+        .panel-title > a {
+            display: block;
+            color: #32373c;
+            padding: 13px 15px;
+        }
+
+            .panel-title > a:hover {
+                color: #fff;
+                background: #f4f6f8;
+            }
+
+        .panel-default > .panel-heading + .panel-collapse .panel-body {
+            border: 0;
+        }
+
+        .panel-default > .panel-heading + .panel-collapse {
+            border: 1px solid #e1e3e5;
+            border-top: none;
+            border-radius: 0px !important;
+            margin-top: -1px;
+        }
+
+        #accordion2 {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        #accordion3 {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .buttonFinish {
+            display: none;
+        }
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 35%;
+            top: 25%;
+            width: 35%; /* Full width */
+            height: min-content; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: transparent; /* Black w/ opacity */
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            padding: 20px;
+            border: 1px solid #888;
+            background-color: lightgray;
+        }
+
+        /* The Close Button */
+        .close {
+            color: black;
+            float: right;
+            font-size: 40px;
+            font-weight: bolder;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+    </style>
+</head>
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+
+                    <div class="clearfix"></div>
+                    <!-- menu profile quick info -->
+                    <div class="profile clearfix">
+                        <div class="profile_pic">
+                            <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                        </div>
+                        <div class="profile_info">
+                            <span>Hoşgeldin,</span>
+                            <h2>@SessionPersister.Username.  @Session["modtype"]</h2>
+                        </div>
+                    </div>
+                    <!-- /menu profile quick info -->
+                    <br />
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3>General</h3>
+                            <ul class="nav side-menu">
+
+                                @{
+
+                                    if (Session["modtype"] != null)
+                                    {
+                                        if (Session["modtype"].ToString() == "Yönetici")
+                                        {
+                                            <li>
+                                                <a href="@Url.Action("panel", "Admin" )"><i class="fa fa-dashboard"></i>Yönetim Paneli</a>
+                                            </li>
+                                        }
+                                    }
+
+                                }
+                                <li>
+                                    <a><i class="fa fa-users"></i> Müşteriler <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="@Url.Action("bireyselmusteriler", "Admin" )">Bireysel Müşterileri Listele/Düzenle</a></li>
+                                        <li><a href="@Url.Action("kurumsalmusteriler", "Admin" )">Kurumsal Müşterileri Listele/Düzenle</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-briefcase"></i> Davalar <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="@Url.Action("davakayit", "Admin" )">Dava Ekle</a></li>
+                                        <li><a href="@Url.Action("davakapat", "Admin" )">Dava Kapat</a></li>
+                                        <li><a href="@Url.Action("bireyseldavalar", "Admin" )">Bireysel Davaları Listele/Düzenle</a></li>
+                                        <li><a href="@Url.Action("kurumsaldavalar", "Admin" )">Kurumsal Davaları Listele/Düzenle</a></li>
+                                    </ul>
+                                </li>
+                                @{
+                                    if (Session["modtype"] != null)
+                                    {
+                                        if (Session["modtype"].ToString() == "Yönetici")
+                                        {
+                                            <li>
+                                                <a><i class="fa fa-database"></i> Silme İşlemleri <span class="fa fa-chevron-down"></span></a>
+                                                <ul class="nav child_menu">
+                                                    <li><a href="@Url.Action("Davasil", "Delete" )">Dava Sil</a></li>
+                                                    <li><a href="@Url.Action("Musterisil", "Delete" )">Müşteri Sil</a></li>
+                                                </ul>
+                                            </li>
+                                        }
+                                    }
+                                }
+                                @{
+                                    if (Session["modtype"] != null)
+                                    {
+                                        if (Session["modtype"].ToString() == "Yönetici")
+                                        {
+                                            <li>
+                                                <a><i class="fa fa-desktop"></i> Yardımcılar <span class="fa fa-chevron-down"></span></a>
+                                                <ul class="nav child_menu">
+                                                    <li><a href="@Url.Action("Create", "superadmin" )">Yardımcı Ekle</a></li>
+                                                    <li><a href="@Url.Action("Index", "superadmin" )">Yardımcıları Listele / Düzenle</a></li>
+                                                </ul>
+                                            </li>
+                                        }
+                                    }
+                                }
+                                @{
+                                    if (Session["modtype"] != null)
+                                    {
+                                        if (Session["modtype"].ToString() == "Yönetici")
+                                        {
+
+                                            <li>
+                                                <a><i class="fa fa-legal"></i> Avukatlar <span class="fa fa-chevron-down"></span></a>
+                                                <ul class="nav child_menu">
+                                                    <li><a href="@Url.Action("Create", "Avukats" )">Avukat Ekle</a></li>
+                                                    <li><a href="@Url.Action("Index", "Avukats" )">Avukatları Listele / Düzenle</a></li>
+                                                </ul>
+                                            </li>
+                                        }
+                                    }
+                                }
+
+
+
+                                <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /sidebar menu -->
+                    <!-- /menu footer buttons -->
+                    <div class="sidebar-footer hidden-small">
+                        <a data-toggle="tooltip" data-placement="top" title="Settings">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Lock">
+                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="@Url.Action("Logout", "Admin")">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <!-- /menu footer buttons -->
+                </div>
+            </div>
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <nav>
+                        <div class="nav toggle">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <img src="images/img.jpg" alt="">@SessionPersister.Username
+                                    <span class=" fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                    <li><a href="javascript:;"> Profile</a></li>
+                                    <li>
+                                        <a href="javascript:;">
+                                            <span class="badge bg-red pull-right">50%</span>
+                                            <span>Settings</span>
+                                        </a>
+                                    </li>
+                                    <li><a href="javascript:;">Help</a></li>
+                                    <li><a href="@Url.Action("Logout", "Admin")"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                </ul>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <div class="">
+                    <div class="clearfix"></div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li>
+                                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li>
+                                                    <a href="#">Settings 1</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Settings 2</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a class="close-link"><i class="fa fa-close"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+
+                                    <h2>DAVA KAPAT</h2>
+                                    <!-- Tabs -->
+                                    <div id="wizard_verticle" class="form_wizard wizard_verticle">
+                                        <ul class="list-unstyled wizard_steps">
+                                            <li>
+                                                <a href="#step-11">
+                                                    <span class="step_no">1</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#step-22">
+                                                    <span class="step_no">2</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div id="step-11">
+                                            <form class="form-horizontal form-label-left">
+                                                <span class="section">Sorgulama Bilgisi</span>
+                                                <div class="btn-group" data-toggle="buttons">
+                                                    <label class="btn btn-primary" data-toggle-class="btn" data-toggle-passive-class="btn">
+                                                        <input type="radio" name="kapaSecim" id="tcsecildi" value="TC_No" onchange="kapaKontrol(this)"> &nbsp; TC/Kurum No &nbsp;
+                                                    </label>
+                                                    <label class="btn btn-primary" data-toggle-class="btn" data-toggle-passive-class="btn">
+                                                        <input type="radio" name="kapaSecim" value="Dava_No" onchange="kapaKontrol(this)"> Dava No
+                                                    </label>
+                                                </div>
+                                                <div id="kapaTC" class="form-group" style="display:block;margin-top:20px;">
+                                                    <label class="control-label col-md-3 col-sm-3" for="number">
+                                                        TC/Kurum No <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-5 col-sm-5">
+                                                        <input type="text" id="kullaniciTC" required="required" class="form-control col-md-7 col-xs-12" maxlength="11">
+                                                    </div>
+                                                    <span class="col-md-4 col-sm-4"></span>
+                                                </div>
+                                                <div id="kapaDava" class="form-group" style="display:none;margin-top:20px;">
+                                                    <label class="control-label col-md-3 col-sm-3" for="number">
+                                                        Dava No <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-5 col-sm-5">
+                                                        <input type="text" id="kullaniciDava" required="required" class="form-control col-md-7 col-xs-12">
+                                                    </div>
+                                                    <span class="col-md-4 col-sm-4"></span>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div id="step-22">
+                                            <div id="tcile" style="display:block;">
+                                                <div class="panel-group accordion style2 mb-0 mt-20" id="">
+                                                </div>
+                                            </div>
+                                            <div id="davaile" style="display:none;">
+                                                <div class="panel-group accordion style2 mb-0 mt-20" id="">
+                                                </div>
+                                            </div>
+                                            <!-- ---------MODAL --------------->
+                                            <div id="myModal" class="modal">
+                                                <!-- Modal content -->
+                                                <div class="modal-content">
+                                                    <span class="close">&times;</span>
+                                                    <h3 class="alert" style="color:black;">Davayı Kapatmak İstediğinize Emin Misiniz?</h3>
+                                                    <input class="btn btn-success btn-lg" type="button" value="EVET" onclick="silCagir()" />
+                                                    <input class="btn btn-danger btn-lg" type="button" value="HAYIR" style="float:right;" onclick="closeModal()" />
+                                                </div>
+
+                                            </div>
+                                            <!--  Modal  SOn ------>
+                                        </div>
+                                    </div>
+                                    <!-- End SmartWizard Content -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /page content -->
+            <!-- Footer -->
+            <footer id="footer" class="footer pb-0 bg-deep">
+
+                <div class="mu-footer-bottom">
+                    <div class="container">
+                        <div class="mu-footer-bottom-area" style="text-align:center;">
+                            <p>© Tüm Hakları Saklıdır. Designed by <a href="https://www.hasturkyazilim.com/" rel="nofollow" style="color:#c99809;">HASTÜRK YAZILIM</a></p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+    <form id="kontrolForm" style="display:none;" action="/Admin/davakapat" method="post">
+        <input id="kontrolInput" value="" name="kontrolInput" />
+        <button type="submit"></button>
+    </form>
+
+    <!-- jQuery -->
+    <script src="~/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="~/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="~/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="~/vendors/nprogress/nprogress.js"></script>
+    <!-- jQuery Smart Wizard -->
+    <script src="~/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="~/build/js/custom.js"></script>
+    <script src="~/vendors/pnotify/dist/pnotify.js"></script>
+    <script src="~/vendors/pnotify/dist/pnotify.buttons.js"></script>
+</body>
+</html>
+
+<script type="text/javascript">
+    
+        document.onclick = function () {
+            var step1 = document.getElementById("step-11");
+            if (step1.style.display == 'block') {
+                var btns = document.getElementsByClassName('buttonNext');
+                var nextBtn = btns[0];
+                nextBtn.onclick = function () {
+                    var url = '@Url.Action("davaKapaTc", "Scripts")';
+                    // Step-2 ye veriler aktarılacak
+                    if (document.getElementById('tcsecildi').checked) {
+                        document.getElementsByClassName('panel-group accordion style2 mb-0 mt-20')[0].id = "accordion2";
+                        document.getElementsByClassName('panel-group accordion style2 mb-0 mt-20')[1].id = "temp";
+                        var tc = $("#kullaniciTC").val();
+                        $.post(url, { TC: tc, trch: "tc" }, function (data) {
+                            if (data == "notfound") {
+                                new PNotify({
+                                    title: 'Dava Kapatma',
+                                    text: 'Girdiğiniz T.C./Kurum Numarasına Ait Müşteri Bulunamadı!',
+                                    type: 'notice',
+                                    styling: 'bootstrap3',
+                                    delay: 2500,
+                                });
+                                $('#btngerii').click();
+                            }
+                            else {
+                                var icerik = "";
+                                var sayac = 1;
+                                for (var i = 1; i <= parseInt((data[0] - 1) / 5, 10); i++) {
+                                    icerik += "<div class=\"panel\"><div class=\"panel-title\"><a href=\"#accordion" + i + 5 + "\" data-toggle=\"collapse\" data-parent=\"#accordion2\"><span class=\"open-sub text-uppercase\">" + data[sayac] + " - <span class=\"alert alert-secondary text-lowercase\"\">" + data[sayac + 1] + " tarihinde oluşturuldu.</span></span><a href=\"#\" name=\"gncl\" id=\"" + data[sayac] + data[sayac + 3] + "\" class=\"btn btn-danger a-btn-slide-text\" onclick='davaSil(this)'><span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span><span><strong>Davayı Kapat</strong></span></a></a></div ><div class=\"panel-collapse collapse\" id=\"accordion" + i + 5 + "\"><div class=\"panel-content\" style=\"color: red;\"><p><h5 style=\"font-weight:bolder;text-decoration:underline;color:black;\">Açıklama: </h5>" + data[sayac + 3] + "</p><h5 style=\"font-weight:bolder;text-decoration:underline;color:black;\">Avukat: </h5>" + data[sayac + 2] + "<button class=\"bg-info\" style=\"color:black;float:right;\" onclick=\"guncelle()\">GÜNCELLE</button><input id=\"ucretid\" maxlength=\"9\" class=\"bg-warning has-feedback-right\" style=\"color:black;float:right;width:17%;\" value=\"" + data[sayac + 4] + "\"><span class=\"fa fa-try feedback right\" style=\"font-size:20px !important;color:black;\" aria-hidden=\"true\"></span></div></div></div >";
+                                    icerik += "\n";
+                                    sayac = sayac + 5;
+                                }
+                                document.getElementById('accordion2').innerHTML = icerik;
+                            }
+                        });
+                        document.getElementById('tcile').style.display = "block";
+                        document.getElementById('davaile').style.display = "none";
+                    }
+                    else {
+                        document.getElementsByClassName('panel-group accordion style2 mb-0 mt-20')[0].id = "temp";
+                        document.getElementsByClassName('panel-group accordion style2 mb-0 mt-20')[1].id = "accordion2";
+                        var tc = $("#kullaniciDava").val();
+                        $.post(url, { TC: tc, trch: "dava" }, function (data) {
+                            if (data == "notfound") {
+                                new PNotify({
+                                    title: 'Dava Kapatma',
+                                    text: 'Girdiğiniz Numaraya Ait Dava Bulunamadı!',
+                                    type: 'notice',
+                                    styling: 'bootstrap3',
+                                    delay: 2500,
+                                });
+                                $('#btngerii').click();
+                            }
+                            var icerik = "";
+                            var sayac = 1;
+                            for (var i = 1; i <= parseInt((data[0] - 1) / 5, 10); i++) {
+                                icerik += "<div class=\"panel\"><div class=\"panel-title\"><a href=\"#accordiona" + tc + "\" data-toggle=\"collapse\" data-parent=\"#accordion2\"><span class=\"open-sub text-uppercase\">" + data[sayac] + " - <span class=\"alert alert-secondary text-lowercase\"\">" + data[sayac + 1] + " tarihinde oluşturuldu.</span></span><a href=\"#\" name=\"gncl\" id=\"" + data[sayac] + data[sayac + 3] + "\" class=\"btn btn-danger a-btn-slide-text\" onclick='davaSil(this)'><span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span><span><strong>Davayı Kapat</strong></span></a></a></div ><div class=\"panel-collapse collapse\" id=\"accordiona" + tc + "\"><div class=\"panel-content\" style=\"color: red;\"><p><h5 style=\"font-weight:bolder;text-decoration:underline;color:black;\">Açıklama: </h5>" + data[sayac + 3] + "</p><h5 style=\"font-weight:bolder;text-decoration:underline;color:black;\">Avukat: </h5>" + data[sayac + 2] + "<button class=\"bg-info\" style=\"color:black;float:right;\" onclick=\"guncelle()\">GÜNCELLE</button><input id=\"ucret2id\" maxlength=\"9\" class=\"bg-warning has-feedback-right\" style=\"color:black;float:right;width:17%;\" value=\"" + data[sayac + 4] + "\"><span class=\"fa fa-try feedback right\" style=\"font-size:20px !important;color:black;\"  aria-hidden=\"true\"></span></div></div></div >";
+                                icerik += "\n";
+                                sayac = sayac + 5;
+                            }
+                            document.getElementById('accordion2').innerHTML = icerik;
+                        });
+                        document.getElementById('tcile').style.display = "none";
+                        document.getElementById('davaile').style.display = "block";
+                    }
+                };
+            }
+        };
+        function davaSil(tik) {
+            if (document.getElementById('tcsecildi').checked) {
+                if ((modal.style.display == "") || (modal.style.display=="none")) {
+                    modal.style.display = "block";
+                }
+                else {
+                    var url = '@Url.Action("davaSil", "Scripts")';
+                    var silinecek = tik.id;
+                    var tc = $("#kullaniciTC").val();
+                    $.post(url, { ID: silinecek, TC: tc, secimm:"tc" }, function (data) {
+                        if (data == "basarili") {
+                            $("#kontrolInput").val("success");
+                            $('#kontrolForm').submit();
+                        }
+                        else {
+                            $("#kontrolInput").val("error");
+                            $('#kontrolForm').submit();
+                        }
+                    });
+                }
+            }
+            else {
+                if ((modal.style.display == "") || (modal.style.display=="none")) {
+                    modal.style.display = "block";
+                }
+                else {
+                    var url = '@Url.Action("davaSil", "Scripts")';
+                    var silinecek = tik.id;
+                    var tc = $("#kullaniciDava").val();
+                    $.post(url, { ID: silinecek, TC: tc, secimm:"dava" }, function (data) {
+                        if (data == "basarili") {
+                            $("#kontrolInput").val("success");
+                            $('#kontrolForm').submit();
+                        }
+                        else {
+                            $("#kontrolInput").val("error");
+                            $('#kontrolForm').submit();
+                        }
+                    });
+                }
+            }
+
+        };
+        // Get the modal
+        var modal = document.getElementById("myModal");
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+        function closeModal() {
+            modal.style.display = "none";
+        };
+        function silCagir() {
+            davaSil(document.getElementsByName('gncl')[0]);
+        };
+        function guncelle() {
+            var ucrt = document.getElementById('ucretid');
+            var url = '@Url.Action("ucretGuncelle", "Scripts")';
+            var secilen = document.getElementById('tcsecildi');
+            if (secilen.checked) {
+                var guncellenecek = document.getElementsByName('gncl')[0].id;
+                var tc = $("#kullaniciTC").val();
+                var yeniDeger = $('#ucretid').val();
+                $.post(url, { ID: guncellenecek, TC: tc, yeni: yeniDeger, tercih:"tc" }, function (data) {
+                    if (data == "basarili") {
+                        $(document).ready(function () {
+                            new PNotify({
+                                title: 'Ücret Güncelle',
+                                text: 'Dava Ücreti Başarılı Bir Şekilde Güncellendi!',
+                                type: 'success',
+                                styling: 'bootstrap3',
+                                delay: 2500,
+                            });
+                        });
+                    }
+                    else {
+                        $(document).ready(function () {
+                            new PNotify({
+                                title: 'Ücret Güncelle',
+                                text: 'Dava Ücreti Güncellenirken Bir Hata Oluştu!',
+                                type: 'error',
+                                styling: 'bootstrap3',
+                                delay: 2500,
+                            });
+                        });
+                    }
+                });
+            }
+            else {
+                var guncellenecek = document.getElementsByName('gncl')[0].id;
+                var tc = $("#kullaniciDava").val();
+                var yeniDeger = $('#ucret2id').val();
+                $.post(url, { ID: guncellenecek, TC: tc, yeni: yeniDeger, tercih:"dava" }, function (data) {
+                    if (data == "basarili") {
+                        new PNotify({
+                            title: 'Ücret Güncelle',
+                            text: 'Dava Ücreti Başarılı Bir Şekilde Güncellendi!',
+                            type: 'success',
+                            styling: 'bootstrap3',
+                            delay: 2500,
+                        });
+                    }
+                    else {
+                        new PNotify({
+                            title: 'Ücret Güncelle',
+                            text: 'Dava Ücreti Güncellenirken Bir Hata Oluştu!',
+                            type: 'error',
+                            styling: 'bootstrap3',
+                            delay: 2500,
+                        });
+                    }
+                });
+            }
+    };
+    function kapaKontrol(item) {
+        if (item.value == "TC_No") {
+            document.getElementById('kapaTC').style.display = "block";
+            document.getElementById('kapaDava').style.display = "none";
+        }
+        else {
+            document.getElementById('kapaTC').style.display = "none";
+            document.getElementById('kapaDava').style.display = "block";
+        }
+    };
+</script>
+
+<script>
+    $(document).ready(function () {
+        $(".btn").first().button("toggle");
+        document.getElementById('btnilerii').style.display = "inline";
+        document.getElementById('btngerii').style.display = "inline";
+    });
+</script>
+
+@if(ViewBag.alert == "success")
+{
+    <script>
+        $(document).ready(function () {
+            new PNotify({
+                title: 'Dava Kapatma',
+                text: 'Dava Kapama İşlemi Başarıyla Gerçekleşti!',
+                type: 'success',
+                styling: 'bootstrap3',
+                delay: 2500,
+            });
+        });
+    </script>
+}
+@if(ViewBag.alert == "error")
+{
+    <script>
+        $(document).ready(function () {
+            new PNotify({
+                title: 'Dava Kapatma',
+                text: 'Dava Kapama İşlemi Gerçekleştirilirken Bir Hata Oluştu!',
+                type: 'error',
+                styling: 'bootstrap3',
+                delay: 2500,
+            });
+        });
+    </script>
+}
