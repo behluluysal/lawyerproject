@@ -253,7 +253,10 @@ namespace Avukat_2.Controllers
             return File(bytes, file.GetType().ToString(), gondericiiki);
         }
 
-
+        public ActionResult Chat()
+        {
+            return View();
+        }
 
 
     }

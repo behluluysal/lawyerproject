@@ -362,3 +362,14 @@ C:\Users\sbuys\Desktop\github\Avukat_2\Avukat_2\obj\Debug\Avukat_2.csproj.CoreCo
 C:\Users\sbuys\Desktop\github\Avukat_2\Avukat_2\obj\Debug\Avukat_2.csproj.CopyComplete
 C:\Users\sbuys\Desktop\github\Avukat_2\Avukat_2\obj\Debug\Avukat_2.dll
 C:\Users\sbuys\Desktop\github\Avukat_2\Avukat_2\obj\Debug\Avukat_2.pdb
+C:\Users\sbuys\Desktop\github\Avukat_2\Avukat_2\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\sbuys\Desktop\github\Avukat_2\Avukat_2\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Users\sbuys\Desktop\github\Avukat_2\Avukat_2\bin\Microsoft.Owin.dll
+C:\Users\sbuys\Desktop\github\Avukat_2\Avukat_2\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\sbuys\Desktop\github\Avukat_2\Avukat_2\bin\Microsoft.Owin.Security.dll
+C:\Users\sbuys\Desktop\github\Avukat_2\Avukat_2\bin\Owin.dll
+C:\Users\sbuys\Desktop\github\Avukat_2\Avukat_2\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\Users\sbuys\Desktop\github\Avukat_2\Avukat_2\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+C:\Users\sbuys\Desktop\github\Avukat_2\Avukat_2\bin\Microsoft.Owin.xml
+C:\Users\sbuys\Desktop\github\Avukat_2\Avukat_2\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\sbuys\Desktop\github\Avukat_2\Avukat_2\bin\Microsoft.Owin.Security.xml

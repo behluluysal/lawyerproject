@@ -10,12 +10,17 @@ namespace Avukat_2
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+        public object WebApiConfig { get; private set; }
+
         protected void Application_Start()
         {
+           
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+
         }
     }
 }
