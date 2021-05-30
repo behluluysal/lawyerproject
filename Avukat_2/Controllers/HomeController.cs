@@ -251,7 +251,6 @@ namespace Avukat_2.Controllers
             System.IO.Directory.Delete(Server.MapPath(targetyol.Substring(0,13)), true);
 
             return File(bytes, file.GetType().ToString(), gondericiiki);
-
         }
 
 
